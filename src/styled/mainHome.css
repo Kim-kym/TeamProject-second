@@ -1,0 +1,72 @@
+
+
+  /* .root{
+    display: flex;
+  } */
+  
+  h1 {
+    display: flex; /*컨테이너 활성화*/
+    align-items: center; /*세로축 중앙 정렬*/
+    color: rgba(233, 250, 1, 0.955);
+    background: radial-gradient(circle, blue, aqua, skyblue, white);
+    font-size: 50px;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  div {
+    margin-top: 20px;
+    justify-content: center;
+    background-color: blanchedalmond;
+}
+
+main {
+  margin: auto;
+  width: 70%;
+  background-color: aquamarine;
+}
+
+main > div {
+  display: flex;
+  justify-content: center; 
+}
+
+button {
+    background-color: lightgoldenrodyellow;
+    margin: auto;
+  }
+
+button:nth-child(2) {
+  margin: 0 10px;
+}
+
+button:nth-child(3) {
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: bisque; /* 마우스가 올라갔을 때 버튼 색 바뀜 */
+}
+
+button:focus {
+  background-color: bisque; /* 버튼을 클릭했을 때 색 바뀜 */
+}
+
+ul{
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap; /* 자동 줄 바꿈 */
+  justify-content: center; /* 가운데 맞추기 */
+  gap: 10px; /**/
+  min-width: 250px;
+}
+
+li {
+  flex: 1 1 calc(33.33% - 10px); /* 각 li의 크기: 3등분 */
+  box-sizing: border-box;       /* 테두리와 패딩 포함 크기 계산 */
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: rgba(127, 255, 212, 0.486);
+  text-align: center; /* 내용 중앙 정렬 */
+
+}
