@@ -45,11 +45,11 @@ button:nth-child(3) {
 }
 
 button:hover {
-  background-color: bisque; /* 마우스가 올라갔을 때 버튼 색 바뀜 */
+  background-color: rgb(248, 195, 129); /* 마우스가 올라갔을 때 버튼 색 바뀜 */
 }
 
 button:focus {
-  background-color: bisque; /* 버튼을 클릭했을 때 색 바뀜 */
+  background-color: rgb(248, 195, 129); /* 버튼을 클릭했을 때 색 바뀜 */
 }
 
 ul{
