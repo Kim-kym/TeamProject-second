@@ -1,5 +1,5 @@
 import React from "react";
-import "../styled/mainHome.css";
+import "../../styled/mainHome.css";
 
 function Category({ setCurrentMenu }) {
   return (

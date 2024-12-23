@@ -8,28 +8,44 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 };
 
-.modal {
-    background: white;
-    border-radius: 8px;
-    box-shadow: inset;
-    padding: 20px;
-    width: 700px;
-    height: 200px;
-    z-index: 1001;
-};
-
-/* 
 .modal {
     background: white;
     border-radius: 8px;
     box-shadow: inset;
     padding: 20px;
    
-} */
+    
+}
 
-/* .modal > div > p {
+.modal > div {
+    background: white;
+    border-radius: 8px;
+    box-shadow: inset;
+    padding: 20px;
+    position: relative;
+    width: 700px;
+    height: 700px;
+   
+   
+}
+
+.modal > div > p {
     text-align: center;
+}
+
+.modal-close {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 5px;
+    top: 5px;
+}
+
+/* .modal > button {
+    
+    background: black;
+    z-index: 2;
+    
 } */

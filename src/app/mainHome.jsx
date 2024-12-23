@@ -1,11 +1,11 @@
-import Category from "../components/container";
+import Category from "../components/menu/container";
 import logo from "/image/logo1.jpg";
 import "../styled/mainHome.css";
 import { useState } from "react";
-import BugerMenuList from "../components/bugerMenu";
-import DrinkMenuList from "../components/drinkMenuList";
-import CoffeeMenuList from "../components/coffeeMenuList";
-import SideMenuList from "../components/sideMenuList";
+import BugerMenuList from "../components/menu/bugerMenu";
+import DrinkMenuList from "../components/menu/drinkMenuList";
+import CoffeeMenuList from "../components/menu/coffeeMenuList";
+import SideMenuList from "../components/menu/sideMenuList";
 
 // import CartList from "../components/cartList";
 
