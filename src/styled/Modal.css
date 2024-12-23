@@ -8,16 +8,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 };
 
-.Modal {
+.modal {
     background: white;
     border-radius: 8px;
     box-shadow: inset;
     padding: 20px;
-    width: 200px;
+    width: 700px;
     height: 200px;
+    z-index: 1001;
 };
+
 /* 
 .modal {
     background: white;
