@@ -10,7 +10,7 @@ function BugermenuList({ menuList }) {
   return (
     <ul>
       {menuList.map((item) => (
-        <li key={item.id} onClick={() => handleClick(item)}>
+        <li key={item.id} onClick={() => handleClick(item)} id="choice">
           <img
             src={item.imgurl}
             alt={item.name}

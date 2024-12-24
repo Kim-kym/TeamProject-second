@@ -9,7 +9,7 @@ import SideMenuList from "../components/menu/sideMenuList";
 
 // import CartList from "../components/cartList";
 
-function App() {
+function MainHome() {
   const [currentMenu, setCurrentMenu] = useState("burger"); // 초기 메뉴는 'burger'
 
   //메뉴 목록 리스트
@@ -352,7 +352,7 @@ function App() {
         {/* <CartList /> */}
 
         {/* 조건부 렌더링 */}
-        <div>
+        <div id="choice">
           {/* 버거 매뉴 리스트 */}
           {currentMenu === "burger" && (
             <BugerMenuList menuList={bugerMenuList} />
@@ -374,4 +374,4 @@ function App() {
   );
 }
 
-export default App;
+export default MainHome;
