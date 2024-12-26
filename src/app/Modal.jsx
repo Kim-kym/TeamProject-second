@@ -87,11 +87,17 @@ function Topping() {
     />
   ));
 
+  const totalPrice = product.map((items) => ({
+    ...product,
+    total: items.id,
+  }));
+
   return (
     <>
       <button id="choice" onClick={() => setOpen(true)}>
         <img src={hambuger} alt="logo image"></img>
         <hambuger />
+        {/* {totalPrice} */}
       </button>
       <Modal isOpen={open} onClose={() => setOpen(false)}>
         <div>
