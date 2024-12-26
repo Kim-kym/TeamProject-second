@@ -6,10 +6,6 @@ import "../styled/Modal.css";
 import "../styled/slideTopping.css";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import BugerMenuList from "../components/menu/bugerMenu.jsx";
-import BugermenuList from "../components/menu/bugerMenu.jsx";
-import ProductInfo from "../components/topping/productInfo.jsx";
-import QuantityInput from "../components/topping/QuantityInput.jsx";
 
 function Topping() {
   //  모달 열기
@@ -88,38 +84,41 @@ function Topping() {
       price={item.price}
     />
   ));
-  import { useEffect, useState } from "react";
+  // import { useEffect, useState } from "react";
 
-  export default function QuantityInput({ stock, quantity, onClick, onBlur }) {
-    const [value, setValue] = useState(quantity);
-  
-    const handleChangeInput = (e) => {
-      const newValue = parseInt(e.target.value);
-  
-      if (isNaN(newValue) || newValue < 1) {
-        setValue(1);
-      } else {
-        setValue(newValue);
-      }
-    };
-  
-    const handleBlurInput = (e) => {
-      let newValue = parseInt(e.target.value);
-  
-      if (stock < newValue) {
-        newValue = stock;
-      }
-      setValue(newValue);
-      onBlur(newValue);
-    };
+  // export default function QuantityInput({ stock, quantity, onClick, onBlur }) {
+  //   const [value, setValue] = useState(quantity);
+
+  //   const handleChangeInput = (e) => {
+  //     const newValue = parseInt(e.target.value);
+
+  //     if (isNaN(newValue) || newValue < 1) {
+  //       setValue(1);
+  //     } else {
+  //       setValue(newValue);
+  //     }
+  //   };
+
+  //   const handleBlurInput = (e) => {
+  //     let newValue = parseInt(e.target.value);
+
+  //     if (stock < newValue) {
+  //       newValue = stock;
+  //     }
+  //     setValue(newValue);
+  //     onBlur(newValue);
+  //   };
+
+  // // const totalPrice = product.map((items) =>
+  // //   items.id === id  { ...product,
+  // //   items.id
+  // // }));
 
   return (
     <>
       <button id="choice" onClick={() => setOpen(true)}>
         <img src={hambuger} alt="logo image"></img>
         <hambuger />
-        {ProductInfo}
-        {QuantityInput}
         {/* {totalPrice} */}
       </button>
       <Modal isOpen={open} onClose={() => setOpen(false)}>
