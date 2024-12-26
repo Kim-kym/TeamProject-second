@@ -7,10 +7,44 @@ import DrinkMenuList from "../components/menu/drinkMenuList";
 import CoffeeMenuList from "../components/menu/coffeeMenuList";
 import SideMenuList from "../components/menu/sideMenuList";
 import BurgerSetMenuList from "../components/menu/burgerSetMenuList";
-// import CartList from "../components/cartList";
+import CartList from "../components/cart/cartList";
 
 function App() {
   const [currentMenu, setCurrentMenu] = useState("burger"); // 초기 메뉴는 'burger'
+
+  // 장바구니 상태 관리
+  const [cart, setCart] = useState([]);
+
+  // 장바구니에 항목 추가
+  const addToCart = (item) => {
+    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+    if (existingItem) {
+      // 이미 장바구니에 있으면 수량만 증가
+      setCart(
+        cart.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        )
+      );
+    } else {
+      // 처음 장바구니에 추가하는 경우
+      setCart([...cart, { ...item, quantity: 1 }]);
+    }
+  };
+
+  // 장바구니에서 항목 삭제
+  const removeFromCart = (itemId) => {
+    setCart(cart.filter((item) => item.id !== itemId));
+  };
+
+  // 장바구니 항목 수량 수정
+  const updateQuantity = (itemId, quantity) => {
+    if (quantity < 1) return; // 수량이 1보다 적을 수 없도록
+    setCart(
+      cart.map((item) => (item.id === itemId ? { ...item, quantity } : item))
+    );
+  };
 
   //메뉴 목록 리스트
   const [burgerSetMenuList] = useState([
@@ -445,30 +479,43 @@ function App() {
         <Category setCurrentMenu={setCurrentMenu} />
 
         {/* 장바구니 리스트 */}
-        {/* <CartList /> */}
+        <CartList
+          cart={cart}
+          removeFromCart={removeFromCart}
+          updateQuantity={updateQuantity}
+        />
 
         {/* 조건부 렌더링 */}
         <div id="choice">
           {/* 버거 세트 메뉴 리스트 */}
           {currentMenu === "burgerSetMenuList" && (
-            <BurgerSetMenuList burgerSetMenuList={burgerSetMenuList} />
+            <BurgerSetMenuList
+              burgerSetMenuList={burgerSetMenuList}
+              addToCart={addToCart}
+            />
           )}
-
           {/* 버거 메뉴 리스트 */}
           {currentMenu === "burger" && (
-            <BurgerMenuList burgerMenuList={burgerMenuList} />
+            <BurgerMenuList
+              burgerMenuList={burgerMenuList}
+              addToCart={addToCart}
+            />
           )}
 
           {/* 음료 메뉴 리스트 */}
-          {currentMenu === "drink" && <DrinkMenuList drinkList={drinkList} />}
+          {currentMenu === "drink" && (
+            <DrinkMenuList drinkList={drinkList} addToCart={addToCart} />
+          )}
 
           {/* 커피 메뉴 리스트 */}
           {currentMenu === "coffee" && (
-            <CoffeeMenuList coffeeList={coffeeList} />
+            <CoffeeMenuList coffeeList={coffeeList} addToCart={addToCart} />
           )}
 
           {/* 사이드 메뉴 리스트 */}
-          {currentMenu === "side" && <SideMenuList sideList={sideList} />}
+          {currentMenu === "side" && (
+            <SideMenuList sideList={sideList} addToCart={addToCart} />
+          )}
         </div>
       </main>
     </div>
