@@ -1,4 +1,4 @@
-simport { useState } from "react";
+import { useState } from "react";
 import hambuger from "/image/topping/hambuger.jpeg";
 import Modal from "../components/topping/Modal.jsx";
 import SlideToping from "../components/topping/toppingslide.jsx";
