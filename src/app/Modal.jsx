@@ -23,7 +23,8 @@ function Topping() {
   const calculateTotalPrice = () => {
     return productData.reduce((total, items) => {
       const quantity = quantityMap[items.id] || 0;
-      return total + items.price * quantity;
+      const price = parseInt(items.price.replace("원", "").replace("+", ""));
+      return total + price * quantity;
     }, 0);
   };
 
@@ -92,15 +93,6 @@ function Topping() {
     },
   ];
 
-  const product = productData.map((item) => (
-    <SlideToping
-      key={item.id}
-      name={item.name}
-      url={item.imageurl}
-      price={item.price}
-    />
-  ));
-
   return (
     <>
       <button id="choice" key={item.id} onClick={() => setOpen(true)}>
@@ -111,28 +103,33 @@ function Topping() {
         <div>
           {/* <Modal isOpen={open}> */}
           {/* children */}
-          <img src={item.imageurl}></img>
-          {productData.map((items) => (
-            <li key={items.id}>
-              <span>
-                {items.name} {items.price}
-              </span>
-              <button onClick={() => handleQuantityChange(items.id, -1)}>
-                -
-              </button>
-              <span>{quantityMap[items.id] || 0}</span>
-              <button onClick={() => handleQuantityChange(items.id, +1)}>
-                +
-              </button>
-              <h3>Total Price: ${calculateTotalPrice()}</h3>
-            </li>
-          ))}
+          <img src={hambuger}></img>
+          <span>
+            <h3>Total Price: {calculateTotalPrice()}원</h3>
+          </span>
+          <div>
+            <button>
+              <img src={hambuger}></img>
+              <h3>세트 메뉴 선택</h3>
+            </button>
+          </div>
+
           <h2>토핑 선택하기</h2>
+
           <div className="SlideTopping">
             <h3>토핑 추가</h3>
 
             {/* <div className="slide"> */}
-            <Carousel responsive={responsive}>{product}</Carousel>
+            <Carousel responsive={responsive}>
+              {productData.map((item) => (
+                <SlideToping
+                  key={item.id}
+                  item={item}
+                  quantityMap={quantityMap}
+                  handleQuantityChange={handleQuantityChange}
+                />
+              ))}
+            </Carousel>
           </div>
 
           <div className="check-btn">
