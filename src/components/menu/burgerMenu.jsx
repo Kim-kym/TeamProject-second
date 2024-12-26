@@ -9,32 +9,32 @@ function BurgerMenuList({ burgerMenuList, addToCart }) {
   // };
 
   return (
-    // <ul>
-    //   {burgerMenuList.map((item) => (
-    //     <li key={item.id} onClick={() => addToCart(item)}>
-    //       <img
-    //         src={item.imgurl}
-    //         alt={item.name}
-    //         style={{ width: "100px", height: "100px" }}
-    //       />
-    //       <p>{item.name}</p>
-    //       <p>가격: {formatPrice(item.price)} 원</p>
-    //       <p>알레르기: {item.allergy}</p>
-    //       {/* <button onClick={() => addToCart(item)}>장바구니에 담기</button> */}
-    //     </li>
-    //   ))}
-    // </ul>
-    <div>
-      <h2>버거 메뉴</h2>
-      <ul>
-        {burgerMenuList.map((item) => (
-          <li key={item.id} onClick={() => addToCart(item)}>
-            <img src={item.imgurl} alt={item.name} style={{ width: "50px" }} />
-            {item.name} - {item.price}원
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {burgerMenuList.map((item) => (
+        <li key={item.id} onClick={() => addToCart(item)}>
+          <img
+            src={item.imgurl}
+            alt={item.name}
+            style={{ width: "100px", height: "100px" }}
+          />
+          <p>{item.name}</p>
+          <p>가격: {formatPrice(item.price)} 원</p>
+          <p>알레르기: {item.allergy}</p>
+          {/* <button onClick={() => addToCart(item)}>장바구니에 담기</button> */}
+        </li>
+      ))}
+    </ul>
+    // <div>
+    //   <h2>버거 메뉴</h2>
+    //   <ul>
+    //     {burgerMenuList.map((item) => (
+    //       <li key={item.id} onClick={() => addToCart(item)}>
+    //         <img src={item.imgurl} alt={item.name} style={{ width: "50px" }} />
+    //         {item.name} - {item.price}원
+    //       </li>
+    //     ))}
+    //   </ul>
+    // </div>
   );
 }
 

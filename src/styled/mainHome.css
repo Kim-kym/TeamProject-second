@@ -101,6 +101,8 @@ li:hover{
   padding: 20px;
   z-index: 1000;
   box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
+  max-height: 70vh; /* 장바구니의 최대 높이 설정 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 가능하게 설정 */
 }
 
 /* 카테고리별 합산 금액 스타일 */
@@ -121,40 +123,57 @@ li:hover{
 /* 장바구니 항목 스타일 */
 .cart-item {
   display: flex;
-  display: inline;
-  flex-direction: column; /* 항목을 세로로 나열 */
+  flex-direction: row; /* 항목을 가로로 나열 */
   align-items: center;
-  justify-content: flex-start;
-  /* width: 150px; 각 항목의 너비 */
+  justify-content: space-between;
+  width: 100%; /* 전체 너비 */
+  max-width: 600px; /* 항목 너비 제한 */
   border: 1px solid #ddd;
-  /* height: 30px; */
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.cart-item img {
-  max-width: 100px;
   margin-bottom: 10px;
 }
 
-.cart-item p {
-  margin: 5px 0;
+.cart-item img {
+  width: 100px;
+  margin-right: 10px;
+}
+
+.cart-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+  transform: translateY(100%); /* 기본 상태는 아래로 내려가 있음 */
+  overflow-y: auto;
+}
+
+.cart-container.open {
+  transform: translateY(0); /* 열리면 위로 올라옴 */
+}
+
+.item-details {
+  flex-grow: 1;
 }
 
 /* 수량 버튼 및 입력창 스타일 */
 .quantity-container {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   margin-top: 10px;
 }
 
 .quantity-btn {
   background-color: #4CAF50;
+  width: 2em;
   color: white;
   font-size: 18px;
-  width: 10px;
   border: none;
   padding: 5px 10px;
   cursor: pointer;
@@ -174,25 +193,32 @@ li:hover{
   border-radius: 5px;
 }
 
+/* 합계 금액 오른쪽에 표시 */
+.item-total {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
 /* 삭제 버튼 스타일 */
-button {
+.remove-btn {
+  width: 5em;
   background-color: #f44336;
-  width: 70px;
   color: white;
   border: none;
   padding: 8px 16px;
   cursor: pointer;
   border-radius: 5px;
-  margin-top: 10px;
 }
 
-button:hover {
+.remove-btn:hover {
   background-color: #e53935;
 }
 
-/* 전체 금액 표시 */
-#cart .total {
-  font-size: 20px;
+/* 총액 표시 */
+.total {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 22px;
   font-weight: bold;
-  margin-top: 10px;
 }
