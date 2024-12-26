@@ -23,7 +23,7 @@
 main {
   margin: auto;
   width: 70%;
-  background-color: aquamarine;
+  background-color: rgb(186, 237, 254);
 }
 
 main > div {
@@ -32,7 +32,7 @@ main > div {
 }
 
 button {
-    background-color: lightgoldenrodyellow;
+    background-color: rgb(186, 237, 254);
     margin: auto;
     border: 0;
     width: 150px;
@@ -63,27 +63,31 @@ button:focus {
 
 ul{
   list-style: none;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3개의 열 생성 */
+  gap: 10px; /* 아이템 간 간격 */
   flex-wrap: wrap; /* 자동 줄 바꿈 */
   justify-content: center; /* 가운데 맞추기 */
-  gap: 10px; /**/
+  gap: 10px; /* 아이템 별 간격 */
   min-width: 250px;
 }
 
 li {
-  flex: 1 1 calc(33.33% - 10px); /* 각 li의 크기: 3등분 */
+  /* flex: 1 1 calc(33.33% - 10px); 각 li의 크기: 3등분 */
   box-sizing: border-box;       /* 테두리와 패딩 포함 크기 계산 */
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: rgba(127, 255, 212, 0.486);
+  /* border: 1px solid #ccc; */
+  padding: 5px;
+  /* background-color: rgba(127, 255, 212, 0.486); */
   text-align: center; /* 내용 중앙 정렬 */
-
+  max-width: 200px;
 }
 
 li:hover{
   transform: scale(1.010); /* 확대 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
   font-size: 1em; /* 텍스트 크기 확대 */
+  font-weight: bold; /* 글씨 두껍게 */
+  background-color: lightgoldenrodyellow;
 }
 /* 장바구니 */
 #cart {
