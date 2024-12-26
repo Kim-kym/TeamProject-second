@@ -16,6 +16,9 @@ function App() {
   // 장바구니 상태 관리
   const [cart, setCart] = useState([]);
 
+  // 장바구니 열림/닫힘 상태
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   // 장바구니에 항목 추가
   const addToCart = (item) => {
     const existingItem = cart.find((cartItem) => cartItem.id === item.id);
@@ -492,6 +495,10 @@ function App() {
           <Category setCurrentMenu={setCurrentMenu} />
         </div>
         {/* 장바구니 리스트 */}
+        <div
+          className={`cart-container ${isCartOpen ? "open" : ""}`}
+          onClick={() => setIsCartOpen(!isCartOpen)} // 장바구니 열기/닫기
+        ></div>
         <CartList
           cart={cart}
           removeFromCart={removeFromCart}

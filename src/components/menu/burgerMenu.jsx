@@ -17,7 +17,7 @@ function BurgerMenuList({
   return (
     <ul>
       {burgerMenuList.map((item) => (
-        <li key={item.id} onClick={() => onMenuClick(burgerMenuList)}>
+        <li key={item.id} onClick={() => addToCart(item)}>
           <img
             src={item.imgurl}
             alt={item.name}
@@ -26,10 +26,21 @@ function BurgerMenuList({
           <p>{item.name}</p>
           <p>가격: {formatPrice(item.price)} 원</p>
           <p>알레르기: {item.allergy}</p>
-          <button onClick={() => addToCart(item)}>장바구니에 담기</button>
+          {/* <button onClick={() => addToCart(item)}>장바구니에 담기</button> */}
         </li>
       ))}
     </ul>
+    // <div>
+    //   <h2>버거 메뉴</h2>
+    //   <ul>
+    //     {burgerMenuList.map((item) => (
+    //       <li key={item.id} onClick={() => addToCart(item)}>
+    //         <img src={item.imgurl} alt={item.name} style={{ width: "50px" }} />
+    //         {item.name} - {item.price}원
+    //       </li>
+    //     ))}
+    //   </ul>
+    // </div>
   );
 }
 
