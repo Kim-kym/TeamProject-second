@@ -27,8 +27,8 @@ export default function SlideToping(props) {
       </button>
       <QuantityInput
         quantity={quantity}
-        setQuantity={setQuantity}
         stock={props.id}
+        setQuantity={setQuantity}
       />
     </div>
   );
