@@ -475,9 +475,10 @@ function App() {
         Krusty Krab
       </h1>
       <main>
-        {/* 카테고리 선택창 */}
-        <Category setCurrentMenu={setCurrentMenu} />
-
+        <div className="category">
+          {/* 카테고리 선택창 */}
+          <Category setCurrentMenu={setCurrentMenu} />
+        </div>
         {/* 장바구니 리스트 */}
         <CartList
           cart={cart}
@@ -486,7 +487,7 @@ function App() {
         />
 
         {/* 조건부 렌더링 */}
-        <div id="choice">
+        <div id="menu">
           {/* 버거 세트 메뉴 리스트 */}
           {currentMenu === "burgerSetMenuList" && (
             <BurgerSetMenuList
