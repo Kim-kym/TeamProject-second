@@ -17,7 +17,7 @@
   div {
     margin-top: 20px;
     justify-content: center;
-    background-color: blanchedalmond;
+    /* background-color: blanchedalmond; */
 }
 
 main {
@@ -34,22 +34,31 @@ main > div {
 button {
     background-color: lightgoldenrodyellow;
     margin: auto;
+    border: 0;
+    width: 150px;
+    height: 25px;
   }
 
-button:nth-child(2) {
-  margin: 0 10px;
-}
-
-button:nth-child(3) {
+button:nth-child(1),
+button:nth-child(2),
+button:nth-child(3),
+button:nth-child(4) {
   margin-right: 10px;
 }
 
 button:hover {
-  background-color: rgb(248, 195, 129); /* 마우스가 올라갔을 때 버튼 색 바뀜 */
+  background-color: rgba(93, 93, 254, 0.466); /* 마우스가 올라갔을 때 버튼 색 바뀜 */
+  transform: scale(1.05); /* 확대 */
+  font-size: 1em; /* 텍스트 크기 확대 */
+  color: yellow; /* 글자 색 변경 */
 }
 
 button:focus {
-  background-color: rgb(248, 195, 129); /* 버튼을 클릭했을 때 색 바뀜 */
+  background-color: rgb(93, 93, 254); /* 버튼을 클릭했을 때 색 바뀜 */
+  transform: scale(1.05); /* 확대 */
+  font-size: 1em; /* 텍스트 크기 확대 */
+  color: yellow;
+  font-weight: bold;
 }
 
 ul{
@@ -69,4 +78,10 @@ li {
   background-color: rgba(127, 255, 212, 0.486);
   text-align: center; /* 내용 중앙 정렬 */
 
+}
+
+li:hover{
+  transform: scale(1.010); /* 확대 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+  font-size: 1em; /* 텍스트 크기 확대 */
 }
