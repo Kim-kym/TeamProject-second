@@ -1,7 +1,7 @@
 //test code
 import Home from "./components/김경빈/Home";
 import MainHome from "./app/MainHome";
-import Topping from "./app/Modal";
+// import Topping from "./app/Modal";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
