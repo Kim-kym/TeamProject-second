@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../../styled/slideTopping.css";
+// import { productData } from "../../toppingData";
 
 const Counter = () => {
   const [number, setNumber] = useState(0);
