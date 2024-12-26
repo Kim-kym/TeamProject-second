@@ -50,43 +50,43 @@ function Topping() {
 
   const productData = [
     {
-      id: 1,
+      id: 901,
       imageurl: "/image/topping/cheese.jpg",
       name: "치즈",
       price: "+600원",
     },
     {
-      id: 2,
+      id: 902,
       imageurl: "/image/topping/cabbage.png",
       name: "양배추",
       price: "+600원",
     },
     {
-      id: 3,
+      id: 903,
       imageurl: "/image/topping/patty.jpg",
       name: "패티",
       price: "+600원",
     },
     {
-      id: 4,
+      id: 904,
       imageurl: "/image/topping/bacon.jpg",
       name: "베이컨",
       price: "+600원",
     },
     {
-      id: 5,
+      id: 905,
       imageurl: "/image/topping/ketchup.jpg",
       name: "케첩",
       price: "+600원",
     },
     {
-      id: 6,
+      id: 906,
       imageurl: "/image/topping/mustard.jpg",
       name: "머스타드",
       price: "+600원",
     },
     {
-      id: 7,
+      id: 907,
       imageurl: "/image/topping/mayonnaise.jpg",
       name: "마요네즈",
       price: "+600원",
@@ -95,8 +95,8 @@ function Topping() {
 
   return (
     <>
-      <button id="choice" onClick={() => setOpen(true)}>
-        <img src={hambuger} alt="logo image"></img>
+      <button id="choice" key={item.id} onClick={() => setOpen(true)}>
+        <img src={item.imgeurl} alt={item.name}></img>
         <hambuger />
       </button>
       <Modal isOpen={open} onClose={() => setOpen(false)}>

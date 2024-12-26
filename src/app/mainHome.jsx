@@ -8,6 +8,7 @@ import CoffeeMenuList from "../components/menu/coffeeMenuList";
 import SideMenuList from "../components/menu/sideMenuList";
 import BurgerSetMenuList from "../components/menu/burgerSetMenuList";
 import CartList from "../components/cart/cartList";
+import Modal from "./Modal";
 
 function App() {
   const [currentMenu, setCurrentMenu] = useState("burger"); // 초기 메뉴는 'burger'
@@ -468,6 +469,17 @@ function App() {
       imgurl: "/image/side/sweet-chili-sauce.jpg",
     },
   ]);
+
+  // 모달 상태 관리
+  const [isToppingModalOpen, setToppingModalOpen] = useState(false);
+  const [selectedMenuItem, setSelectedMenuItem] = useState(null);
+
+  // 토핑 모달 열기
+  const handleMenuClick = (burgerMenuList) => {
+    setSelectedMenuItem(burgerMenuList); // 선택된 메뉴 아이템 저장
+    setToppingModalOpen(true); // 모달 열기
+  };
+
   return (
     <div>
       <h1>
@@ -500,6 +512,7 @@ function App() {
             <BurgerMenuList
               burgerMenuList={burgerMenuList}
               addToCart={addToCart}
+              onMenuClick={handleMenuClick} // 이벤트 핸들러 전달
             />
           )}
 
@@ -516,6 +529,23 @@ function App() {
           {/* 사이드 메뉴 리스트 */}
           {currentMenu === "side" && (
             <SideMenuList sideList={sideList} addToCart={addToCart} />
+          )}
+
+          {isToppingModalOpen && (
+            <Modal
+              isOpen={isToppingModalOpen}
+              onClose={() => setToppingModalOpen(false)}
+            >
+              <div>
+                <h2>{selectedMenuItem?.name}</h2>
+                <p>Price: {selectedMenuItem?.price}원</p>
+                <p>Allergy Info: {selectedMenuItem?.allergy}</p>
+                <img
+                  src={selectedMenuItem?.imgurl}
+                  alt={selectedMenuItem?.name}
+                />
+              </div>
+            </Modal>
           )}
         </div>
       </main>
