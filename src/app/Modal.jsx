@@ -113,7 +113,6 @@ function Topping() {
               <h3>세트 메뉴 선택</h3>
             </button>
           </div>
-
           <h2>토핑 선택하기</h2>
 
           <div className="SlideTopping">

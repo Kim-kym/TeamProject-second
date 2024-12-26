@@ -1,18 +1,8 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-// import cheese from "/image/topping/cheese.jpg";
-// import cabbage from "/image/topping/cabbage.png";
-// import patty from "/image/topping/patty.jpg";
-// import bacon from "/image/topping/bacon.jpg";
-// import ketchup from "/image/topping/ketchup.jpg";
-// import mustard from "/image/topping/mustard.jpg";
-// import mayonnaise from "/image/topping/mayonnaise.jpg";
 import "../../styled/slideTopping.css";
-// import Counter from "./Counter.jsx";
-// import Cart from "../topping/CounterRe.jsx";
-import { useState } from "react";
+// import { useState } from "react";
 // import QuantityInput from "../topping/CounterRe.jsx";
-
 export default function SlideToping({
   item,
   quantityMap,
@@ -33,7 +23,6 @@ export default function SlideToping({
         <button onClick={() => handleQuantityChange(item.id, +1)}>+</button>
       </div>
     </div>
-
     // {/* </Carousel> */}
   );
 }
