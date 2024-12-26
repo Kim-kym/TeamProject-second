@@ -59,7 +59,7 @@ function Topping() {
       id: 902,
       imageurl: "/image/topping/cabbage.png",
       name: "양배추",
-      price: "+700원",
+      price: "+600원",
     },
     {
       id: 903,
@@ -95,8 +95,8 @@ function Topping() {
 
   return (
     <>
-      <button id="choice" key={item.id} onClick={() => setOpen(true)}>
-        <img src={item.imgeurl} alt={item.name}></img>
+      <button id="choice" onClick={() => setOpen(true)}>
+        <img src={hambuger} alt="logo image"></img>
         <hambuger />
       </button>
       <Modal isOpen={open} onClose={() => setOpen(false)}>
