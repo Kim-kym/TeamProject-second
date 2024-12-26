@@ -1,6 +1,6 @@
 import React from "react";
 
-function BurgerMenuList({ burgerMenuList }) {
+function BurgerMenuList({ burgerMenuList, addToCart }) {
   const formatPrice = (price) => price.toLocaleString("ko-KR");
   // 특정 항목을 클릭했을 때 동작하는 함수
   const handleClick = (item) => {
@@ -20,6 +20,7 @@ function BurgerMenuList({ burgerMenuList }) {
           <p>{item.name}</p>
           <p>가격: {formatPrice(item.price)} 원</p>
           <p>알레르기: {item.allergy}</p>
+          <button onClick={() => addToCart(item)}>장바구니에 담기</button>
         </li>
       ))}
     </ul>
