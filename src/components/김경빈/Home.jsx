@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import "./Home.css";
+
 
 function Home() {
   let orderOption = "";
@@ -18,7 +20,7 @@ function Home() {
     <div
       style={{
         // 배경 이미지
-        backgroundImage: "url('/image/side/커여운 사진.jpg')", // 배경 소스
+        backgroundImage: "url('/image/side/배경사진.jpg')", // 배경 소스
         height: "100%", // 화면 꽉 체움 (세로 기준)
         backgroundSize: "cover", // 이미지 비율 유지
       }}
@@ -33,7 +35,9 @@ function Home() {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <button
           id="test" // 포장 버튼
-          style={{ width: "47vw", height: "45vw", marginRight: "0.8vw" }}
+          style={{ width: "47vw", height: "45vw", marginRight: "0.8vw",
+            backgroundColor: 'rgb(249, 252, 69)', fontSize: '8vw',
+            color: 'rgb(44, 167, 248'}} 
           onClick={() => orderOptionSelect("포장")}
         >
           포장
@@ -41,7 +45,9 @@ function Home() {
 
         <button
           id="test"
-          style={{ width: "47vw", height: "45vw" }}
+          style={{ width: "47vw", height: "45vw", 
+          backgroundColor: 'rgb(44, 167, 248)', fontSize: '8vw',
+          color: 'rgb(249, 252, 69)'}}
           onClick={() => orderOptionSelect("매장")}
         >
           매장
