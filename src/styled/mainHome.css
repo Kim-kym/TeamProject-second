@@ -89,45 +89,110 @@ li:hover{
   font-weight: bold; /* 글씨 두껍게 */
   background-color: lightgoldenrodyellow;
 }
-/* 장바구니 */
+
+/* 장바구니 고정 */
 #cart {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   background-color: #fff;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+  border-top: 2px solid #ccc;
+  padding: 20px;
   z-index: 1000;
-  border-top: 1px solid #ddd;
+  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
 }
 
-#cart ul {
-  list-style-type: none;
-  padding: 0;
+/* 카테고리별 합산 금액 스타일 */
+#cart h3 {
+  margin: 10px 0;
+  font-size: 18px;
 }
 
-#cart li {
+/* 장바구니 항목들을 가로로 나열 */
+.cart-items {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap; /* 항목들이 공간을 넘치면 아래로 내려가도록 설정 */
+  gap: 20px; /* 항목들 간의 간격 */
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  margin-top: 10px;
+}
+
+/* 장바구니 항목 스타일 */
+.cart-item {
+  display: flex;
+  display: inline;
+  flex-direction: column; /* 항목을 세로로 나열 */
   align-items: center;
+  justify-content: flex-start;
+  /* width: 150px; 각 항목의 너비 */
+  border: 1px solid #ddd;
+  /* height: 30px; */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item img {
+  max-width: 100px;
   margin-bottom: 10px;
 }
 
-#cart button {
+.cart-item p {
+  margin: 5px 0;
+}
+
+/* 수량 버튼 및 입력창 스타일 */
+.quantity-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.quantity-btn {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 18px;
+  width: 10px;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.quantity-btn:hover {
+  background-color: #45a049;
+}
+
+.quantity-input {
+  width: 50px;
+  padding: 5px;
+  font-size: 18px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* 삭제 버튼 스타일 */
+button {
   background-color: #f44336;
+  width: 70px;
   color: white;
   border: none;
-  /* padding: 5px 10px; */
-  padding: 0px;
+  padding: 8px 16px;
   cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
 }
 
-#cart button:hover {
-  background-color: #d32f2f;
+button:hover {
+  background-color: #e53935;
 }
 
-#cart input {
-  width: 50px;
-  text-align: center;
+/* 전체 금액 표시 */
+#cart .total {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
 }
