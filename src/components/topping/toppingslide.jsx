@@ -14,8 +14,6 @@ import { useState } from "react";
 import QuantityInput from "../topping/CounterRe.jsx";
 
 export default function SlideToping(props) {
-  const [quantity, setQuantity] = useState(0);
-
   return (
     // {/* <h3>토핑 추가</h3> */}
     // {/* <Carousel responsive={responsive}> */}
@@ -25,11 +23,13 @@ export default function SlideToping(props) {
         <h2>{props.name}</h2>
         <p className="price">{props.price}</p>
       </button>
-      <QuantityInput
+      <Counter />
+
+      {/* <QuantityInput
         quantity={quantity}
         stock={props.id}
         setQuantity={setQuantity}
-      />
+      /> */}
     </div>
   );
 }

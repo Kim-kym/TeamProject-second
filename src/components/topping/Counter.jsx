@@ -10,13 +10,15 @@ const Counter = () => {
     setNumber(number + 1);
   };
   const decrease = () => {
-    setNumber(number - 1);
+    if (number > 1) {
+      setNumber(number - 1);
+    }
   };
   return (
     <div className="count-btn">
-      <button onClick={increase}>-</button>
+      <button onClick={decrease}>-</button>
       <p>{number}</p>
-      <button onClick={decrease}>+</button>
+      <button onClick={increase}>-</button>
     </div>
   );
 };

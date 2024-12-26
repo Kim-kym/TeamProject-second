@@ -1,25 +1,25 @@
 import { useState } from "react";
 import QuantityInput from "./CounterRe";
 
-export default function ProductInfo({ product }) {
+export default function ProductInfo({ item }) {
   const [quantity, setQuantity] = useState(1);
-  const [total, setTotal] = useState(product.price);
+  const [total, setTotal] = useState(item.price);
 
   const handleClickCounter = (num) => {
     setQuantity((prev) => prev + num);
-    setTotal((prev) => prev + product.price * num);
+    setTotal((prev) => prev + item.price * num);
   };
   const handleBlurInput = (quantity) => {
     const newQuantity = quantity;
     setQuantity(newQuantity);
-    setTotal(product.price * newQuantity);
+    setTotal(item.price * newQuantity);
   };
 
   return (
     <div>
       <QuantityInput
         quantity={quantity}
-        stock={product.stock}
+        stock={item.stock}
         onClick={handleClickCounter}
         onBlur={handleBlurInput}
       />

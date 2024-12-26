@@ -10,6 +10,22 @@ import "react-multi-carousel/lib/styles.css";
 function Topping() {
   //  모달 열기
   const [open, setOpen] = useState(false);
+  const [quantityMap, setQuantityMap] = useState({});
+
+  const handleQuantityChange = (id, change) => {
+    setQuantityMap((prevMap) => {
+      const currentQuantity = prevMap[id] || 0;
+      const newQuantity = currentQuantity + change;
+      return { ...prevMap, [id]: Math.max(newQuantity, 0) };
+    });
+  };
+
+  const calculateTotalPrice = () => {
+    return productData.reduce((total, items) => {
+      const quantity = quantityMap[items.id] || 0;
+      return total + items.price * quantity;
+    }, 0);
+  };
 
   const responsive = {
     superLargeDesktop: {
@@ -85,23 +101,32 @@ function Topping() {
     />
   ));
 
-  // const totalPrice = product.map((items) =>
-  //   items.id === id  { ...product,
-  //   items.id
-  // }));
-
   return (
     <>
       <button id="choice" onClick={() => setOpen(true)}>
         <img src={hambuger} alt="logo image"></img>
         <hambuger />
-        {/* {totalPrice} */}
       </button>
       <Modal isOpen={open} onClose={() => setOpen(false)}>
         <div>
           {/* <Modal isOpen={open}> */}
           {/* children */}
           <img src={hambuger}></img>
+          {productData.map((items) => (
+            <li key={items.id}>
+              <span>
+                {items.name} {items.price}
+              </span>
+              <button onClick={() => handleQuantityChange(items.id, -1)}>
+                -
+              </button>
+              <span>{quantityMap[items.id] || 0}</span>
+              <button onClick={() => handleQuantityChange(items.id, +1)}>
+                +
+              </button>
+              <h3>Total Price: ${calculateTotalPrice()}</h3>
+            </li>
+          ))}
           <h2>토핑 선택하기</h2>
           <div className="SlideTopping">
             <h3>토핑 추가</h3>
