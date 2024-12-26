@@ -6,8 +6,6 @@ import "../styled/Modal.css";
 import "../styled/slideTopping.css";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import BugerMenuList from "../components/menu/bugerMenu.jsx";
-import BugermenuList from "../components/menu/bugerMenu.jsx";
 
 function Topping() {
   //  모달 열기
@@ -87,11 +85,17 @@ function Topping() {
     />
   ));
 
+  // const totalPrice = product.map((items) =>
+  //   items.id === id  { ...product,
+  //   items.id
+  // }));
+
   return (
     <>
       <button id="choice" onClick={() => setOpen(true)}>
         <img src={hambuger} alt="logo image"></img>
         <hambuger />
+        {/* {totalPrice} */}
       </button>
       <Modal isOpen={open} onClose={() => setOpen(false)}>
         <div>

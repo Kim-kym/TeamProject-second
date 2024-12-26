@@ -456,7 +456,7 @@ function App() {
 
           {/* 버거 메뉴 리스트 */}
           {currentMenu === "burger" && (
-            <BurgerMenuList menuList={burgerMenuList} />
+            <BurgerMenuList burgerMenuList={burgerMenuList} />
           )}
 
           {/* 음료 메뉴 리스트 */}

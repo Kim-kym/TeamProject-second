@@ -1,7 +1,7 @@
 //test code
 import Home from "./components/김경빈/Home";
 import MainHome from "./app/mainHome";
-import Topping from "./app/Modal";
+// import Topping from "./app/Modal";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/test" element={<MainHome />} />
-      <Route path="/choice" element={<Topping />} />
+      {/* <Route path="/choice" element={<Topping />} /> */}
     </Routes>
   );
 }
