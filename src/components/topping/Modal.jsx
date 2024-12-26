@@ -1,3 +1,5 @@
+// import "../../styled/Modal.css";
+
 const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 

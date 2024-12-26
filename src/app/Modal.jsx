@@ -107,6 +107,13 @@ function Topping() {
           <span>
             <h3>Total Price: {calculateTotalPrice()}원</h3>
           </span>
+          <div>
+            <button>
+              <img src={hambuger}></img>
+              <h3>세트 메뉴 선택</h3>
+            </button>
+          </div>
+
           <h2>토핑 선택하기</h2>
 
           <div className="SlideTopping">

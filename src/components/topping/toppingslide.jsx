@@ -32,60 +32,7 @@ export default function SlideToping({
         <span>{quantityMap[item.id] || 0}</span>
         <button onClick={() => handleQuantityChange(item.id, +1)}>+</button>
       </div>
-      {/* <QuantityInput
-        quantity={quantity}
-        stock={props.id}
-        setQuantity={setQuantity}
-      /> */}
     </div>
-    // <div className="card">
-    //   <button>
-    //     <img className="product" src={cabbage} alt="product image"></img>
-    //     <h2>양배추</h2>
-    //     <p className="price">+600원</p>
-    //   </button>
-    //   <Counter />
-    // </div>
-    // <div className="card">
-    //   <button>
-    //     <img className="product" src={patty} alt="product image"></img>
-    //     <h2>패티</h2>
-    //     <p className="price">+600원</p>
-    //   </button>
-    //   <Counter />
-    // </div>
-    // <div className="card">
-    //   <button>
-    //     <img className="product" src={bacon} alt="product image"></img>
-    //     <h2>베이컨</h2>
-    //     <p className="price">+600원</p>
-    //   </button>
-    //   <Counter />
-    // </div>
-    // <div className="card">
-    //   <button>
-    //     <img className="product" src={ketchup} alt="product image"></img>
-    //     <h2>케첩</h2>
-    //     <p className="price">FREE</p>
-    //   </button>
-    //   <Counter />
-    // </div>
-    // <div className="card">
-    //   <button>
-    //     <img className="product" src={mustard} alt="product image"></img>
-    //     <h2>머스타드</h2>
-    //     <p className="price">FREE</p>
-    //   </button>
-    //   <Counter />
-    // </div>
-    // <div className="card">
-    //   <button>
-    //     <img className="product" src={mayonnaise} alt="product image"></img>
-    //     <h2>마요네즈</h2>
-    //     <p className="price">FREE</p>
-    //   </button>
-    //   <Counter />
-    // </div>
 
     // {/* </Carousel> */}
   );
