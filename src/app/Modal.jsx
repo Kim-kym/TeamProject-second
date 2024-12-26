@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import hambuger from "/image/topping/hambuger.jpeg";
 import Modal from "../components/topping/Modal.jsx";
 import SlideToping from "../components/topping/toppingslide.jsx";
@@ -84,35 +84,11 @@ function Topping() {
       price={item.price}
     />
   ));
-  // import { useEffect, useState } from "react";
 
-  // export default function QuantityInput({ stock, quantity, onClick, onBlur }) {
-  //   const [value, setValue] = useState(quantity);
-
-  //   const handleChangeInput = (e) => {
-  //     const newValue = parseInt(e.target.value);
-
-  //     if (isNaN(newValue) || newValue < 1) {
-  //       setValue(1);
-  //     } else {
-  //       setValue(newValue);
-  //     }
-  //   };
-
-  //   const handleBlurInput = (e) => {
-  //     let newValue = parseInt(e.target.value);
-
-  //     if (stock < newValue) {
-  //       newValue = stock;
-  //     }
-  //     setValue(newValue);
-  //     onBlur(newValue);
-  //   };
-
-  // // const totalPrice = product.map((items) =>
-  // //   items.id === id  { ...product,
-  // //   items.id
-  // // }));
+  // const totalPrice = product.map((items) =>
+  //   items.id === id  { ...product,
+  //   items.id
+  // }));
 
   return (
     <>
