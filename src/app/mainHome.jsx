@@ -352,7 +352,7 @@ function MainHome() {
         {/* <CartList /> */}
 
         {/* 조건부 렌더링 */}
-        <div id="choice">
+        <div>
           {/* 버거 매뉴 리스트 */}
           {currentMenu === "burger" && (
             <BugerMenuList menuList={bugerMenuList} />
