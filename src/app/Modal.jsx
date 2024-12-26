@@ -59,7 +59,7 @@ function Topping() {
       id: 902,
       imageurl: "/image/topping/cabbage.png",
       name: "양배추",
-      price: "+600원",
+      price: "+700원",
     },
     {
       id: 903,
