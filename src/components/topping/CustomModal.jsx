@@ -10,6 +10,10 @@ function CustomModal({
   setOpen,
   selectedItem,
   setSelectedItem,
+  addToCart,
+  selectedTopping,
+  setSelectedTopping,
+  handleMenuClick,
 }) {
   // 모달
   //   const [open, setOpen] = useState(false);
@@ -134,7 +138,15 @@ function CustomModal({
           ))}
         </Carousel>
         <div className="check-btn">
-          <button onClick={() => setOpen(false)} className="btn-yes">
+          <button
+            onClick={() => {
+              setOpen(false);
+              addToCart(selectedItem);
+              selectedTopping(setSelectedTopping);
+              handleMenuClick(selectedTopping);
+            }}
+            className="btn-yes"
+          >
             확인
           </button>
           <button onClick={() => setOpen(false)} className="btn-no">
