@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
 
 function Home() {
+  let isVisible = false;
   let orderOption = "";
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const orderOptionSelect = (option) => {
     orderOption = option;
@@ -12,11 +13,27 @@ function Home() {
   };
 
   const pageChange = () => {
-    console.log(orderOption);
-    navigate("/test", { state: { orderOption: orderOption } });
+    // console.log(orderOption);
+    // navigate("/test", { state: { orderOption: orderOption } });
+    isVisible = true;
+  };
+
+  const handleClick = () => {
+    isVisible = false;
   };
 
   return (
+    <div>
+      <div>
+{isVisible && 
+<div style={{backgroundColor : "white", height : "60%", width : "60%"}}>
+  <p>{orderOption}</p>
+  <p> 음료 수정</p>
+  <p> 사이드 교체</p>
+  <button onClick={() => handleClick()}>닫기</button>
+</div>
+}
+</div>
     <div
       style={{
         // 배경 이미지
@@ -59,6 +76,7 @@ function Home() {
           height: "15vh",
         }}
       ></div>
+    </div>
     </div>
   );
 }
