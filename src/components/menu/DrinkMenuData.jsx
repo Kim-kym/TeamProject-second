@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-function DrinkMenuData({ handleMenuClick }) {
-  const formatPrice = (price) => price.toLocaleString("ko-KR");
-
+function DrinkMenuData({ handleMenuClick, formatPrice }) {
   const [DrinkList] = useState([
     {
       id: 101,

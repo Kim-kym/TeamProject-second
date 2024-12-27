@@ -4,14 +4,18 @@ import "../styled/mainHome.css";
 import { useState } from "react";
 import CartList from "../components/cart/cartList";
 import MenuDisplay from "../components/menu/MenuDisplay";
-import Modal from "./Modal";
+import CustomModal from "../components/topping/CustomModal";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 function MainHome() {
   const [currentMenu, setCurrentMenu] = useState("burger"); // 초기 메뉴는 'burger'
 
   // 선택한 메뉴 정보 불러오기
-  const handleMenuClick = (menuItem) => {
-    console.log("Selected item:", menuItem);
+  const handleMenuClick = (menu) => {
+    console.log("Selected item:", menu);
+    setSelectedItem(menu);
+    setOpen(true);
   };
 
   // 장바구니 상태 관리
@@ -50,16 +54,14 @@ function MainHome() {
       cart.map((item) => (item.id === itemId ? { ...item, quantity } : item))
     );
   };
+  // 메뉴 가격
+  const formatPrice = (price) => price.toLocaleString("ko-KR");
 
-  // // 모달 상태 관리
-  const [isToppingModalOpen, setToppingModalOpen] = useState(false);
-  const [selectedMenuItem, setSelectedMenuItem] = useState(null);
+  //  모달 상태 관리
+  const [open, setOpen] = useState(false);
 
-  // 토핑 모달 열기
-  const openToppingModal = (burgerMenuList) => {
-    setSelectedMenuItem(burgerMenuList); // 선택된 메뉴 아이템 저장
-    setToppingModalOpen(true); // 모달 열기
-  };
+  // 선택된 메뉴 아이템 저장
+  const [selectedItem, setSelectedItem] = useState(null);
 
   return (
     <div className="root">
@@ -74,10 +76,12 @@ function MainHome() {
             setCurrentMenu={setCurrentMenu}
             addToCart={addToCart}
             handleMenuClick={handleMenuClick}
-            openToppingModal={openToppingModal}
+            formatPrice={formatPrice}
+            // openToppingModal={openToppingModal}
           />
         </div>
         {/* 장바구니 리스트 */}
+
         <div
           className={`cart-container ${isCartOpen ? "open" : ""}`}
           onClick={() => setIsCartOpen(!isCartOpen)} // 장바구니 열기/닫기
@@ -87,23 +91,16 @@ function MainHome() {
           removeFromCart={removeFromCart}
           updateQuantity={updateQuantity}
         />
-
-        <div className="modal">
-          {isToppingModalOpen && (
-            <Modal
-              isOpen={isToppingModalOpen}
-              onClose={() => setToppingModalOpen(false)}
-            >
-              <div>
-                <h2>{selectedMenuItem?.name}</h2>
-                <p>Price: {selectedMenuItem?.price}원</p>
-                <p>Allergy Info: {selectedMenuItem?.allergy}</p>
-                <img
-                  src={selectedMenuItem?.imgurl}
-                  alt={selectedMenuItem?.name}
-                />
-              </div>
-            </Modal>
+        <div>
+          <h3>토핑 선택하기</h3>
+          {open && (
+            <CustomModal
+              open={open}
+              formatPrice={formatPrice}
+              setOpen={setOpen}
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+            />
           )}
         </div>
         

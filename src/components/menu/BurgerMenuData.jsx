@@ -1,7 +1,9 @@
 import { useState } from "react";
+import Topping from "../topping/Modal";
+import Modal from "../topping/Modal";
+import "../../styled/Modal.css";
 
-function BurgerMenuData({ onMenuClick, openToppingModal }) {
-  const formatPrice = (price) => price.toLocaleString("ko-KR");
+function BurgerMenuData({ handleMenuClick, formatPrice }) {
   const [MenuList] = useState([
     {
       id: 1,
@@ -106,8 +108,9 @@ function BurgerMenuData({ onMenuClick, openToppingModal }) {
           <li
             key={menu.id}
             onClick={() => {
-              onMenuClick(menu);
-              openToppingModal(menu);
+              handleMenuClick(menu);
+              setOpen(true);
+              formatPrice(Menu);
             }}
           >
             <img
@@ -118,6 +121,7 @@ function BurgerMenuData({ onMenuClick, openToppingModal }) {
             <p>{menu.name}</p>
             <p>가격: {formatPrice(menu.price)} 원</p>
             <p>알레르기: {menu.allergy}</p>
+            {/* <img src={menu.imgurl} alt={menu.name}></img> */}
           </li>
         ))}
       </ul>

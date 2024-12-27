@@ -1,9 +1,8 @@
 import { useState } from "react";
 // import SideMenuList from "../sideMenuList";
 
-function SideMenuData({ handleMenuClick }) {
+function SideMenuData({ handleMenuClick, formatPrice }) {
   // 금액에 , 넣기
-  const formatPrice = (price) => price.toLocaleString("ko-KR");
 
   /* 사이드 메뉴 리스트 */
 

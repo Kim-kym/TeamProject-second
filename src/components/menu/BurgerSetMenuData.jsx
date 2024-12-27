@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-function SetMenuData({ handleMenuClick }) {
-  const formatPrice = (price) => price.toLocaleString("ko-KR");
-
+function SetMenuData({ handleMenuClick, formatPrice }) {
   const [burgerSetMenuList] = useState([
     {
       id: 401,
