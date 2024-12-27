@@ -15,6 +15,7 @@ function MainHome() {
   const handleMenuClick = (menu) => {
     console.log("Selected item:", menu);
     setSelectedItem(menu);
+    setSelectedTopping(menu);
     setOpen(true);
   };
 
@@ -63,6 +64,9 @@ function MainHome() {
   // 선택된 메뉴 아이템 저장
   const [selectedItem, setSelectedItem] = useState(null);
 
+  // 선택된 토핑 저장
+  const [selectedTopping, setSelectedTopping] = useState(null);
+
   return (
     <div className="root">
       <h1>
@@ -100,10 +104,13 @@ function MainHome() {
               setOpen={setOpen}
               selectedItem={selectedItem}
               setSelectedItem={setSelectedItem}
+              addToCart={addToCart}
+              selectedTopping={selectedTopping}
+              setSelectedTopping={setSelectedTopping}
+              handleMenuClick={handleMenuClick}
             />
           )}
         </div>
-        
       </main>
     </div>
   );
