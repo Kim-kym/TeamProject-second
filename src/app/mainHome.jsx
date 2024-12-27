@@ -524,6 +524,7 @@ function App() {
             <SideMenuList sideList={sideList} addToCart={addToCart} />
           )}
         </div>
+        
       </main>
     </div>
   );
