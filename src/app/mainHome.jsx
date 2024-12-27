@@ -1,17 +1,31 @@
-// import Category from "../components/menu/Category";
+import Category from "../components/menu/Category";
 import logo from "/image/logo1.jpg";
-import "../styled/mainHome.css";
+import "../styled/MainHome.css";
 import { useState } from "react";
 import CartList from "../components/cart/cartList";
 import MenuDisplay from "../components/menu/MenuDisplay";
 import Modal from "./Modal";
+import BurgerSetMenuData from "../components/menu/BurgerSetMenuData";
+import BurgerMenuData from "../components/menu/BurgerMenuData";
+import CoffeeMenuData from "../components/menu/CoffeeMenuData";
+import DrinkMenuData from "../components/menu/DrinkMenuData";
+import SideMenuData from "../components/menu/SideMenuData";
+// import menuListData from "../components/menu/MenuList";
 
 function MainHome() {
   const [currentMenu, setCurrentMenu] = useState("burger"); // 초기 메뉴는 'burger'
 
   // 선택한 메뉴 정보 불러오기
-  const handleMenuClick = (menuItem) => {
-    console.log("Selected item:", menuItem);
+  const handleMenuClick = (menu) => {
+    console.log("Selected menu:", menu);
+  };
+
+  const menuDatas = {
+    set: BurgerSetMenuData,
+    burger: BurgerMenuData,
+    drink: DrinkMenuData,
+    coffee: CoffeeMenuData,
+    side: SideMenuData,
   };
 
   // 장바구니 상태 관리
@@ -62,7 +76,8 @@ function MainHome() {
   };
 
   return (
-    <div className="root">
+    <div>
+      <div className="back"></div>
       <h1>
         <img src={logo} alt="Krusty Krab Logo" style={{ width: "150px" }} />
         Krusty Krab
@@ -74,7 +89,7 @@ function MainHome() {
             setCurrentMenu={setCurrentMenu}
             addToCart={addToCart}
             handleMenuClick={handleMenuClick}
-            openToppingModal={openToppingModal}
+            menuListData={menuDatas}
           />
         </div>
         {/* 장바구니 리스트 */}
@@ -87,7 +102,6 @@ function MainHome() {
           removeFromCart={removeFromCart}
           updateQuantity={updateQuantity}
         />
-
         <div className="modal">
           {isToppingModalOpen && (
             <Modal
@@ -98,10 +112,6 @@ function MainHome() {
                 <h2>{selectedMenuItem?.name}</h2>
                 <p>Price: {selectedMenuItem?.price}원</p>
                 <p>Allergy Info: {selectedMenuItem?.allergy}</p>
-                <img
-                  src={selectedMenuItem?.imgurl}
-                  alt={selectedMenuItem?.name}
-                />
               </div>
             </Modal>
           )}
