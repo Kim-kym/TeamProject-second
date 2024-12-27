@@ -12,6 +12,7 @@ function MenuDisplay({
   addToCart,
   handleMenuClick,
   openToppingModal,
+  formatPrice,
 }) {
   return (
     <div className="menu-display">
@@ -24,22 +25,26 @@ function MenuDisplay({
           currentMenu={currentMenu}
           addToCart={addToCart}
           handleMenuClick={handleMenuClick}
+          formatPrice={formatPrice}
         />
       )}
       {currentMenu === "burger" && (
         <BurgerMenu
           burgerMenuList={currentMenu}
           addToCart={addToCart}
-          onMenuClick={handleMenuClick}
-          openToppingModal={openToppingModal}
+          handleMenuClick={handleMenuClick}
+          formatPrice={formatPrice}
+          // openToppingModal={openToppingModal}
         />
       )}
+
       {currentMenu === "side" && (
         <SideMenuData
           sideList={currentMenu}
           addToCart={addToCart}
           handleMenuClick={handleMenuClick}
-          openToppingModal={openToppingModal}
+          formatPrice={formatPrice}
+          // openToppingModal={openToppingModal}
         />
       )}
       {currentMenu === "drink" && (
@@ -47,6 +52,7 @@ function MenuDisplay({
           drinkList={currentMenu}
           addToCart={addToCart}
           handleMenuClick={handleMenuClick}
+          formatPrice={formatPrice}
         />
       )}
       {currentMenu === "coffee" && (
@@ -54,6 +60,7 @@ function MenuDisplay({
           coffeeList={currentMenu}
           addToCart={addToCart}
           handleMenuClick={handleMenuClick}
+          formatPrice={formatPrice}
         />
       )}
     </div>

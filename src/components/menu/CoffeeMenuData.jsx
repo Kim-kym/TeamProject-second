@@ -1,9 +1,7 @@
 import { useState } from "react";
 // import CoffeeMenuList from "../coffeeMenuList";
 
-function CoffeeMenuData({ handleMenuClick }) {
-  const formatPrice = (price) => price.toLocaleString("ko-KR");
-
+function CoffeeMenuData({ handleMenuClick, formatPrice }) {
   const [coffeeList] = useState([
     {
       id: 201,

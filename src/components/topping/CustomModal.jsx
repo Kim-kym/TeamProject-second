@@ -1,16 +1,24 @@
+import Modal from "./Modal";
 import { useState } from "react";
-import hambuger from "/image/topping/hambuger.jpeg";
-import Modal from "../components/topping/Modal.jsx";
-import SlideToping from "../components/topping/toppingslide.jsx";
-import "../styled/Modal.css";
-import "../styled/slideTopping.css";
+import SlideTopping from "./toppingslide";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-function Topping() {
-  //  모달 열기
-  const [open, setOpen] = useState(false);
+function CustomModal({
+  formatPrice,
+  open,
+  setOpen,
+  selectedItem,
+  setSelectedItem,
+}) {
+  // 모달
+  //   const [open, setOpen] = useState(false);
   const [quantityMap, setQuantityMap] = useState({});
+
+  const openModal = (menu) => {
+    setSelectedItem(menu); // 선택된 메뉴 아이템 저장
+    setIsModalOpen(true); // 모달 열기
+  };
 
   const handleQuantityChange = (id, change) => {
     setQuantityMap((prevMap) => {
@@ -25,7 +33,7 @@ function Topping() {
       const quantity = quantityMap[items.id] || 0;
       const price = parseInt(items.price.replace("원", "").replace("+", ""));
       return total + price * quantity;
-    }, 0);
+    }, selectedItem.price);
   };
 
   const responsive = {
@@ -94,54 +102,48 @@ function Topping() {
   ];
 
   return (
-    <>
-      <button id="choice" onClick={() => setOpen(true)}>
-        <img src={hambuger} alt="logo image"></img>
-      </button>
-      <Modal isOpen={open} onClose={() => setOpen(false)}>
-        <div>
-          {/* <Modal isOpen={open}> */}
-          {/* children */}
-          <img src={hambuger}></img>
-          <span>
-            <h3>Total Price: {calculateTotalPrice()}원</h3>
-          </span>
+    <Modal isOpen={open} onClose={() => setOpen(false)}>
+      <div>
+        {selectedItem && (
           <div>
-            <button>
-              <img src={hambuger}></img>
-              <h3>세트 메뉴 선택</h3>
-            </button>
+            <h2>토핑 선택하기</h2>
+            <img
+              src={selectedItem.imgurl}
+              alt={selectedItem.name}
+              style={{ width: "200px", height: "200px" }}
+            />
+            <p>{selectedItem.name}</p>
+            <p>알레르기: {selectedItem.allergy}</p>
+            <p>Price: {formatPrice(selectedItem.price)}</p>
+            <h3>Total Price: {calculateTotalPrice()}원</h3>
+            {/* 여기에 추가적인 아이템 상세 정보를 넣을 수 있습니다. */}
           </div>
-          <h2>토핑 선택하기</h2>
-
-          <div className="SlideTopping">
-            <h3>토핑 추가</h3>
-
-            {/* <div className="slide"> */}
-            <Carousel responsive={responsive}>
-              {productData.map((item) => (
-                <SlideToping
-                  key={item.id}
-                  item={item}
-                  quantityMap={quantityMap}
-                  handleQuantityChange={handleQuantityChange}
-                />
-              ))}
-            </Carousel>
-          </div>
-
-          <div className="check-btn">
-            <button onClick={() => setOpen(false)} className="btn-yes">
-              확인
-            </button>
-            <button onClick={() => setOpen(false)} className="btn-no">
-              취소
-            </button>
-          </div>
+        )}
+        <div>
+          <h3>세트 메뉴 선택하기</h3>
         </div>
-      </Modal>
-    </>
+        {/* <h3>토핑 추가</h3> */}
+        <Carousel responsive={responsive}>
+          {productData.map((item) => (
+            <SlideTopping
+              key={item.id}
+              item={item}
+              quantityMap={quantityMap}
+              handleQuantityChange={handleQuantityChange}
+            />
+          ))}
+        </Carousel>
+        <div className="check-btn">
+          <button onClick={() => setOpen(false)} className="btn-yes">
+            확인
+          </button>
+          <button onClick={() => setOpen(false)} className="btn-no">
+            취소
+          </button>
+        </div>
+      </div>
+    </Modal>
   );
 }
 
-export default Topping;
+export default CustomModal;
