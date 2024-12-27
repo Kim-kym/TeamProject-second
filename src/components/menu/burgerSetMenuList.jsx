@@ -9,6 +9,8 @@ function BurgerSetMenuList({ burgerSetMenuList }) {
   };
 
   return (
+
+    
     <ul>
       {burgerSetMenuList.map((item) => (
         <li key={item.id} onClick={() => handleClick(item)}>
@@ -27,3 +29,14 @@ function BurgerSetMenuList({ burgerSetMenuList }) {
 }
 
 export default BurgerSetMenuList;
+
+{/* <div>
+{isVisible && 
+<div>
+  <p>{showItem.name}</p>
+  <p> 음료 수정</p>
+  <p> 사이드 교체</p>
+  <button onClick={() => handleClick(showItem)}>장바구니 넣기</button>
+</div>
+}
+</div> */}

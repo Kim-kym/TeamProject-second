@@ -1,6 +1,10 @@
 //test code
 import Home from "./components/김경빈/Home";
+<<<<<<< HEAD
 import Menu from "./components/김경빈/Menu";
+=======
+import Menu from "./components/김경빈/Menu"
+>>>>>>> bin
 // import MainHome from "./app/MainHome";
 // import Topping from "./app/Modal";
 import { Routes, Route } from "react-router-dom";
