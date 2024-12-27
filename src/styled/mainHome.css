@@ -15,6 +15,13 @@ div {
     /* background-color: blanchedalmond; */
 }
 
+.root {
+  background-image: url('/image/side/배경사진.jpg');
+  height: 100%;
+  background-size: "cover";
+  /* opacity: 0.5; */
+  background-repeat: no-repeat;
+}
 main {
   margin: auto;
   width: 70%;
@@ -64,7 +71,9 @@ button:focus {
   /* background-color: #d32f2f; */
   margin: 0;
 }
-#menu > ul {
+
+
+.category ul {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3개의 열 생성 */

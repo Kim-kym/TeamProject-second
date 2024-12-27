@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
-
 function Home() {
   let orderOption = "";
   const navigate = useNavigate();
@@ -35,9 +34,14 @@ function Home() {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <button
           id="test" // 포장 버튼
-          style={{ width: "47vw", height: "45vw", marginRight: "0.8vw",
-            backgroundColor: 'rgb(249, 252, 69)', fontSize: '8vw',
-            color: 'rgb(44, 167, 248'}} 
+          style={{
+            width: "47vw",
+            height: "45vw",
+            marginRight: "0.8vw",
+            backgroundColor: "rgb(249, 252, 69)",
+            fontSize: "8vw",
+            color: "rgb(44, 167, 248",
+          }}
           onClick={() => orderOptionSelect("포장")}
         >
           포장
@@ -45,9 +49,13 @@ function Home() {
 
         <button
           id="test"
-          style={{ width: "47vw", height: "45vw", 
-          backgroundColor: 'rgb(44, 167, 248)', fontSize: '8vw',
-          color: 'rgb(249, 252, 69)'}}
+          style={{
+            width: "47vw",
+            height: "45vw",
+            backgroundColor: "rgb(44, 167, 248)",
+            fontSize: "8vw",
+            color: "rgb(249, 252, 69)",
+          }}
           onClick={() => orderOptionSelect("매장")}
         >
           매장
