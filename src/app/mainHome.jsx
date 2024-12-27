@@ -106,6 +106,7 @@ function MainHome() {
             </Modal>
           )}
         </div>
+        
       </main>
     </div>
   );
