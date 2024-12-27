@@ -6,7 +6,6 @@ import Topping from "./app/Modal";
 // import App from "./components/toppingslide";
 // import App from "/src/app/MainHome.jsx";
 import App from "./App";
-// import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root")).render(
