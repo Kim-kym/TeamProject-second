@@ -1,7 +1,7 @@
 import { useState } from "react";
 import hambuger from "/image/topping/hambuger.jpeg";
 import Modal from "../components/topping/Modal.jsx";
-import SlideToping from "../components/topping/toppingslide.jsx";
+import SlideToping from "../components/topping/Toppingslide.jsx";
 import "../styled/Modal.css";
 import "../styled/slideTopping.css";
 import Carousel from "react-multi-carousel";

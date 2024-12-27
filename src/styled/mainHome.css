@@ -13,14 +13,21 @@ div {
     /* margin-top: 20px; */
     justify-content: center;
     /* background-color: blanchedalmond; */
+    /* position: relative; */
 }
 
-.root {
+.back {
   background-image: url('/image/side/배경사진.jpg');
-  height: 100%;
-  background-size: "cover";
-  /* opacity: 0.5; */
+  background-size: cover;
   background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(2px); /* 흐림 효과 적용 */
+  z-index: -1; /* 콘텐츠보다 뒤에 위치하도록 설정 */
+  opacity: 0.5; /* 배경 흐림 효과 투명도 */
 }
 main {
   margin: auto;
@@ -76,13 +83,15 @@ button:focus {
 .category ul {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3개의 열 생성 */
+  grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개의 열 */
+  grid-auto-rows: auto; /* 행의 높이를 자동으로 설정 */
   gap: 10px; /* 아이템 간 간격 */
-  flex-wrap: wrap; /* 자동 줄 바꿈 */
-  justify-content: center; /* 가운데 맞추기 */
-  gap: 10px; /* 아이템 별 간격 */
+  max-height: calc(3 * 150px + 10px); /* 2줄 제한: 항목 높이 * 2줄 + 간격 */
+  overflow-y: auto; /* 2줄을 초과할 경우 스크롤 생성 */
+  
+  
   min-width: 250px;
-  background-color: rgb(93, 93, 254);
+  background-color: rgb(93, 93, 254); 
   /* margin-top: 0; */
 }
 

@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-// import Home from "./components/김경빈/Home";
+// import Home from "./components/kimgyeongbin/Home";
 // import "./styled/Modal.css";
 // import Topping from "./app/Modal";
 // import App from "./components/topping/Counter.jsx";
