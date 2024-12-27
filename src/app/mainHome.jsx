@@ -21,7 +21,7 @@ function MainHome() {
   };
 
   const menuDatas = {
-    set: BurgerSetMenuData,
+    Set: BurgerSetMenuData,
     burger: BurgerMenuData,
     drink: DrinkMenuData,
     coffee: CoffeeMenuData,
@@ -104,7 +104,7 @@ function MainHome() {
           removeFromCart={removeFromCart}
           updateQuantity={updateQuantity}
         />
-        <div className="modal">
+        {/* <div className="modal">
           {isToppingModalOpen && (
             <Modal
               isOpen={isToppingModalOpen}
@@ -117,7 +117,7 @@ function MainHome() {
               </div>
             </Modal>
           )}
-        </div>
+        </div> */}
       </main>
     </div>
   );
