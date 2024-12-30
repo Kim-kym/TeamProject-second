@@ -90,57 +90,57 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
     setOpen(false);
   };
 
-  const productData = [
-    {
-      id: 901,
-      imgurl: "/image/topping/cheese.jpg",
-      name: "치즈",
-      price: 600,
-      category: "topping",
-    },
-    {
-      id: 902,
-      imgurl: "/image/topping/cabbage.png",
-      name: "양배추",
-      price: 600,
-      category: "topping",
-    },
-    {
-      id: 903,
-      imageurl: "/image/topping/patty.jpg",
-      name: "패티",
-      price: 600,
-      category: "topping",
-    },
-    {
-      id: 904,
-      imgurl: "/image/topping/bacon.jpg",
-      name: "베이컨",
-      price: 600,
-      category: "topping",
-    },
-    {
-      id: 905,
-      imgurl: "/image/topping/ketchup.jpg",
-      name: "케첩",
-      price: 600,
-      category: "topping",
-    },
-    {
-      id: 906,
-      imgurl: "/image/topping/mustard.jpg",
-      name: "머스타드",
-      price: 600,
-      category: "topping",
-    },
-    {
-      id: 907,
-      imgurl: "/image/topping/mayonnaise.jpg",
-      name: "마요네즈",
-      price: 600,
-      category: "topping",
-    },
-  ];
+  // const productData = [
+  //   {
+  //     id: 901,
+  //     imgurl: "/image/topping/cheese.jpg",
+  //     name: "치즈",
+  //     price: 600,
+  //     category: "topping",
+  //   },
+  //   {
+  //     id: 902,
+  //     imgurl: "/image/topping/cabbage.png",
+  //     name: "양배추",
+  //     price: 600,
+  //     category: "topping",
+  //   },
+  //   {
+  //     id: 903,
+  //     imageurl: "/image/topping/patty.jpg",
+  //     name: "패티",
+  //     price: 600,
+  //     category: "topping",
+  //   },
+  //   {
+  //     id: 904,
+  //     imgurl: "/image/topping/bacon.jpg",
+  //     name: "베이컨",
+  //     price: 600,
+  //     category: "topping",
+  //   },
+  //   {
+  //     id: 905,
+  //     imgurl: "/image/topping/ketchup.jpg",
+  //     name: "케첩",
+  //     price: 600,
+  //     category: "topping",
+  //   },
+  //   {
+  //     id: 906,
+  //     imgurl: "/image/topping/mustard.jpg",
+  //     name: "머스타드",
+  //     price: 600,
+  //     category: "topping",
+  //   },
+  //   {
+  //     id: 907,
+  //     imgurl: "/image/topping/mayonnaise.jpg",
+  //     name: "마요네즈",
+  //     price: 600,
+  //     category: "topping",
+  //   },
+  // ];
 
   return (
     <Modal
