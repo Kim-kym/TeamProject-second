@@ -99,12 +99,14 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
       imageurl: "/image/topping/cheese.jpg",
       name: "치즈",
       price: 600,
+      category: "topping",
     },
     {
       id: 902,
       imageurl: "/image/topping/cabbage.png",
       name: "양배추",
       price: 600,
+      category: "topping",
     },
     { id: 903, imageurl: "/image/topping/patty.jpg", name: "패티", price: 600 },
     {
@@ -112,24 +114,28 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
       imageurl: "/image/topping/bacon.jpg",
       name: "베이컨",
       price: 600,
+      category: "topping",
     },
     {
       id: 905,
       imageurl: "/image/topping/ketchup.jpg",
       name: "케첩",
       price: 600,
+      category: "topping",
     },
     {
       id: 906,
       imageurl: "/image/topping/mustard.jpg",
       name: "머스타드",
       price: 600,
+      category: "topping",
     },
     {
       id: 907,
       imageurl: "/image/topping/mayonnaise.jpg",
       name: "마요네즈",
       price: 600,
+      category: "topping",
     },
   ];
 
@@ -139,17 +145,14 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
         {/* 선택한 메뉴 정보: 이미지, 이름, 알레르기, 가격 */}
         {selectedMenu && (
           <div className="selected-menu">
-            <img
-              src={selectedMenu.imgurl}
-              alt={selectedMenu.name}
-              onClick={handleMenuToggle}
-              style={{
-                width: "150px",
-                height: "150px",
-                marginRight: "20px",
-                cursor: "pointer",
-              }}
-            />
+            <div className="image-container">
+              <img
+                src={selectedMenu.imgurl}
+                alt={selectedMenu.name}
+                onClick={handleMenuToggle}
+              />
+              <input type="checkbox" className="image-checkbox" />
+            </div>
             <div>
               <h3>{selectedMenu.name}</h3>
               <p>알레르기: {selectedMenu.allergy || "없음"}</p>
