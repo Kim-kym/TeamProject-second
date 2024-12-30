@@ -2,6 +2,7 @@ import Modal from "./Modal";
 import ToppingList from "./ToppingList";
 import { useState, useEffect, useRef } from "react";
 import BurgerSetMenuData from "../menu/BurgerSetMenuData";
+import productMenuData from "../menu/ProductMenuData";
 
 function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
   const [selectedMenu, setSelectedMenu] = useState(selectedItem || {});
@@ -90,58 +91,6 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
     setOpen(false);
   };
 
-  // const productData = [
-  //   {
-  //     id: 901,
-  //     imgurl: "/image/topping/cheese.jpg",
-  //     name: "치즈",
-  //     price: 600,
-  //     category: "topping",
-  //   },
-  //   {
-  //     id: 902,
-  //     imgurl: "/image/topping/cabbage.png",
-  //     name: "양배추",
-  //     price: 600,
-  //     category: "topping",
-  //   },
-  //   {
-  //     id: 903,
-  //     imageurl: "/image/topping/patty.jpg",
-  //     name: "패티",
-  //     price: 600,
-  //     category: "topping",
-  //   },
-  //   {
-  //     id: 904,
-  //     imgurl: "/image/topping/bacon.jpg",
-  //     name: "베이컨",
-  //     price: 600,
-  //     category: "topping",
-  //   },
-  //   {
-  //     id: 905,
-  //     imgurl: "/image/topping/ketchup.jpg",
-  //     name: "케첩",
-  //     price: 600,
-  //     category: "topping",
-  //   },
-  //   {
-  //     id: 906,
-  //     imgurl: "/image/topping/mustard.jpg",
-  //     name: "머스타드",
-  //     price: 600,
-  //     category: "topping",
-  //   },
-  //   {
-  //     id: 907,
-  //     imgurl: "/image/topping/mayonnaise.jpg",
-  //     name: "마요네즈",
-  //     price: 600,
-  //     category: "topping",
-  //   },
-  // ];
-
   return (
     <Modal
       isOpen={open}
@@ -180,7 +129,7 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
         )}
         <h3>Total Price: {formatPrice(calculateTotalPrice())}원</h3>
         <ToppingList
-          productData={productData}
+          productData={productMenuData}
           quantityMap={quantityMap}
           handleQuantityChange={handleQuantityChange}
           carouselRef={carouselRef} // Carousel ref 전달
