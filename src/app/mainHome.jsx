@@ -11,12 +11,8 @@ import CartList from "../components/cart/cartList";
 
 function App() {
   const [currentMenu, setCurrentMenu] = useState("burger"); // 초기 메뉴는 'burger'
-
-  // 장바구니 상태 관리
-  const [cart, setCart] = useState([]);
-
-  // 장바구니 열림/닫힘 상태
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [cart, setCart] = useState([]); // 장바구니 상태 관리
+  const [isCartOpen, setIsCartOpen] = useState(false); // 장바구니 열림/닫힘 상태
 
   // 장바구니에 항목 추가
   const addToCart = (item) => {
@@ -48,6 +44,16 @@ function App() {
       cart.map((item) => (item.id === itemId ? { ...item, quantity } : item))
     );
   };
+
+  // 장바구니 총 가격 계산
+  // const getTotalPrice = () => {
+  //   return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  // };
+
+  // 장바구니 총 수량 계산
+  // const getTotalQuantity = () => {
+  //   return cart.reduce((total, item) => total + item.quantity, 0);
+  // };
 
   //메뉴 목록 리스트
   const [burgerSetMenuList] = useState([
@@ -481,17 +487,6 @@ function App() {
         {/* 카테고리 선택창 */}
         <Category setCurrentMenu={setCurrentMenu} />
 
-        {/* 장바구니 리스트 */}
-        <div
-          className={`cart-container ${isCartOpen ? "open" : ""}`}
-          onClick={() => setIsCartOpen(!isCartOpen)} // 장바구니 열기/닫기
-        ></div>
-        <CartList
-          cart={cart}
-          removeFromCart={removeFromCart}
-          updateQuantity={updateQuantity}
-        />
-
         {/* 조건부 렌더링 */}
         <div id="choice">
           {/* 버거 세트 메뉴 리스트 */}
@@ -524,8 +519,18 @@ function App() {
             <SideMenuList sideList={sideList} addToCart={addToCart} />
           )}
         </div>
-        
       </main>
+
+      {/* 장바구니 리스트 */}
+      <div
+        className={`cart-container ${isCartOpen ? "open" : ""}`}
+        onClick={() => setIsCartOpen(!isCartOpen)} // 장바구니 열기/닫기
+      ></div>
+      <CartList
+        cart={cart}
+        removeFromCart={removeFromCart}
+        updateQuantity={updateQuantity}
+      />
     </div>
   );
 }

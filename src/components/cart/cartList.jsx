@@ -33,11 +33,11 @@ function CartList({ cart, removeFromCart, updateQuantity }) {
       <div className="cart-items">
         {cart.map((item) => (
           <div key={item.id} className="cart-item">
-            <img
+            {/* <img
               src={item.imgurl}
               alt={item.name}
               style={{ width: "100px", marginRight: "10px" }}
-            />
+            /> */}
             <div className="item-details">
               <span>{item.name}</span> <p>{item.price}원</p>
               <div className="quantity-container">
