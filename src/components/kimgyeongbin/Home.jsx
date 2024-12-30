@@ -85,7 +85,7 @@ function Home() {
         height: "100%",
         backgroundColor: "transparent", // 배경 제거
         fontSize: "8vw",
-        color: "rgb(74, 161, 241)",
+        color: "rgb(218, 68, 138)",
          WebkitTextStroke: "1px black",
         border: "none", // 테두리 제거
         zIndex: 1, // 텍스트 위에 표시
@@ -131,7 +131,7 @@ function Home() {
         height: "100%",
         backgroundColor: "transparent", // 배경 제거
         fontSize: "8vw",
-        color: "rgb(243, 224, 52)",
+        color: "rgb(50, 245, 50)",
          WebkitTextStroke: "1px black",
         border: "none", // 테두리 제거
         zIndex: 1, // 텍스트 위에 표시

@@ -9,10 +9,12 @@ function SetMenuModal({
   addToCart,
   sideMenuData,
   drinkMenuData,
+  productMenuData,
   formatPrice,
 }) {
   const [sideQuantity, setSideQuantity] = useState({});
   const [drinkQuantity, setDrinkQuantity] = useState({});
+  const [productQuantity, setproductQuantity] = useState({});
 
   const handleQuantityChange = (setter) => (id, change) => {
     setter((prev) => ({
@@ -22,6 +24,14 @@ function SetMenuModal({
   };
 
   const calculateTotalPrice = () => {
+    const productPrice = Object.entries(productQuantity).reduce(
+      (total, [id, qty]) => {
+        const product = productMenuData.find((item) => item.id === parseInt(id));
+        return total + (product?.price || 0) * qty;
+      },
+      0
+    );
+
     const sidePrice = Object.entries(sideQuantity).reduce(
       (total, [id, qty]) => {
         const side = sideMenuData.find((item) => item.id === parseInt(id));
@@ -38,12 +48,16 @@ function SetMenuModal({
       0
     );
 
-    return (selectedItem?.price || 0) + sidePrice + drinkPrice;
+    return (selectedItem?.price || 0) + productPrice + sidePrice + drinkPrice;
   };
 
   const handleAddToCart = () => {
     addToCart({
       ...selectedItem,
+      product: Object.entries(productQuantity).map(([id, qty]) => ({
+        ...productMenuData.find((item) => item.id === parseInt(id)),
+        quantity: qty,
+      })),
       sides: Object.entries(sideQuantity).map(([id, qty]) => ({
         ...sideMenuData.find((item) => item.id === parseInt(id)),
         quantity: qty,
@@ -59,14 +73,39 @@ function SetMenuModal({
   return (
     <Modal isOpen={open} onClose={() => setOpen(false)}>
       <div>
+      <img
+              src={selectedItem.imgurl}
+              alt={selectedItem.name}
+              style={{
+                width: "150px",
+                height: "150px",
+                marginRight: "20px",
+                cursor: "pointer",
+              }}
+            />
         <h3>{selectedItem?.name}</h3>
-        <h4>Total Price: {formatPrice(calculateTotalPrice())}원</h4>
+        <p>알레르기: {selectedItem.allergy || "없음"}</p>
+        <p>가격: {formatPrice(selectedItem.price)}원</p>
+              <p>{selectedItem ? "현재: 세트 메뉴" : "현재: 단품 메뉴"}</p>
+        <h4>Total Price: {formatPrice(calculateTotalPrice())}</h4>
+
+        <h4>토핑 변경</h4>
+        <ToppingList
+          productData={productMenuData}
+          quantityMap={productQuantity}
+          handleQuantityChange={handleQuantityChange(setproductQuantity)}
+        />
+       <div style={{ marginBottom: "30px" }}></div>
+
         <h4>사이드 메뉴</h4>
         <ToppingList
           productData={sideMenuData}
           quantityMap={sideQuantity}
           handleQuantityChange={handleQuantityChange(setSideQuantity)}
         />
+      {/* 간격 추가 */}
+      <div style={{ marginBottom: "30px" }}></div>
+
         <h4>음료 선택</h4>
         <ToppingList
           productData={drinkMenuData}
