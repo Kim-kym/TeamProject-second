@@ -48,36 +48,100 @@ function Home() {
         }}
       ></div>
 
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <button
-          id="test" // 포장 버튼
-          style={{
-            width: "47vw",
-            height: "45vw",
-            marginRight: "0.8vw",
-            backgroundColor: "rgb(249, 252, 69)",
-            fontSize: "8vw",
-            color: "rgb(44, 167, 248",
-          }}
-          onClick={() => orderOptionSelect("포장")}
-        >
-          포장
-        </button>
+<div style={{ display: "flex", justifyContent: "center" }}>
+  {/* 포장 버튼 */}
+  <div
+    style={{
+      position: "relative",
+      width: "47vw",
+      height: "45vw",
+      marginRight: "0.8vw",
+    }}
+  >
+    {/* 흐릿한 배경 */}
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundImage: "url('/image/button1.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        filter: "blur(3px)", // 배경 흐릿하게
+        zIndex: 0,
+      }}
+    ></div>
 
-        <button
-          id="test"
-          style={{
-            width: "47vw",
-            height: "45vw",
-            backgroundColor: "rgb(44, 167, 248)",
-            fontSize: "8vw",
-            color: "rgb(249, 252, 69)",
-          }}
-          onClick={() => orderOptionSelect("매장")}
-        >
-          매장
-        </button>
-      </div>
+    {/* 선명한 텍스트 버튼 */}
+    <button
+      id="test"
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundColor: "transparent", // 배경 제거
+        fontSize: "8vw",
+        color: "rgb(74, 161, 241)",
+         WebkitTextStroke: "1px black",
+        border: "none", // 테두리 제거
+        zIndex: 1, // 텍스트 위에 표시
+      }}
+      onClick={() => orderOptionSelect("포장")}
+    >
+      포장
+    </button>
+  </div>
+
+  {/* 매장 버튼 */}
+  <div
+    style={{
+      position: "relative",
+      width: "47vw",
+      height: "45vw",
+    }}
+  >
+    {/* 흐릿한 배경 */}
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundImage: "url('/image/button3.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        filter: "blur(3px)", // 배경 흐릿하게
+        zIndex: 0,
+      }}
+    ></div>
+
+    {/* 선명한 텍스트 버튼 */}
+    <button
+      id="test"
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundColor: "transparent", // 배경 제거
+        fontSize: "8vw",
+        color: "rgb(243, 224, 52)",
+         WebkitTextStroke: "1px black",
+        border: "none", // 테두리 제거
+        zIndex: 1, // 텍스트 위에 표시
+      }}
+      onClick={() => orderOptionSelect("매장")}
+    >
+      매장
+    </button>
+  </div>
+</div>
       <div
         style={{
           //상단 여유공간 확보 ( 나중에 로고 추가 )
