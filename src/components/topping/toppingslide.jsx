@@ -4,12 +4,13 @@ export default function SlideToping({
   quantityMap,
   handleQuantityChange,
 }) {
+  console.log("아이템 정보" + item.price)
   return (
     <div className="card">
       {/* <button> */}
-      <img className="product" src={item.imageurl} alt="product image"></img>
+      <img className="product" src={item.imgurl} alt={item.imgurl}></img>
       <h2>{item.name}</h2>
-      <p className="price">{item.price}</p>
+      <p className="price">{item.price}원</p>
       {/* </button> */}
       <div className="count-btn">
         <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
