@@ -107,6 +107,7 @@ function MainHome() {
       </h1>
       <main>
         <div className="category">
+          {/* 메뉴 선택창 */}
           <MenuDisplay
             currentMenu={currentMenu}
             setCurrentMenu={setCurrentMenu}
