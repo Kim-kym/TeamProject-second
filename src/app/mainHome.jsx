@@ -101,17 +101,6 @@ function MainHome() {
   //   return cart.reduce((total, item) => total + item.quantity, 0);
   // };
 
-  //메뉴 목록 리스트
-  const [burgerSetMenuList] = useState([
-    {
-      id: 401,
-      name: "게살버거 세트",
-      price: 11000,
-      allergy: "갑각류, 마늘",
-      imgurl: "/image/buger/buger1.jpg",
-    },
-  ]);
-
   // 선택된 메뉴 아이템 저장
   const [selectedItem, setSelectedItem] = useState(null);
 
