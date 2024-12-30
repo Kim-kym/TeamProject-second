@@ -91,26 +91,6 @@ function MainHome() {
 
   //  모달 상태 관리
   const [open, setOpen] = useState(false);
-  // 장바구니 총 가격 계산
-  // const getTotalPrice = () => {
-  //   return cart.reduce((total, item) => total + item.price * item.quantity, 0);
-  // };
-
-  // 장바구니 총 수량 계산
-  // const getTotalQuantity = () => {
-  //   return cart.reduce((total, item) => total + item.quantity, 0);
-  // };
-
-  //메뉴 목록 리스트
-  const [burgerSetMenuList] = useState([
-    {
-      id: 401,
-      name: "게살버거 세트",
-      price: 11000,
-      allergy: "갑각류, 마늘",
-      imgurl: "/image/buger/buger1.jpg",
-    },
-  ]);
 
   // 선택된 메뉴 아이템 저장
   const [selectedItem, setSelectedItem] = useState(null);
@@ -127,6 +107,7 @@ function MainHome() {
       </h1>
       <main>
         <div className="category">
+          {/* 메뉴 선택창 */}
           <MenuDisplay
             currentMenu={currentMenu}
             setCurrentMenu={setCurrentMenu}
@@ -135,17 +116,23 @@ function MainHome() {
             menuListData={menuDatas}
           />
         </div>
-        {/* 장바구니 리스트 */}
 
+        {/* 장바구니 리스트 */}
         <div
           className={`cart-container ${isCartOpen ? "open" : ""}`}
           onClick={() => setIsCartOpen(!isCartOpen)} // 장바구니 열기/닫기
-        ></div>
-        <CartList
-          cart={cart}
-          removeFromCart={removeFromCart}
-          updateQuantity={updateQuantity}
-        />
+        >
+          <span>장바구니</span>
+        </div>
+
+        {isCartOpen && (
+          <CartList
+            cart={cart}
+            removeFromCart={removeFromCart}
+            updateQuantity={updateQuantity}
+          />
+        )}
+
         {selectedItem?.category === "burger" && (
           <CustomModal
             open={open}
@@ -169,53 +156,7 @@ function MainHome() {
             drinkMenuData={menuDatas.drink}
           />
         )}
-        {/* 카테고리 선택창 */}
-        <Category setCurrentMenu={setCurrentMenu} />
-
-        {/* 조건부 렌더링 */}
-        <div id="choice">
-          {/* 버거 세트 메뉴 리스트 */}
-          {currentMenu === "burgerSetMenuList" && (
-            <BurgerSetMenuList
-              burgerSetMenuList={burgerSetMenuList}
-              addToCart={addToCart}
-            />
-          )}
-          {/* 버거 메뉴 리스트 */}
-          {currentMenu === "burger" && (
-            <BurgerMenuList
-              burgerMenuList={burgerMenuList}
-              addToCart={addToCart}
-            />
-          )}
-
-          {/* 음료 메뉴 리스트 */}
-          {currentMenu === "drink" && (
-            <DrinkMenuList drinkList={drinkList} addToCart={addToCart} />
-          )}
-
-          {/* 커피 메뉴 리스트 */}
-          {currentMenu === "coffee" && (
-            <CoffeeMenuList coffeeList={coffeeList} addToCart={addToCart} />
-          )}
-
-          {/* 사이드 메뉴 리스트 */}
-          {currentMenu === "side" && (
-            <SideMenuList sideList={sideList} addToCart={addToCart} />
-          )}
-        </div>
       </main>
-
-      {/* 장바구니 리스트 */}
-      <div
-        className={`cart-container ${isCartOpen ? "open" : ""}`}
-        onClick={() => setIsCartOpen(!isCartOpen)} // 장바구니 열기/닫기
-      ></div>
-      <CartList
-        cart={cart}
-        removeFromCart={removeFromCart}
-        updateQuantity={updateQuantity}
-      />
     </div>
   );
 }
