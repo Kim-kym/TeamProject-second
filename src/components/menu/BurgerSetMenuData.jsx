@@ -5,6 +5,7 @@ const BurgerSetMenuList = [
     price: 11000,
     allergy: "갑각류, 마늘",
     imgurl: "/image/buger/buger1.jpg",
+    category: "Set",
   },
 
   {
@@ -13,6 +14,7 @@ const BurgerSetMenuList = [
     price: 9500,
     allergy: "마늘",
     imgurl: "/image/buger/buger2.jpg",
+    category: "Set",
   },
 
   {
@@ -21,6 +23,7 @@ const BurgerSetMenuList = [
     price: 11500,
     allergy: "닭, 마늘",
     imgurl: "/image/buger/buger3.jpg",
+    category: "Set",
   },
 
   {
@@ -29,6 +32,7 @@ const BurgerSetMenuList = [
     price: 11500,
     allergy: "새우, 마늘",
     imgurl: "/image/buger/buger4.jpg",
+    category: "Set",
   },
 
   {
@@ -37,6 +41,7 @@ const BurgerSetMenuList = [
     price: 9500,
     allergy: "유제품",
     imgurl: "/image/buger/buger5.jpg",
+    category: "Set",
   },
 
   {
@@ -45,6 +50,7 @@ const BurgerSetMenuList = [
     price: 11500,
     allergy: "마늘",
     imgurl: "/image/buger/buger6.jpg",
+    category: "Set",
   },
 
   {
@@ -53,6 +59,7 @@ const BurgerSetMenuList = [
     price: 10800,
     allergy: "마늘, 닭",
     imgurl: "/image/buger/buger7.jpg",
+    category: "Set",
   },
 
   {
@@ -61,6 +68,7 @@ const BurgerSetMenuList = [
     price: 9900,
     allergy: "마늘",
     imgurl: "/image/buger/buger8.jpg",
+    category: "Set",
   },
 
   {
@@ -69,6 +77,7 @@ const BurgerSetMenuList = [
     price: 9000,
     allergy: "마늘, 유제품",
     imgurl: "/image/buger/buger9.jpg",
+    category: "Set",
   },
   {
     id: 410,
@@ -76,6 +85,7 @@ const BurgerSetMenuList = [
     price: 10800,
     allergy: "마늘, 해산물, 오징어",
     imgurl: "/image/buger/buger10.jpg",
+    category: "Set",
   },
   {
     id: 411,
@@ -83,6 +93,7 @@ const BurgerSetMenuList = [
     price: 12700,
     allergy: "마늘",
     imgurl: "/image/buger/buger11.jpg",
+    category: "Set",
   },
 
   {
@@ -91,6 +102,7 @@ const BurgerSetMenuList = [
     price: 11800,
     allergy: "마늘",
     imgurl: "/image/buger/buger12.jpg",
+    category: "Set",
   },
 ];
 

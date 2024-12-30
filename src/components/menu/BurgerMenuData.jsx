@@ -1,10 +1,13 @@
 const BurgerList = [
   {
+    // setMenuId : 세트메뉴와의 관계를 나타내기 위한 데이터
     id: 1,
     name: "게살버거",
     price: 7000,
     allergy: "갑각류, 마늘",
     imgurl: "/image/buger/buger1.jpg",
+    setMenuId: 401,
+    category: "burger",
   },
 
   {
@@ -13,6 +16,8 @@ const BurgerList = [
     price: 5500,
     allergy: "마늘",
     imgurl: "/image/buger/buger2.jpg",
+    setMenuId: 402,
+    category: "burger",
   },
 
   {
@@ -21,6 +26,8 @@ const BurgerList = [
     price: 7500,
     allergy: "닭, 마늘",
     imgurl: "/image/buger/buger3.jpg",
+    setMenuId: 403,
+    category: "burger",
   },
 
   {
@@ -29,6 +36,8 @@ const BurgerList = [
     price: 7500,
     allergy: "새우, 마늘",
     imgurl: "/image/buger/buger4.jpg",
+    setMenuId: 404,
+    category: "burger",
   },
 
   {
@@ -37,6 +46,8 @@ const BurgerList = [
     price: 5500,
     allergy: "유제품",
     imgurl: "/image/buger/buger5.jpg",
+    setMenuId: 405,
+    category: "burger",
   },
 
   {
@@ -45,6 +56,8 @@ const BurgerList = [
     price: 7500,
     allergy: "마늘",
     imgurl: "/image/buger/buger6.jpg",
+    setMenuId: 406,
+    category: "burger",
   },
 
   {
@@ -53,6 +66,8 @@ const BurgerList = [
     price: 6800,
     allergy: "마늘, 닭",
     imgurl: "/image/buger/buger7.jpg",
+    setMenuId: 407,
+    category: "burger",
   },
 
   {
@@ -61,6 +76,8 @@ const BurgerList = [
     price: 5900,
     allergy: "마늘",
     imgurl: "/image/buger/buger8.jpg",
+    setMenuId: 408,
+    category: "burger",
   },
 
   {
@@ -69,6 +86,8 @@ const BurgerList = [
     price: 5000,
     allergy: "마늘, 유제품",
     imgurl: "/image/buger/buger9.jpg",
+    setMenuId: 409,
+    category: "burger",
   },
   {
     id: 10,
@@ -76,6 +95,8 @@ const BurgerList = [
     price: 6800,
     allergy: "마늘, 해산물, 오징어",
     imgurl: "/image/buger/buger10.jpg",
+    setMenuId: 410,
+    category: "burger",
   },
   {
     id: 11,
@@ -83,6 +104,8 @@ const BurgerList = [
     price: 8700,
     allergy: "마늘",
     imgurl: "/image/buger/buger11.jpg",
+    setMenuId: 411,
+    category: "burger",
   },
 
   {
@@ -91,6 +114,8 @@ const BurgerList = [
     price: 7800,
     allergy: "마늘",
     imgurl: "/image/buger/buger12.jpg",
+    setMenuId: 412,
+    category: "burger",
   },
 ];
 

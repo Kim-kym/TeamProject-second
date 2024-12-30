@@ -4,6 +4,7 @@ const DrinkList = [
     name: "콜라",
     price: 2000,
     imgurl: "/image/drink/coke.jpg",
+    category: "drink",
   },
 
   {
@@ -11,6 +12,7 @@ const DrinkList = [
     name: "제로 콜라",
     price: 2000,
     imgurl: "/image/drink/zero-coke.jpg",
+    category: "drink",
   },
 
   {
@@ -18,6 +20,7 @@ const DrinkList = [
     name: "스프라이트",
     price: 2000,
     imgurl: "/image/drink/sprite.jpg",
+    category: "drink",
   },
 
   {
@@ -25,6 +28,7 @@ const DrinkList = [
     name: "제로 스프라이트",
     price: 2000,
     imgurl: "/image/drink/zero-sprite.jpg",
+    category: "drink",
   },
 
   {
@@ -32,6 +36,7 @@ const DrinkList = [
     name: "환타 오렌지",
     price: 2000,
     imgurl: "/image/drink/fanta-orange.jpg",
+    category: "drink",
   },
 
   {
@@ -39,6 +44,7 @@ const DrinkList = [
     name: "환타 포도",
     price: 2000,
     imgurl: "/image/drink/fanta-grape.jpg",
+    category: "drink",
   },
 
   {
@@ -46,6 +52,7 @@ const DrinkList = [
     name: "환타 파인",
     price: 2000,
     imgurl: "/image/drink/fanta-pine.jpg",
+    category: "drink",
   },
 
   {
@@ -53,6 +60,7 @@ const DrinkList = [
     name: "복숭아아이스티",
     price: 2500,
     imgurl: "/image/drink/peach-iced-tea.jpg",
+    category: "drink",
   },
 
   {
@@ -60,6 +68,7 @@ const DrinkList = [
     name: "레몬에이드",
     price: 3000,
     imgurl: "/image/drink/lemonade.jpg",
+    category: "drink",
   },
 
   {
@@ -67,6 +76,7 @@ const DrinkList = [
     name: "블루레몬에이드",
     price: 3000,
     imgurl: "/image/drink/blue-lemonade.jpg",
+    category: "drink",
   },
 
   {
@@ -74,6 +84,7 @@ const DrinkList = [
     name: "오랜지주스",
     price: 3000,
     imgurl: "/image/drink/orange.jpg",
+    category: "drink",
   },
 
   {
@@ -81,6 +92,7 @@ const DrinkList = [
     name: "초코라떼",
     price: 4000,
     imgurl: "/image/drink/hot-chocolate.jpg",
+    category: "drink",
   },
 ];
 

@@ -19,7 +19,21 @@ function MainHome() {
 
   // 선택한 메뉴 정보 불러오기
   const handleMenuClick = (menu) => {
-    console.log("Selected menu:", menu);
+    console.log("Clicked menu:", menu);
+    if (!menu || !menu.category) {
+      console.error("Invalid menu item clicked. Menu:", menu);
+      return;
+    }
+    if (menu.category === "burger" || menu.category === "Set") {
+      //  버거와 세트 메뉴만 모달창 열기
+      setSelectedItem(menu);
+      setOpen(true);
+      console.log("Opeing modal for:", menu);
+    } else {
+      console.log("Adding to cart directly:", menu);
+      //  사이드 메뉴, 음료, 커피는 바로 장바구니에 담기
+      addToCart({ ...menu, quantity: 1 });
+    }
   };
 
   const menuDatas = {
@@ -38,6 +52,7 @@ function MainHome() {
 
   // 장바구니에 항목 추가
   const addToCart = (item) => {
+    console.log("Adding to cart:", item);
     const existingItem = cart.find((cartItem) => cartItem.id === item.id);
     if (existingItem) {
       // 이미 장바구니에 있으면 수량만 증가
@@ -50,7 +65,15 @@ function MainHome() {
       );
     } else {
       // 처음 장바구니에 추가하는 경우
-      setCart([...cart, { ...item, quantity: 1 }]);
+      setCart([
+        ...cart,
+        {
+          ...item,
+          quantity: 1,
+          price: item.price || 0,
+          category: item.category || "기타",
+        },
+      ]);
     }
   };
 
@@ -106,20 +129,29 @@ function MainHome() {
           removeFromCart={removeFromCart}
           updateQuantity={updateQuantity}
         />
-        {/* <div className="modal">
-          {isToppingModalOpen && (
-            <Modal
-              isOpen={isToppingModalOpen}
-              onClose={() => setToppingModalOpen(false)}
-            >
-              <div>
-                <h2>{selectedMenuItem?.name}</h2>
-                <p>Price: {selectedMenuItem?.price}원</p>
-                <p>Allergy Info: {selectedMenuItem?.allergy}</p>
-              </div>
-            </Modal>
-          )}
-        </div> */}
+        {selectedItem?.category === "burger" && (
+          <CustomModal
+            open={open}
+            setOpen={setOpen}
+            selectedItem={selectedItem}
+            addToCart={addToCart}
+            selectedTopping={selectedTopping}
+            setSelectedTopping={setSelectedTopping}
+            formatPrice={formatPrice}
+          />
+        )}
+
+        {selectedItem?.category === "Set" && (
+          <SetMenuModal
+            open={open}
+            setOpen={setOpen}
+            selectedItem={selectedItem}
+            addToCart={addToCart}
+            formatPrice={formatPrice}
+            sideMenuData={menuDatas.side}
+            drinkMenuData={menuDatas.drink}
+          />
+        )}
       </main>
     </div>
   );
