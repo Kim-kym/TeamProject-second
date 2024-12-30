@@ -101,7 +101,7 @@ button:focus {
 }
 
 .menu-item {
-  display: flex;
+  display: block;
   align-items: center;
 }
 
@@ -126,12 +126,19 @@ button:focus {
 }
 
 .slick-slider {
-  height: 300px;
+  height: 450px;
 }
 
 .slick-slide {
   width: 100px; /* 슬라이드 아이템 너비 설정 */
   height: 200px;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.slick-slide .impotmation{
+  /* margin: auto; */
+  margin-bottom: 20px;
 }
 
 .menu-display {
