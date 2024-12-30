@@ -1,7 +1,13 @@
-import React, { useCallback, useRef } from "react";
+import React from "react";
 import Category from "./Category";
 import MenuList from "./MenuList";
-import Slider from "react-slick";
+
+const formatPrice = (price) => {
+  if (typeof price !== "number") {
+    price = parseFloat(price); // 숫자가 아닌 경우 변환
+  }
+  return price.toLocaleString("ko-KR");
+};
 
 function MenuDisplay({
   currentMenu,
@@ -10,32 +16,16 @@ function MenuDisplay({
   handleMenuClick,
   menuListData,
 }) {
-  const slickRef = useRef(null);
-
-  const previous = useCallback(() => slickRef.current.slickPrev(), []);
-  const next = useCallback(() => slickRef.current.slickNext(), []);
-
-  const settings = {
-    dots: true,
-    infinite: false, // 무한 슬라이드 비활성화
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    rows: 2,
-    swipeToSlide: true,
-    arrows: false,
-  };
-
+  console.log("Menu Display:", menuListData);
   return (
     <div className="menu-display">
       {/* 카테고리 버튼 */}
       <Category setCurrentMenu={setCurrentMenu} />
-      <Slider {...settings} ref={slickRef}>
-        <MenuList
-          menuData={menuListData[currentMenu]}
-          addToCart={addToCart}
-          handleMenuClick={handleMenuClick}
-        />
-      </Slider>
+      <MenuList
+        menuData={menuListData[currentMenu]}
+        addToCart={addToCart}
+        handleMenuClick={handleMenuClick}
+      />
     </div>
   );
 }
