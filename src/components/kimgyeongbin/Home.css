@@ -1,7 +1,6 @@
 button {
     font-weight: 500;
     position: relative;
-    WebkitTextStroke: "1px black";
 }
 
 button:hover {
