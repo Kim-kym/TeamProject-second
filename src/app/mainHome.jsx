@@ -1,4 +1,4 @@
-// import Category from "../components/menu/Category";
+import Category from "../components/menu/Category";
 import logo from "/image/logo1.jpg";
 import "../styled/MainHome.css";
 import { useState } from "react";
@@ -30,7 +30,7 @@ function MainHome() {
       //  버거와 세트 메뉴만 모달창 열기
       setSelectedItem(menu);
       setOpen(true);
-      console.log("Opeing modal for:", menu);
+      console.log("Opening modal for:", menu);
     } else {
       console.log("Adding to cart directly:", menu);
       //  사이드 메뉴, 음료, 커피는 바로 장바구니에 담기
@@ -46,11 +46,8 @@ function MainHome() {
     product: productMenuData || [],
   };
 
-  // 장바구니 상태 관리
-  const [cart, setCart] = useState([]);
-
-  // 장바구니 열림/닫힘 상태
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [cart, setCart] = useState([]); // 장바구니 상태 관리
+  const [isCartOpen, setIsCartOpen] = useState(false); // 장바구니 열림/닫힘 상태
 
   // 장바구니에 항목 추가
   const addToCart = (item) => {
@@ -112,6 +109,7 @@ function MainHome() {
       </h1>
       <main>
         <div className="category">
+          {/* 메뉴 선택창 */}
           <MenuDisplay
             currentMenu={currentMenu}
             setCurrentMenu={setCurrentMenu}
@@ -120,17 +118,22 @@ function MainHome() {
             menuListData={menuDatas}
           />
         </div>
-        {/* 장바구니 리스트 */}
 
+        {/* 장바구니 리스트 */}
         <div
           className={`cart-container ${isCartOpen ? "open" : ""}`}
           onClick={() => setIsCartOpen(!isCartOpen)} // 장바구니 열기/닫기
-        ></div>
-        <CartList
-          cart={cart}
-          removeFromCart={removeFromCart}
-          updateQuantity={updateQuantity}
-        />
+        >
+          <span>장바구니</span>
+        </div>
+        {isCartOpen && (
+          <CartList
+            cart={cart}
+            removeFromCart={removeFromCart}
+            updateQuantity={updateQuantity}
+          />
+        )}
+
         {selectedItem?.category === "burger" && (
           <CustomModal
             open={open}
