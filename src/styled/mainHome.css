@@ -1,18 +1,46 @@
- h1 {
-    display: flex; /*컨테이너 활성화*/
-    align-items: center; /*세로축 중앙 정렬*/
-    color: rgba(233, 250, 1, 0.955);
-    background: radial-gradient(circle, blue, aqua, skyblue, white);
-    font-size: 50px;
-    margin: 0 auto;
-    justify-content: center;
-    margin-bottom: 20px;
+h1 {
+  display: flex; /* 컨테이너 활성화 */
+  align-items: center; /* 세로축 중앙 정렬 */
+  font-size: 50px;
+  margin: 0 auto;
+  justify-content: center;
+  color: rgba(233, 250, 1, 0.955); /* 텍스트 색상 */
+  z-index: 1; /* 배경 위에 표시되도록 설정 */
+  margin-bottom: 20px;
+  position: relative; /* 자식 요소와 배경을 분리하기 위해 position 설정 */
+}
+
+h1::before {
+  content: ''; /* 가상의 요소 추가 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, blue, aqua, skyblue, white);
+  opacity: 0.4; /* 배경만 흐리게 */
+  z-index: -1; /* 배경이 콘텐츠 뒤로 가도록 설정 */
 }
 
 div {
     /* margin-top: 20px; */
     justify-content: center;
     /* background-color: blanchedalmond; */
+    /* position: relative; */
+}
+
+.back {
+  background-image: url('/image/side/배경사진.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(2px); /* 흐림 효과 적용 */
+  z-index: -1; /* 콘텐츠보다 뒤에 위치하도록 설정 */
+  opacity: 0.5; /* 배경 흐림 효과 투명도 */
 }
 
 main {
@@ -34,20 +62,18 @@ button {
     height: 25px;
   }
 
-button:nth-child(1),
+/* button:nth-child(1),
 button:nth-child(2),
 button:nth-child(3),
 button:nth-child(4) {
   margin-right: 10px;
-}
+} */
 
 button:hover {
   background-color: rgba(93, 93, 254, 0.466); /* 마우스가 올라갔을 때 버튼 색 바뀜 */
-  transform: scale(1.05); /* 확대 */
-  font-size: 1em; /* 텍스트 크기 확대 */
-  color: yellow; /* 글자 색 변경 */
 }
 
+button:hover,
 button:focus {
   background-color: rgb(93, 93, 254); /* 버튼을 클릭했을 때 색 바뀜 */
   transform: scale(1.05); /* 확대 */
@@ -56,44 +82,65 @@ button:focus {
   font-weight: bold;
 }
 
-/* .category {
-  background-color: #d32f2f;
-} */
+.category {
+  width: 500px; /* 고정 가로 크기 */
+  min-height: 600px;
+  margin: 0 auto; /* 가운데 정렬 */
+  overflow: hidden; /* 넘치는 컨텐츠 숨김 */
+}
 
 #menu {
   /* background-color: #d32f2f; */
   margin: 0;
 }
-#menu > ul {
-  list-style: none;
+
+
+.menu-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3개의 열 생성 */
-  gap: 10px; /* 아이템 간 간격 */
-  flex-wrap: wrap; /* 자동 줄 바꿈 */
-  justify-content: center; /* 가운데 맞추기 */
-  gap: 10px; /* 아이템 별 간격 */
-  min-width: 250px;
-  background-color: rgb(93, 93, 254);
-  /* margin-top: 0; */
+  grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개의 아이템 */
+  gap: 20px; /* 아이템 간 간격 */
+  margin-top: 20px;
 }
 
-li{
-  box-sizing: border-box;       /* 테두리와 패딩 포함 크기 계산 */
-  padding: 5px;
-  text-align: center; /* 내용 중앙 정렬 */
-  /* flex: 1 1 calc(33.33% - 10px); 각 li의 크기: 3등분 */
-  /* background-color: rgba(127, 255, 212, 0.486); */
-  /* border: 1px solid #ccc; */
-  /* min-width: 70%; */
+.menu-item {
+  border: 1px solid #ddd; /* 각 메뉴 항목에 경계선 추가 (선택 사항) */
+  padding: 10px; /* 각 항목에 패딩 추가 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  width: 125px;
 }
 
-li:hover{
-  transform: scale(1.010); /* 확대 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
-  font-size: 1em; /* 텍스트 크기 확대 */
-  font-weight: bold; /* 글씨 두껍게 */
-  background-color: lightgoldenrodyellow;
+.menu-item img {
+  width: 100px;
+  height: 120px;
+  margin-bottom: 10px; /* 이미지와 텍스트 사이에 간격 */
+  display: block; /* 이미지를 블록 요소로 설정 */
+  margin-left: auto; /* 좌우 여백 자동 설정 */
+  margin-right: auto; /* 좌우 여백 자동 설정 */
 }
+
+.menu-item:hover {
+  transform: scale(1.05); /* 아이템 확대 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  background-color: rgba(93, 93, 254, 0.1); /* 배경 색상 변경 */
+}
+
+/* 각 아이템에 대한 세부 스타일 */
+.menu-item p {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+
+.placeholder{
+  height: 120px;
+  background-color: #f0f0f0;
+  border: 1px dashed #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*--------장바구니 css */
 
 /* 장바구니 고정 */
 #cart {
@@ -157,6 +204,7 @@ li:hover{
   transform: translateY(100%); /* 기본 상태는 아래로 내려가 있음 */
   overflow-y: auto;
 }
+
 
 .cart-container.open {
   transform: translateY(0); /* 열리면 위로 올라옴 */

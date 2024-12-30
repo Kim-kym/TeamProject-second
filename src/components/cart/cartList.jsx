@@ -6,23 +6,41 @@ function CartList({ cart, removeFromCart, updateQuantity }) {
   const categoryTotals = categories.map((category) => {
     const categoryTotal = cart
       .filter((item) => item.category === category)
-      .reduce((total, item) => total + item.price * item.quantity, 0);
+      .reduce((total, item) => {
+        //  토핑 가격 포함
+        const toppingsTotal = item.toppings
+          ? item.toppings.reduce(
+              (toppingTotal, topping) =>
+                toppingTotal + topping.price * topping.quantity,
+              0
+            )
+          : 0;
+        return total + item.price * item.quantity + toppingsTotal;
+      }, 0);
     return { category, total: categoryTotal };
   });
 
   // 전체 금액 계산
-  const totalAmount = cart.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  const totalAmount = cart.reduce((total, item) => {
+    // 토핑 가격 포함
+    const itemPrice = isNaN(item.price) ? 0 : item.price;
+    const toppingsTotal = item.toppings
+      ? item.toppings.reduce((toppingTotal, topping) => {
+          const toppingPrice = isNaN(topping.price) ? 0 : topping.price;
+          return toppingTotal + toppingPrice * topping.quantity;
+        }, 0)
+      : 0;
+
+    return total + item.price * item.quantity + toppingsTotal;
+  }, 0);
 
   return (
     <div id="cart">
       <h2>장바구니</h2>
 
       {/* 카테고리별 합산금액 표시 */}
-      {categoryTotals.map((categoryTotal) => (
-        <div key={categoryTotal.category}>
+      {categoryTotals.map((categoryTotal, index) => (
+        <div key={`${categoryTotal.category}-${index}`}>
           <h3>
             {categoryTotal.category} 합계: {categoryTotal.total}원
           </h3>
@@ -40,6 +58,16 @@ function CartList({ cart, removeFromCart, updateQuantity }) {
             />
             <div className="item-details">
               <span>{item.name}</span> <p>{item.price}원</p>
+              {/* 선택된 토핑 표시 */}
+              {item.toppings && item.toppings.length > 0 && (
+                <ul>
+                  {item.toppings.map((topping, index) => (
+                    <li key={`${item.id}-topping-${topping.id}-${index}`}>
+                      {topping.name} x {topping.quantity}개 ({topping.price}원)
+                    </li>
+                  ))}
+                </ul>
+              )}
               <div className="quantity-container">
                 <button
                   className="quantity-btn"
@@ -65,8 +93,23 @@ function CartList({ cart, removeFromCart, updateQuantity }) {
               </div>
             </div>
 
-            {/* 합계 금액을 오른쪽으로 표시 */}
-            <div className="item-total">{item.price * item.quantity}원</div>
+            {/* 합계 금액을 오른쪽으로 표시 (햄버거 + 토핑 가격) */}
+            <div className="item-total">
+              {(() => {
+                const itemPrice = isNaN(item.price) ? 0 : item.price;
+                const toppingsTotal = item.toppings
+                  ? item.toppings.reduce((toppingTotal, topping) => {
+                      const toppingPrice = isNaN(topping.price)
+                        ? 0
+                        : topping.price;
+                      return toppingTotal + toppingPrice * topping.quantity;
+                    }, 0)
+                  : 0;
+
+                return itemPrice * item.quantity + toppingsTotal;
+              })()}
+              원
+            </div>
 
             {/* 삭제 버튼 */}
             <button

@@ -2,12 +2,11 @@ import Category from "../../components/menu/Category";
 import logo from "/image/logo1.jpg";
 import "../../styled/mainHome.css";
 import { useState } from "react";
-import BurgerSetMenuList from "../../components/menu/burgerSetMenuList";
+// import BurgerSetMenuList from "../../components/menu/burgerSetMenuList";
 import CartList from "../../components/cart/cartList";
 
 function App() {
-
-    //메뉴 목록 리스트
+  //메뉴 목록 리스트
   const [burgerSetMenuList] = useState([
     {
       id: 401,
@@ -103,7 +102,7 @@ function App() {
       imgurl: "/image/buger/buger12.jpg",
     },
   ]);
-  
+
   const [currentMenu, setCurrentMenu] = useState("burger"); // 초기 메뉴는 'burger'
 
   // 장바구니 상태 관리

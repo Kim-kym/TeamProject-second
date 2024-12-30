@@ -1,4 +1,4 @@
-.product {
+.card > .product {
     width: 200px;
     height: 200px;
 }
@@ -9,7 +9,7 @@
 
 .count-btn {
     display: flex;
-    /* justify-content: center; */
+    
     justify-content: space-evenly;
 }
 
