@@ -9,7 +9,10 @@ function MenuList({ menuData, handleMenuClick, setCurrentMenu }) {
     return price.toLocaleString("ko-KR");
   };
 
-  console.log(menuData);
+  // console.log("MenuList data:", JSON.stringify(menuData, null, 2));
+  // if (!menuData || menuData.length === 0) {
+  //   console.warn("No menu data available");
+  // }
 
   return (
     <div className="menu-list">

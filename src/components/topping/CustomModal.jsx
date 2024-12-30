@@ -20,6 +20,37 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
     }
   }, [selectedItem]);
 
+  // useEffect(() => {
+  //   console.log("Selected item updated:", selectedItem);
+  // }, [selectedItem]);
+
+  useEffect(() => {
+    if (selectedItem) {
+      console.log(
+        "Selected item updated:",
+        JSON.stringify(selectedItem, null, 2)
+      );
+    }
+  }, [selectedItem]);
+
+  useEffect(() => {
+    console.log(
+      "Modal received selected item:",
+      JSON.stringify(selectedItem, null, 2)
+    );
+  }, [selectedItem]);
+
+  // useEffect(() => {
+  //   if (open) {
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "auto";
+  //   }
+  //   return () => {
+  //     document.body.style.overflow = "auto"; // 컴포넌트 언마운트 시 복구
+  //   };
+  // }, [open]);
+
   const handleQuantityChange = (id, change) => {
     setQuantityMap((prevMap) => ({
       ...prevMap,
