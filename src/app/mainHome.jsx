@@ -1,16 +1,17 @@
-import Category from "../components/menu/Category";
+// import Category from "../components/menu/Category";
 import logo from "/image/logo1.jpg";
 import "../styled/MainHome.css";
 import { useState } from "react";
 import CartList from "../components/cart/cartList";
 import MenuDisplay from "../components/menu/MenuDisplay";
+// import Modal from "./Modal";
 import BurgerSetMenuData from "../components/menu/BurgerSetMenuData";
 import BurgerMenuData from "../components/menu/BurgerMenuData";
 import CoffeeMenuData from "../components/menu/CoffeeMenuData";
 import DrinkMenuData from "../components/menu/DrinkMenuData";
 import SideMenuData from "../components/menu/SideMenuData";
-import CustomModal from "../components/topping/CustomModal";
-import SetMenuModal from "../components/topping/SetMenuModal";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 // import menuListData from "../components/menu/MenuList";
 
 function MainHome() {
