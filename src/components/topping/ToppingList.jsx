@@ -11,7 +11,11 @@ const ToppingList = ({ productData, quantityMap, handleQuantityChange }) => {
   };
 
   return (
-    <Carousel responsive={responsive}>
+    <Carousel
+      responsive={responsive}
+      containerClass="carousel-container"
+      itemClass="carousel-item"
+    >
       {productData.map((item) => (
         <SlideTopping
           key={item.id}
