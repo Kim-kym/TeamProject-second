@@ -69,7 +69,7 @@ function SetMenuModal({
         />
         <h4>음료 선택</h4>
         <ToppingList
-          menuData={drinkMenuData}
+          productData={drinkMenuData}
           quantityMap={drinkQuantity}
           handleQuantityChange={handleQuantityChange(setDrinkQuantity)}
         />

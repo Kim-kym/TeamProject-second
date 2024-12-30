@@ -30,11 +30,19 @@
   }
 
 .carousel-container {
-    max-width: 100%; /* 부모 요소를 넘지 않도록 제한 */
-    overflow: hidden; /* 부모 요소를 넘는 내용 숨기기 */
+    overflow: hidden; /* 슬라이더 이미지가 잘리지 않도록 설정 */
+    padding: 0 20px;
+
+  }
+
+  .react-multi-carousel-track {
+    border: 1px solid red; /* 트랙 경계선 */
   }
   
   .carousel-item {
+    border: 1px solid blue; /* 각 슬라이드 경계선 */
+  }
+  .carousel-item {    
     max-width: 200px; /* 슬라이더 항목 크기 제한 */
     margin: auto; /* 가운데 정렬 */
   }
@@ -132,20 +140,23 @@ h2 {
     margin: 5px;
   }
 
-  .image-container {
-    position: relative; /* 부모 요소를 기준으로 자식 요소 위치 지정 */
-    width: 150px; /* 이미지 크기 */
-    height: 150px; /* 이미지 크기 */
+  .image-checkbox:checked + span {
+    color: green; /* 체크된 상태일 때 텍스트 색상 변경 */
+    font-weight: bold;
+}
+
+.modal .menu-image {
+    border: 3px solid transparent;
+    border-radius: 8px;
+    transition: border 0.3s ease;
   }
   
-  .image-container img {
-    object-fit: cover; /* 이미지 비율 유지 */
+  .modal .menu-image.set-menu {
+    border-color: green;
   }
-  
-  .image-checkbox {
-    position: absolute; /* 부모 요소 기준 위치 지정 */
-    top: 10px; /* 이미지 위쪽에서 10px 떨어짐 */
-    right: 10px; /* 이미지 오른쪽에서 10px 떨어짐 */
-    transform: scale(1.2); /* 체크박스 크기 조정 */
-    z-index: 2; /* 이미지 위에 표시되도록 설정 */
-  }
+
+.react-multi-carousel-list {
+    max-width: 100%;
+    margin: auto;
+    justify-content: space-around;
+}

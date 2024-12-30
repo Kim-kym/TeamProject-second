@@ -1,12 +1,20 @@
 import Modal from "./Modal";
 import ToppingList from "./ToppingList";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import BurgerSetMenuData from "../menu/BurgerSetMenuData";
 
 function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
   const [selectedMenu, setSelectedMenu] = useState(selectedItem || {});
   const [quantityMap, setQuantityMap] = useState({});
   const [isSetMenuSelected, setIsSetMenuSelected] = useState(false);
+
+  const carouselRef = useRef(null);
+
+  const handleModalOpen = () => {
+    if (carouselRef.current) {
+      carouselRef.current.goToSlide(0); //  첫 번째 슬라이드로 이동
+    }
+  };
 
   const setMenu = selectedItem?.setMenuId
     ? BurgerSetMenuData.find((set) => set.id === selectedItem.setMenuId)
@@ -33,23 +41,12 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
     }
   }, [selectedItem]);
 
+  // 모달이 열릴 때 첫 번째 슬라이드로 이동
   useEffect(() => {
-    console.log(
-      "Modal received selected item:",
-      JSON.stringify(selectedItem, null, 2)
-    );
-  }, [selectedItem]);
-
-  // useEffect(() => {
-  //   if (open) {
-  //     document.body.style.overflow = "hidden";
-  //   } else {
-  //     document.body.style.overflow = "auto";
-  //   }
-  //   return () => {
-  //     document.body.style.overflow = "auto"; // 컴포넌트 언마운트 시 복구
-  //   };
-  // }, [open]);
+    if (open && carouselRef.current) {
+      carouselRef.current.goToSlide(0);
+    }
+  }, [open]);
 
   const handleQuantityChange = (id, change) => {
     setQuantityMap((prevMap) => ({
@@ -108,7 +105,13 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
       price: 600,
       category: "topping",
     },
-    { id: 903, imageurl: "/image/topping/patty.jpg", name: "패티", price: 600 },
+    {
+      id: 903,
+      imageurl: "/image/topping/patty.jpg",
+      name: "패티",
+      price: 600,
+      category: "topping",
+    },
     {
       id: 904,
       imageurl: "/image/topping/bacon.jpg",
@@ -140,24 +143,38 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
   ];
 
   return (
-    <Modal isOpen={open} onClose={() => setOpen(false)}>
+    <Modal
+      isOpen={open}
+      onClose={() => setOpen(false)}
+      onAfterOpen={handleModalOpen} //  모달이 열리면 첫 번째 슬라이드로 이동
+    >
       <div>
         {/* 선택한 메뉴 정보: 이미지, 이름, 알레르기, 가격 */}
         {selectedMenu && (
           <div className="selected-menu">
-            <div className="image-container">
-              <img
-                src={selectedMenu.imgurl}
-                alt={selectedMenu.name}
-                onClick={handleMenuToggle}
-              />
-              <input type="checkbox" className="image-checkbox" />
-            </div>
+            <img
+              src={selectedMenu.imgurl}
+              alt={selectedMenu.name}
+              onClick={handleMenuToggle}
+            />
             <div>
               <h3>{selectedMenu.name}</h3>
               <p>알레르기: {selectedMenu.allergy || "없음"}</p>
               <p>가격: {formatPrice(selectedMenu.price)}원</p>
               <p>{isSetMenuSelected ? "현재: 세트 메뉴" : "현재: 단품 메뉴"}</p>
+              <label className="image-checkbox-container">
+                <input
+                  type="checkbox"
+                  className="image-checkbox"
+                  checked={isSetMenuSelected}
+                  onChange={(e) => {
+                    const isChecked = e.target.checked;
+                    setIsSetMenuSelected(isChecked); // 세트 메뉴 상태 업데이트
+                    setSelectedMenu(isChecked ? setMenu : selectedItem); // 메뉴 변경
+                  }}
+                />
+                <span>세트 메뉴 선택</span> {/* 체크박스 옆에 표시될 텍스트 */}
+              </label>
             </div>
           </div>
         )}
@@ -166,6 +183,7 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
           productData={productData}
           quantityMap={quantityMap}
           handleQuantityChange={handleQuantityChange}
+          carouselRef={carouselRef} // Carousel ref 전달
         />
         <div className="actions">
           <button onClick={handleAddToCart}>추가</button>
