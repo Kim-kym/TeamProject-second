@@ -1,10 +1,10 @@
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
 function Home() {
   let isVisible = false;
   let orderOption = "";
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const orderOptionSelect = (option) => {
     orderOption = option;
@@ -12,8 +12,8 @@ function Home() {
   };
 
   const pageChange = () => {
-    // console.log(orderOption);
-    // navigate("/test", { state: { orderOption: orderOption } });
+    console.log(orderOption);
+    navigate("/test", { state: { orderOption: orderOption } });
     isVisible = true;
   };
 
