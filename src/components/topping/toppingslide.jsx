@@ -1,4 +1,8 @@
+// import Carousel from "react-multi-carousel";
+// import "react-multi-carousel/lib/styles.css";
 import "../../styled/slideTopping.css";
+// import { useState } from "react";
+// import QuantityInput from "../topping/CounterRe.jsx";
 export default function SlideToping({
   item,
   quantityMap,
@@ -6,6 +10,8 @@ export default function SlideToping({
 }) {
   console.log("아이템 정보" + item.price)
   return (
+    // {/* <h3>토핑 추가</h3> */}
+    // {/* <Carousel responsive={responsive}> */}
     <div className="card">
       {/* <button> */}
       <img className="product" src={item.imgurl} alt={item.imgurl}></img>
