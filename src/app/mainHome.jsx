@@ -10,8 +10,7 @@ import BurgerMenuData from "../components/menu/BurgerMenuData";
 import CoffeeMenuData from "../components/menu/CoffeeMenuData";
 import DrinkMenuData from "../components/menu/DrinkMenuData";
 import SideMenuData from "../components/menu/SideMenuData";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 // import menuListData from "../components/menu/MenuList";
 
 function MainHome() {
@@ -23,11 +22,11 @@ function MainHome() {
   };
 
   const menuDatas = {
-    Set: BurgerSetMenuData,
-    burger: BurgerMenuData,
-    drink: DrinkMenuData,
-    coffee: CoffeeMenuData,
-    side: SideMenuData,
+    Set: BurgerSetMenuData || [],
+    burger: BurgerMenuData || [],
+    drink: DrinkMenuData || [],
+    coffee: CoffeeMenuData || [],
+    side: SideMenuData || [],
   };
 
   // 장바구니 상태 관리
