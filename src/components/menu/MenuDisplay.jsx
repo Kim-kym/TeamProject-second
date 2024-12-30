@@ -9,6 +9,8 @@ function MenuDisplay({
   handleMenuClick,
   menuListData,
 }) {
+  const menuData = menuListData[currentMenu]; //  현재 메뉴에 해당하는 데이터
+
   return (
     <div className="menu-display">
       {/* 카테고리 버튼 */}
