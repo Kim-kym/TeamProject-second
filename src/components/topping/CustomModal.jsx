@@ -160,7 +160,7 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
             <div>
               <h3>{selectedMenu.name}</h3>
               <p>알레르기: {selectedMenu.allergy || "없음"}</p>
-              <p>가격: {formatPrice(selectedMenu.price)}원</p>
+              <p>가격: {formatPrice(selectedMenu.price)}</p>
               <p>{isSetMenuSelected ? "현재: 세트 메뉴" : "현재: 단품 메뉴"}</p>
               <label className="image-checkbox-container">
                 <input

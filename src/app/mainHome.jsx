@@ -12,6 +12,7 @@ import DrinkMenuData from "../components/menu/DrinkMenuData";
 import SideMenuData from "../components/menu/SideMenuData";
 import CustomModal from "../components/topping/CustomModal";
 import SetMenuModal from "../components/topping/SetMenuModal";
+import productMenuData from "../components/menu/ProductMenuData";
 import "../styled/Modal.css";
 
 // import menuListData from "../components/menu/MenuList";
@@ -42,6 +43,7 @@ function MainHome() {
     drink: DrinkMenuData || [],
     coffee: CoffeeMenuData || [],
     side: SideMenuData || [],
+    product: productMenuData || [],
   };
 
   const [cart, setCart] = useState([]); // 장바구니 상태 관리
@@ -153,6 +155,7 @@ function MainHome() {
             formatPrice={formatPrice}
             sideMenuData={menuDatas.side}
             drinkMenuData={menuDatas.drink}
+            productMenuData={menuDatas.product}
           />
         )}
       </main>
