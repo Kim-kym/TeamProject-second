@@ -96,24 +96,19 @@ button:focus {
 
 
 .menu-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개의 아이템 */
-  gap: 20px; /* 아이템 간 간격 */
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .menu-item {
-  border: 1px solid #ddd; /* 각 메뉴 항목에 경계선 추가 (선택 사항) */
-  padding: 10px; /* 각 항목에 패딩 추가 */
-  text-align: center; /* 텍스트 가운데 정렬 */
-  width: 125px;
+  display: flex;
+  align-items: center;
 }
 
 .menu-item img {
   width: 100px;
-  height: 120px;
+  height: 80px;
   margin-bottom: 10px; /* 이미지와 텍스트 사이에 간격 */
-  display: block; /* 이미지를 블록 요소로 설정 */
   margin-left: auto; /* 좌우 여백 자동 설정 */
   margin-right: auto; /* 좌우 여백 자동 설정 */
 }
@@ -129,6 +124,21 @@ button:focus {
   font-size: 14px;
   margin-top: 5px;
 }
+
+.slick-slider {
+  height: 300px;
+}
+
+.slick-slide {
+  width: 100px; /* 슬라이드 아이템 너비 설정 */
+  height: 200px;
+}
+
+.menu-display {
+  overflow: hidden; /* 필수 */
+  width: 100%;
+}
+
 
 
 .placeholder{

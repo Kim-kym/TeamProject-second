@@ -10,14 +10,15 @@ import BurgerMenuData from "../components/menu/BurgerMenuData";
 import CoffeeMenuData from "../components/menu/CoffeeMenuData";
 import DrinkMenuData from "../components/menu/DrinkMenuData";
 import SideMenuData from "../components/menu/SideMenuData";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import CustomModal from "../components/topping/CustomModal";
+import SetMenuModal from "../components/topping/SetMenuModal";
+import "../styled/Modal.css";
+
 // import menuListData from "../components/menu/MenuList";
 
 function MainHome() {
   const [currentMenu, setCurrentMenu] = useState("burger"); // 초기 메뉴는 'burger'
 
-  // 선택한 메뉴 정보 불러오기
   const handleMenuClick = (menu) => {
     console.log("Clicked menu:", menu);
     if (!menu || !menu.category) {
@@ -35,13 +36,12 @@ function MainHome() {
       addToCart({ ...menu, quantity: 1 });
     }
   };
-
   const menuDatas = {
-    Set: BurgerSetMenuData,
-    burger: BurgerMenuData,
-    drink: DrinkMenuData,
-    coffee: CoffeeMenuData,
-    side: SideMenuData,
+    Set: BurgerSetMenuData || [],
+    burger: BurgerMenuData || [],
+    drink: DrinkMenuData || [],
+    coffee: CoffeeMenuData || [],
+    side: SideMenuData || [],
   };
 
   // 장바구니 상태 관리
