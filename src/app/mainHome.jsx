@@ -10,6 +10,9 @@ import BurgerMenuData from "../components/menu/BurgerMenuData";
 import CoffeeMenuData from "../components/menu/CoffeeMenuData";
 import DrinkMenuData from "../components/menu/DrinkMenuData";
 import SideMenuData from "../components/menu/SideMenuData";
+import CustomModal from "../components/topping/CustomModal";
+import SetMenuModal from "../components/topping/SetMenuModal";
+import "../styled/Modal.css";
 
 // import menuListData from "../components/menu/MenuList";
 
