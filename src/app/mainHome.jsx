@@ -1,4 +1,4 @@
-// import Category from "../components/menu/Category";
+import Category from "../components/menu/Category";
 import logo from "/image/logo1.jpg";
 import "../styled/MainHome.css";
 import { useState } from "react";
@@ -44,11 +44,6 @@ function MainHome() {
     side: SideMenuData || [],
   };
 
-  // 장바구니 상태 관리
-  const [cart, setCart] = useState([]);
-
-  // 장바구니 열림/닫힘 상태
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [cart, setCart] = useState([]); // 장바구니 상태 관리
   const [isCartOpen, setIsCartOpen] = useState(false); // 장바구니 열림/닫힘 상태
 
@@ -115,6 +110,7 @@ function MainHome() {
       allergy: "갑각류, 마늘",
       imgurl: "/image/buger/buger1.jpg",
     },
+  ]);
 
   // 선택된 메뉴 아이템 저장
   const [selectedItem, setSelectedItem] = useState(null);
