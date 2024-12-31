@@ -4,7 +4,7 @@ const CoffeeList = [
     name: "아메리카노",
     price: 2500,
     imgurl: "/image/coffee/americano.jpg",
-    category: "coffe",
+    category: "coffee",
   },
 
   {
@@ -12,7 +12,7 @@ const CoffeeList = [
     name: "카페라떼",
     price: 3000,
     imgurl: "/image/coffee/caffe-latte.jpg",
-    category: "coffe",
+    category: "coffee",
   },
 
   {
@@ -20,7 +20,7 @@ const CoffeeList = [
     name: "바닐라라떼",
     price: 3500,
     imgurl: "/image/coffee/vanilla-latte.jpg",
-    category: "coffe",
+    category: "coffee",
   },
 ];
 

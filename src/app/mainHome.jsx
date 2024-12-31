@@ -13,6 +13,7 @@ import SideMenuData from "../components/menu/SideMenuData";
 import CustomModal from "../components/topping/CustomModal";
 import SetMenuModal from "../components/topping/SetMenuModal";
 import productMenuData from "../components/menu/ProductMenuData";
+import OptionSelectionModal from "../components/topping/OptionSelectionModal";
 import "../styled/Modal.css";
 
 // import menuListData from "../components/menu/MenuList";
@@ -21,22 +22,30 @@ function MainHome() {
   const [currentMenu, setCurrentMenu] = useState("burger"); // 초기 메뉴는 'burger'
 
   const handleMenuClick = (menu) => {
-    console.log("Clicked menu:", menu);
-    if (!menu || !menu.category) {
-      console.error("Invalid menu item clicked. Menu:", menu);
-      return;
-    }
     if (menu.category === "burger" || menu.category === "Set") {
-      //  버거와 세트 메뉴만 모달창 열기
       setSelectedItem(menu);
       setOpen(true);
-      console.log("Opening modal for:", menu);
+    } else if (menu.name === "양념감자") {
+      // 양념감자: 맛 선택 모달
+      setModalConfig({
+        title: "양념감자 맛 선택",
+        options: ["치즈", "양파", "매운맛", "갈릭"],
+        selectedOptions: [],
+      });
+      setOptionModalOpen(true);
+    } else if (menu.category === "coffee") {
+      // 커피: 아이스/핫 선택 모달
+      setModalConfig({
+        title: "커피 옵션 선택",
+        options: ["아이스", "핫"],
+        selectedOptions: [],
+      });
+      setOptionModalOpen(true);
     } else {
-      console.log("Adding to cart directly:", menu);
-      //  사이드 메뉴, 음료, 커피는 바로 장바구니에 담기
-      addToCart({ ...menu, quantity: 1 });
+      addToCart(menu); // 다른 메뉴는 바로 장바구니에 추가
     }
   };
+
   const menuDatas = {
     Set: BurgerSetMenuData || [],
     burger: BurgerMenuData || [],
@@ -100,6 +109,30 @@ function MainHome() {
   // 선택된 토핑 저장
   const [selectedTopping, setSelectedTopping] = useState(null);
 
+  // 옵션 선택 모달 상태
+  const [optionModalOpen, setOptionModalOpen] = useState(false);
+  const [modalConfig, setModalConfig] = useState({
+    title: "",
+    options: [],
+    selectedOptions: [],
+  });
+
+  const handleOptionModalOpen = (menuId) => {
+    setModalConfig({
+      title: "양념감자 맛 선택",
+      options: ["치즈", "양파", "매운맛", "갈릭"],
+      selectedOption: "",
+      targetId: menuId, // 양념감자 ID를 추적
+    });
+    setOptionModalOpen(true);
+  };
+
+  //  선택된 맛 저장 후 닫기
+  const handleOptionConfirm = (selectedOption) => {
+    console.log("선택된 맛:", selectedOption);
+    setOptionModalOpen(false); // 모달 닫기
+  };
+
   return (
     <div>
       <div className="back"></div>
@@ -156,8 +189,26 @@ function MainHome() {
             sideMenuData={menuDatas.side}
             drinkMenuData={menuDatas.drink}
             productMenuData={menuDatas.product}
+            handleOptionModalOpen={handleOptionModalOpen}
           />
         )}
+        {/* 옵션 선택 모달 */}
+        <OptionSelectionModal
+          open={optionModalOpen}
+          setOpen={setOptionModalOpen}
+          title={modalConfig.title}
+          options={modalConfig.options}
+          selectedOptions={modalConfig.selectedOptions}
+          setSelectedOptions={(updateFn) =>
+            setModalConfig((prev) => ({
+              ...prev,
+              selectedOptions: updateFn(prev.selectedOptions),
+            }))
+          }
+          onConfirm={handleOptionConfirm}
+        />
+
+        {/* {open} */}
       </main>
     </div>
   );
