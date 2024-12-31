@@ -1,7 +1,9 @@
 import Category from "../components/menu/Category";
 import logo from "/image/logo1.jpg";
+import home from "/image/home_24.png";
 import "../styled/MainHome.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CartList from "../components/cart/cartList";
 import MenuDisplay from "../components/menu/MenuDisplay";
 // import Modal from "./Modal";
@@ -20,6 +22,7 @@ import "../styled/Modal.css";
 
 function MainHome() {
   const [currentMenu, setCurrentMenu] = useState("burger"); // 초기 메뉴는 'burger'
+  const navigate = useNavigate();
 
   const handleMenuClick = (menu) => {
     if (menu.category === "burger" || menu.category === "Set") {
@@ -133,13 +136,24 @@ function MainHome() {
     setOptionModalOpen(false); // 모달 닫기
   };
 
+  const handleReturnClick = () => {
+    navigate("/home"); // "/home" 경로로 이동
+  };
+
   return (
-    <div>
+    <div className="root">
       <div className="back"></div>
       <h1>
         <img src={logo} alt="Krusty Krab Logo" style={{ width: "150px" }} />
         Krusty Krab
+        <img
+          src={home}
+          alt="homeMenu"
+          className="returnHome"
+          onClick={handleReturnClick}
+        />
       </h1>
+
       <main>
         <div className="category">
           {/* 메뉴 선택창 */}
