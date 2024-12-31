@@ -72,7 +72,7 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
   const calculateTotalPrice = () => {
     const basePrice = selectedMenu?.price || selectedItem?.price || 0;
     return Object.entries(quantityMap).reduce((total, [id, quantity]) => {
-      const topping = productData.find((item) => item.id === parseInt(id));
+      const topping = productMenuData.find((item) => item.id === parseInt(id));
       return total + (topping?.price || 0) * quantity;
     }, basePrice);
   };
@@ -83,7 +83,7 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
       toppings: Object.entries(quantityMap)
         .filter(([_, quantity]) => quantity > 0)
         .map(([id, quantity]) => ({
-          ...productData.find((item) => item.id === parseInt(id)),
+          ...productMenuData.find((item) => item.id === parseInt(id)),
           quantity,
         })),
     };
