@@ -29,11 +29,11 @@ function MenuList({
 
   const settings = {
     dots: true, // 슬라이더 하단에 점 표시
-    infinite: false, // 무한 반복 활성화
+    infinite: true, // 무한 반복 활성화
     speed: 500, // 슬라이더 전환 속도
     slidesToShow: 3, // 한 번에 보여지는 슬라이드 개수
     slidesToScroll: 3, // 한 번에 이동하는 슬라이드 개수
-    rows: 2, // 행 개수 (기본값: 3)
+    rows: 2, // 행 개수 (기본값: 2)
     swipeToSlide: true, // 슬라이드로 스와이프 가능
     arrows: true, // 좌우 화살표 표시
     draggable: false, // 슬라이드를 드레그로 변경 못하게 함
@@ -41,6 +41,7 @@ function MenuList({
 
   console.log("DATA:", menuData);
   console.log("Slider Data:", menuData);
+  console.log("Current Menu:", currentMenu);
 
   return (
     <div className="menu-list">
@@ -50,19 +51,20 @@ function MenuList({
         <Slider {...settings} ref={slickRef}>
           {menuData.map((menu) => (
             <div key={menu.id}>
-              <div onClick={() => handleMenuClick(menu)} className="menu-item">
-                <div>
-                  <img
-                    src={menu.imgurl}
-                    alt={menu.name}
-                    style={{ width: "100px", height: "120px" }}
-                  />
-                </div>
-                <div className="impotmation">
-                  <p>{menu.name}</p>
-                  <p>가격: {formatPrice(menu.price)}원</p>
-                  {menu.allergy && <p>알레르기: {menu.allergy}</p>}
-                </div>
+              <div
+                onClick={() => {
+                  handleMenuClick(menu);
+                }}
+                className="menu-item"
+              >
+                <img
+                  src={menu.imgurl}
+                  alt={menu.name}
+                  style={{ width: "100px", height: "120px" }}
+                />
+                <p>{menu.name}</p>
+                <p>가격: {formatPrice(menu.price)}원</p>
+                {menu.allergy && <p>알레르기: {menu.allergy}</p>}
               </div>
             </div>
           ))}

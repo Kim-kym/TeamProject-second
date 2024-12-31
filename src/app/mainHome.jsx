@@ -25,24 +25,17 @@ function MainHome() {
     if (menu.category === "burger" || menu.category === "Set") {
       setSelectedItem(menu);
       setOpen(true);
-    } else if (menu.name === "양념감자") {
-      // 양념감자: 맛 선택 모달
+    } else if (menu.name === "양념감자" || menu.category === "coffee") {
+      const isCoffee = menu.category === "coffee";
       setModalConfig({
-        title: "양념감자 맛 선택",
-        options: ["치즈", "양파", "매운맛", "갈릭"],
+        title: isCoffee ? "커피 옵션 선택" : "양념감자 맛 선택",
+        options: isCoffee
+          ? ["아이스", "핫"]
+          : ["치즈", "양파", "매운맛", "갈릭"],
         selectedOptions: [],
+        targetId: menu.id,
       });
       setOptionModalOpen(true);
-    } else if (menu.category === "coffee") {
-      // 커피: 아이스/핫 선택 모달
-      setModalConfig({
-        title: "커피 옵션 선택",
-        options: ["아이스", "핫"],
-        selectedOptions: [],
-      });
-      setOptionModalOpen(true);
-    } else {
-      addToCart(menu); // 다른 메뉴는 바로 장바구니에 추가
     }
   };
 
@@ -121,16 +114,21 @@ function MainHome() {
     setModalConfig({
       title: "양념감자 맛 선택",
       options: ["치즈", "양파", "매운맛", "갈릭"],
-      selectedOption: "",
-      targetId: menuId, // 양념감자 ID를 추적
+      selectedOptions: [],
+      targetId: menuId, // 양념감자 ID 추적
     });
     setOptionModalOpen(true);
   };
 
-  //  선택된 맛 저장 후 닫기
-  const handleOptionConfirm = (selectedOption) => {
-    console.log("선택된 맛:", selectedOption);
-    setOptionModalOpen(false); // 모달 닫기
+  const handleOptionConfirm = (selectedOptions) => {
+    const targetName = modalConfig.title.includes("커피") ? "커피" : "양념감자";
+    addToCart({
+      id: modalConfig.targetId,
+      name: targetName,
+      options: selectedOptions.join(", "),
+      quantity: 1,
+    });
+    setOptionModalOpen(false);
   };
 
   return (
@@ -189,7 +187,15 @@ function MainHome() {
             sideMenuData={menuDatas.side}
             drinkMenuData={menuDatas.drink}
             productMenuData={menuDatas.product}
-            handleOptionModalOpen={handleOptionModalOpen}
+            handleOptionModalOpen={(id) => {
+              setModalConfig({
+                title: "양념감자 맛 선택",
+                options: ["치즈", "양파", "매운맛", "갈릭"],
+                selectedOptions: [],
+                targetId: id,
+              });
+              setOptionModalOpen(true);
+            }}
           />
         )}
         {/* 옵션 선택 모달 */}
@@ -207,8 +213,6 @@ function MainHome() {
           }
           onConfirm={handleOptionConfirm}
         />
-
-        {/* {open} */}
       </main>
     </div>
   );
