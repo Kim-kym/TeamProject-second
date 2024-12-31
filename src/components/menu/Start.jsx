@@ -19,7 +19,7 @@ function Start() {
   return (
     <div className="root-start" onClick={handleStartClick}>
       <video ref={videoRef} autoPlay muted loop className="background-video">
-        <source src="/video/video1.mp4" type="video/mp4" />
+        <source src="/video/video4.mp4" type="video/mp4" />
       </video>
       <div className="content-start">
         <p>
