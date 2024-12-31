@@ -83,8 +83,8 @@ button:focus {
 }
 
 .category {
-  width: 500px; /* 고정 가로 크기 */
-  min-height: 600px;
+  width: 520px; /* 고정 가로 크기 */
+  min-height: 620px;
   margin: 0 auto; /* 가운데 정렬 */
   overflow: hidden; /* 넘치는 컨텐츠 숨김 */
 }
@@ -103,6 +103,7 @@ button:focus {
 .menu-item {
   display: block;
   align-items: center;
+  margin-top: 20px;
 }
 
 .menu-item img {
@@ -131,22 +132,22 @@ button:focus {
 
 .slick-slide {
   width: 100px; /* 슬라이드 아이템 너비 설정 */
-  height: 200px;
-  margin-top: 20px;
-  gap: 20px;
+  height: 100px;
+  gap: 10px;
 }
 
 .slick-slide .impotmation{
-  /* margin: auto; */
-  margin-bottom: 20px;
+  flex-direction: column;
+
 }
+
+.slick-slide .impotmation:hover{  transform: scale(1.05); /* 확대 */
+  font-size: 2em; /* 텍스트 크기 확대 */}
 
 .menu-display {
   overflow: hidden; /* 필수 */
   width: 100%;
 }
-
-
 
 .placeholder{
   height: 120px;
@@ -290,4 +291,3 @@ button:focus {
   font-size: 22px;
   font-weight: bold;
 } 
-

@@ -8,7 +8,7 @@ export default function SlideToping({
   quantityMap,
   handleQuantityChange,
 }) {
-  console.log("아이템 정보" + item.price)
+  console.log("아이템 정보" + item.price);
   return (
     // {/* <h3>토핑 추가</h3> */}
     // {/* <Carousel responsive={responsive}> */}
