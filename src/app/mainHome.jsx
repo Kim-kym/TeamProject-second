@@ -115,14 +115,14 @@ function MainHome() {
   const [modalConfig, setModalConfig] = useState({
     title: "",
     options: [],
-    selectedOptions: [],
+    selectedOptions: "",
   });
 
   const handleOptionModalOpen = (menuId) => {
     setModalConfig({
       title: "양념감자 맛 선택",
       options: ["치즈", "양파", "매운맛", "갈릭"],
-      selectedOptions: [],
+      selectedOptions: "",
       targetId: menuId, // 양념감자 ID 추적
     });
     setOptionModalOpen(true);
