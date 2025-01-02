@@ -12,7 +12,6 @@ import DrinkMenuData from "../components/menu/DrinkMenuData";
 import SideMenuData from "../components/menu/SideMenuData";
 import productMenuData from "../components/menu/ProductMenuData";
 import "../styled/Modal.css";
-import ModalManager from "./ModalManager";
 
 function MainHome() {
   const [currentMenu, setCurrentMenu] = useState("burger"); // 초기 메뉴는 'burger'
