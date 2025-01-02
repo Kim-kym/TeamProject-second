@@ -17,6 +17,7 @@ import SetMenuModal from "../components/topping/SetMenuModal";
 import productMenuData from "../components/menu/ProductMenuData";
 import OptionSelectionModal from "../components/topping/OptionSelectionModal";
 import "../styled/Modal.css";
+import "../components/cart/Cart";
 
 // import menuListData from "../components/menu/MenuList";
 
@@ -172,19 +173,30 @@ function MainHome() {
           />
         </div>
 
-        {/* 장바구니 리스트 */}
         <div
           className={`cart-container ${isCartOpen ? "open" : ""}`}
-          onClick={() => setIsCartOpen(!isCartOpen)} // 장바구니 열기/닫기
+          onClick={() => {
+            setIsCartOpen((prev) => {
+              const newState = !prev;
+              console.log("isCartOpen:", newState); // 상태 변경 직후 로그
+              return newState;
+            });
+          }}
         >
           <span>장바구니</span>
         </div>
+
+        {/* 장바구니가 열릴 때만 CartList를 렌더링 */}
         {isCartOpen && (
-          <CartList
-            cart={cart}
-            removeFromCart={removeFromCart}
-            updateQuantity={updateQuantity}
-          />
+          <>
+            {console.log("CartList is open, isCartOpen:", isCartOpen)}{" "}
+            {/* 로그 추가 */}
+            <CartList
+              cart={cart}
+              removeFromCart={removeFromCart}
+              updateQuantity={updateQuantity}
+            />
+          </>
         )}
 
         {modalType === "custom" && selectedItem?.category === "burger" && (
@@ -220,26 +232,16 @@ function MainHome() {
             sideMenuData={menuDatas.side}
             drinkMenuData={menuDatas.drink}
             productMenuData={menuDatas.product}
-            onModalTypeChange={(newType) => {
-              if (newType === "custom") {
-                const singleMenu = BurgerMenuData.find(
-                  (menu) => menu.setMenuId === selectedItem?.id // 단품 메뉴 찾기
-                );
-                if (singleMenu) {
-                  setSelectedItem(singleMenu);
-                  setModalType(newType); // 상태 변경
-                }
-              }
-            }}
-            handleOptionModalOpen={(id) => {
-              setModalConfig({
-                title: "양념감자 맛 선택",
-                options: ["치즈", "양파", "매운맛", "갈릭"],
-                selectedOptions: [],
-                targetId: id,
-              });
-              setOptionModalOpen(true);
-            }}
+            // handleOptionModalOpen={(id) => {
+            //   setModalConfig({
+            //     title: "양념감자 맛 선택",
+            //     options: ["치즈", "양파", "매운맛", "갈릭"],
+            //     selectedOptions: [],
+            //     targetId: id,
+            //   });
+            //   setOptionModalOpen(true);
+            // }}
+            handleOptionModalOpen={handleOptionModalOpen}
           />
         )}
 
@@ -258,6 +260,19 @@ function MainHome() {
           }
           onConfirm={handleOptionConfirm}
         />
+        {/* SetMenuModal 열기 */}
+        {selectedItem && (
+          <SetMenuModal
+            open={open}
+            setOpen={setOpen}
+            selectedItem={selectedItem}
+            addToCart={addToCart}
+            formatPrice={(price) => price.toLocaleString("ko-KR")}
+            sideMenuData={menuDatas.side}
+            drinkMenuData={menuDatas.drink}
+            productMenuData={menuDatas.product}
+          />
+        )}
       </main>
     </div>
   );
