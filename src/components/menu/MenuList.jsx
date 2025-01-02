@@ -51,7 +51,7 @@ function MenuList({
 
   // console.log("DATA:", menuData);
   // console.log("Slider Data:", menuData);
-  // console.log("Current Menu:", currentMenu);
+  console.log("Current Menu:", currentMenu);
 
   return (
     <div className="menu-list">
@@ -59,11 +59,13 @@ function MenuList({
         <p>메뉴가 없습니다.</p>
       ) : (
         <Slider {...settings} ref={slickRef} className="menu-slider">
-          {sliderData.map((menu, index) => (
+          {menuData.map((menu, index) => (
             <div key={index}>
               {menu.id ? ( // 데이터가 있는 경우만 표시
                 <div
-                  onClick={() => handleMenuClick(menu)}
+                  onClick={() => {
+                    handleMenuClick(menu);
+                  }}
                   className="menu-item"
                 >
                   <img
