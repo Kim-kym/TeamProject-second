@@ -27,6 +27,11 @@ function MainHome() {
   const handleMenuClick = (menu) => {
     if (menu.category === "burger" || menu.category === "Set") {
       setSelectedItem(menu);
+
+      // 모달 타입 설정: burger -> custom, Set -> setMenu
+      const modalType = menu.category === "burger" ? "custom" : "setMenu";
+      setModalType(modalType);
+
       setOpen(true);
     } else if (menu.name === "양념감자" || menu.category === "coffee") {
       const isCoffee = menu.category === "coffee";
@@ -138,6 +143,9 @@ function MainHome() {
     navigate("/home"); // "/home" 경로로 이동
   };
 
+  // 'custom' 또는 'setMenu'
+  const [modalType, setModalType] = useState("custom");
+
   return (
     <div className="root">
       <div className="back"></div>
@@ -179,7 +187,7 @@ function MainHome() {
           />
         )}
 
-        {selectedItem?.category === "burger" && (
+        {modalType === "custom" && selectedItem?.category === "burger" && (
           <CustomModal
             open={open}
             setOpen={setOpen}
@@ -188,10 +196,21 @@ function MainHome() {
             selectedTopping={selectedTopping}
             setSelectedTopping={setSelectedTopping}
             formatPrice={formatPrice}
+            onModalTypeChange={(newType) => {
+              if (newType === "setMenu") {
+                const setMenu = BurgerSetMenuData.find(
+                  (menu) => menu.id === selectedItem?.setMenuId
+                );
+                if (setMenu) {
+                  setSelectedItem(setMenu);
+                  setModalType(newType); // 상태 변경
+                }
+              }
+            }}
           />
         )}
 
-        {selectedItem?.category === "Set" && (
+        {modalType === "setMenu" && selectedItem?.category === "Set" && (
           <SetMenuModal
             open={open}
             setOpen={setOpen}
@@ -201,6 +220,17 @@ function MainHome() {
             sideMenuData={menuDatas.side}
             drinkMenuData={menuDatas.drink}
             productMenuData={menuDatas.product}
+            onModalTypeChange={(newType) => {
+              if (newType === "custom") {
+                const singleMenu = BurgerMenuData.find(
+                  (menu) => menu.setMenuId === selectedItem?.id // 단품 메뉴 찾기
+                );
+                if (singleMenu) {
+                  setSelectedItem(singleMenu);
+                  setModalType(newType); // 상태 변경
+                }
+              }
+            }}
             handleOptionModalOpen={(id) => {
               setModalConfig({
                 title: "양념감자 맛 선택",
@@ -212,6 +242,7 @@ function MainHome() {
             }}
           />
         )}
+
         {/* 옵션 선택 모달 */}
         <OptionSelectionModal
           open={optionModalOpen}

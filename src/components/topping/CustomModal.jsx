@@ -4,7 +4,14 @@ import { useState, useEffect, useRef } from "react";
 import BurgerSetMenuData from "../menu/BurgerSetMenuData";
 import productMenuData from "../menu/ProductMenuData";
 
-function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
+function CustomModal({
+  formatPrice,
+  open,
+  setOpen,
+  selectedItem,
+  addToCart,
+  onModalTypeChange,
+}) {
   const [selectedMenu, setSelectedMenu] = useState(selectedItem || {});
   const [quantityMap, setQuantityMap] = useState({});
   const [isSetMenuSelected, setIsSetMenuSelected] = useState(false);
@@ -14,6 +21,16 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
   const handleModalOpen = () => {
     if (carouselRef.current) {
       carouselRef.current.goToSlide(0); //  첫 번째 슬라이드로 이동
+    }
+  };
+
+  const handleCheckboxChange = (e) => {
+    const isChecked = e.target.checked;
+    setIsSetMenuSelected(isChecked);
+
+    if (isChecked && setMenu) {
+      // 세트 메뉴로 전환 시 상위 컴포넌트에 세트 메뉴 정보 전달
+      onModalTypeChange("setMenu");
     }
   };
 
@@ -97,7 +114,7 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
       onClose={() => setOpen(false)}
       onAfterOpen={handleModalOpen} //  모달이 열리면 첫 번째 슬라이드로 이동
     >
-      <div>
+      <div className="single-menu-modal">
         {/* 선택한 메뉴 정보: 이미지, 이름, 알레르기, 가격 */}
         {selectedMenu && (
           <div className="selected-menu">
@@ -116,18 +133,17 @@ function CustomModal({ formatPrice, open, setOpen, selectedItem, addToCart }) {
                   type="checkbox"
                   className="image-checkbox"
                   checked={isSetMenuSelected}
-                  onChange={(e) => {
-                    const isChecked = e.target.checked;
-                    setIsSetMenuSelected(isChecked); // 세트 메뉴 상태 업데이트
-                    setSelectedMenu(isChecked ? setMenu : selectedItem); // 메뉴 변경
-                  }}
+                  onChange={handleCheckboxChange}
                 />
                 <span>세트 메뉴 선택</span> {/* 체크박스 옆에 표시될 텍스트 */}
               </label>
             </div>
           </div>
         )}
-        <h3>Total Price: {formatPrice(calculateTotalPrice())}원</h3>
+        <h3 className="Total-Price">
+          Total Price: {formatPrice(calculateTotalPrice())}원
+        </h3>
+        <h4 className="Topping-Plus">토핑 추가</h4>
         <ToppingList
           productData={productMenuData}
           quantityMap={quantityMap}
