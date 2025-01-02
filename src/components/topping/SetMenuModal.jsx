@@ -1,6 +1,7 @@
 import BasedModal from "./BasedModal";
 
 function SetMenuModal({
+  menuData = [],
   isOpen, // 변경: open → isOpen
   onClose, // 변경: setOpen → onClose
   selectedItem,

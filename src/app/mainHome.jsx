@@ -12,11 +12,42 @@ import DrinkMenuData from "../components/menu/DrinkMenuData";
 import SideMenuData from "../components/menu/SideMenuData";
 import productMenuData from "../components/menu/ProductMenuData";
 import "../styled/Modal.css";
+import ModalManager from "../app/ModalManager";
 
 function MainHome() {
   const [currentMenu, setCurrentMenu] = useState("burger"); // 초기 메뉴는 'burger'
   const navigate = useNavigate();
   const [cart, setCart] = useState([]); // 장바구니 상태
+
+  const formatPrice = (price) => {
+    if (typeof price !== "number") {
+      price = parseFloat(price); // 숫자가 아닌 경우 변환
+    }
+    return price.toLocaleString("ko-KR");
+  };
+
+  const menuDatas = {
+    Set: BurgerSetMenuData || [],
+    burger: BurgerMenuData || [],
+    drink: DrinkMenuData || [],
+    coffee: CoffeeMenuData || [],
+    side: SideMenuData || [],
+    product: productMenuData || [],
+  };
+
+  const handleReturnClick = () => {
+    navigate("/home"); // "/home" 경로로 이동
+  };
+
+  const handleMenuClick = (menu) => {
+    console.log("Selected menu:", menu);
+    // 메뉴 클릭 시 필요한 추가 로직
+    setCurrentMenu(menu.category); // 예: 클릭된 메뉴에 따라 카테고리 설정
+    // handleModalClick 호출로 메뉴 정보 전달
+    handleModalClick(menu);
+    console.log("ModalClick:", menu);
+  };
+
   // 모달 관련 상태 및 핸들러
   const [isOpen, setIsOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
@@ -103,49 +134,6 @@ function MainHome() {
     }
   };
 
-  const menuDatas = {
-    Set: BurgerSetMenuData || [],
-    burger: BurgerMenuData || [],
-    drink: DrinkMenuData || [],
-    coffee: CoffeeMenuData || [],
-    side: SideMenuData || [],
-    product: productMenuData || [],
-  };
-
-  const handleReturnClick = () => {
-    navigate("/home"); // "/home" 경로로 이동
-  };
-
-  const handleMenuClick = (menu) => {
-    console.log("Selected menu:", menu);
-    // 메뉴 클릭 시 필요한 추가 로직
-    setCurrentMenu(menu.category); // 예: 클릭된 메뉴에 따라 카테고리 설정
-    // handleModalClick 호출로 메뉴 정보 전달
-    handleModalClick(menu);
-  };
-
-  // const handleModalClick = (menu) => {
-  //   console.log("Menu:", menu);
-  //   if (menu.category === "burger" || menu.category === "Set") {
-  //     setSelectedItem(menu);
-  //     setModalType(menu.category === "burger" ? "custom" : "setMenu");
-  //     setIsOpen(true);
-  //   } else if (menu.name === "양념감자" || menu.category === "coffee") {
-  //     setModalConfig({
-  //       title:
-  //         menu.category === "coffee" ? "커피 옵션 선택" : "양념감자 맛 선택",
-  //       options:
-  //         menu.category === "coffee"
-  //           ? ["아이스", "핫"]
-  //           : ["치즈", "양파", "매운맛", "갈릭"],
-  //       selectedOptions: [],
-  //       targetId: menu.id,
-  //     });
-  //     setModalType("optionSelection");
-  //     setIsOpen(true);
-  //   }
-  // };
-
   return (
     <div className="root">
       <div className="back"></div>
@@ -167,7 +155,7 @@ function MainHome() {
             currentMenu={currentMenu}
             setCurrentMenu={setCurrentMenu}
             addToCart={addToCart}
-            handleMenuClick={handleModalClick}
+            handleMenuClick={handleMenuClick}
             menuListData={menuDatas}
           />
         </div>
@@ -180,6 +168,7 @@ function MainHome() {
         />
 
         <ModalManager
+          isOpen={isOpen}
           onClose={handleCloseModal}
           selectedItem={selectedItem}
           addToCart={addToCart}
@@ -187,7 +176,13 @@ function MainHome() {
           handleModalClick={handleModalClick}
           handleModalQuantityChange={handleModalQuantityChange}
           productMenuData={menuDatas.product}
-          // formatPrice={formatPrice}
+          sideMenuData={menuDatas.side}
+          drinkMenuData={menuDatas.drink}
+          title={modalConfig.title}
+          options={modalConfig.options}
+          selectedOptions={modalConfig.selectedOptions}
+          formatPrice={formatPrice}
+          modalType={modalType}
         />
       </main>
     </div>
