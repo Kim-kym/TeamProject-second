@@ -9,20 +9,19 @@ export default function SlideToping({
     // {/* <h3>토핑 추가</h3> */}
     // {/* <Carousel responsive={responsive}> */}
     <div className="card">
-      {/* <button> */}
       <img className="product" src={item.imgurl} alt={item.imgurl}></img>
       <h2>{item.name}</h2>
-      {
-        item.extraPrice !== undefined // extraPrice가 존재하는 경우에만 처리
-          ? !item.hidePrice && (
-              <p className="price">
-                {item.extraPrice > 0
-                  ? `+${item.extraPrice}원`
-                  : `${item.extraPrice}원`}
-              </p>
-            )
-          : !item.hidePrice && <p className="price">{item.price}원</p> // 기본 가격 처리
-      }
+      {item.extraPrice !== undefined ? (
+        <p className={`price ${item.hidePrice ? "hidden" : ""}`}>
+          {item.extraPrice > 0
+            ? `+${item.extraPrice}원`
+            : `${item.extraPrice}원`}
+        </p>
+      ) : (
+        <p className={`price ${item.hidePrice ? "hidden" : ""}`}>
+          {item.price}원
+        </p>
+      )}
       {/* </button> */}
       <div className="count-btn">
         <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>

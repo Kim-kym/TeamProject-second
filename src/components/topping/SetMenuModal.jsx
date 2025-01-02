@@ -13,6 +13,7 @@ function SetMenuModal({
   productMenuData,
   formatPrice,
   handleOptionModalOpen,
+  onModalTypeChange,
 }) {
   const defaultSide = sideMenuData.find((item) => item.name === "감자튀김");
   const defaultDrink = drinkMenuData.find((item) => item.name === "콜라");
@@ -220,26 +221,44 @@ function SetMenuModal({
     setOpen(false);
   };
 
+  const handleCheckboxChange = (e) => {
+    if (typeof onModalTypeChange === "function") {
+      const isChecked = !e.target.checked; // 체크 해제 시 단품 메뉴로 전환
+
+      if (!isChecked && selectedItem?.id) {
+        onModalTypeChange("custom");
+      }
+    } else {
+      console.error("onModalTypeChange is not a function");
+    }
+  };
+
   return (
     <Modal isOpen={open} onClose={() => setOpen(false)}>
-      <div>
-        <img
-          src={selectedItem.imgurl}
-          alt={selectedItem.name}
-          style={{
-            width: "150px",
-            height: "150px",
-            marginRight: "20px",
-            cursor: "pointer",
-          }}
-        />
-        <h3>{selectedItem?.name}</h3>
-        <p>알레르기: {selectedItem.allergy || "없음"}</p>
-        <p>가격: {formatPrice(selectedItem.price)}원</p>
-        <p>{selectedItem ? "현재: 세트 메뉴" : "현재: 단품 메뉴"}</p>
-        <h4>Total Price: {formatPrice(calculateTotalPrice())}</h4>
+      <div className="set-menu-modal">
+        <div className="selected-menu">
+          <img src={selectedItem.imgurl} alt={selectedItem.name} />
+          <div>
+            <h3>{selectedItem?.name}</h3>
+            <p>알레르기: {selectedItem.allergy || "없음"}</p>
+            <p>가격: {formatPrice(selectedItem.price)}원</p>
+            <p>{selectedItem ? "현재: 세트 메뉴" : "현재: 단품 메뉴"}</p>
+            <label className="image-checkbox-container">
+              <input
+                type="checkbox"
+                className="image-checkbox"
+                // checked={isSetMenuSelected}
+                onChange={handleCheckboxChange}
+              />
+              <span>단품 메뉴로 변경</span> {/* 체크박스 옆에 표시될 텍스트 */}
+            </label>
+          </div>
+        </div>
+        <h3 className="Total-Price">
+          Total Price: {formatPrice(calculateTotalPrice())}
+        </h3>
 
-        <h4>토핑 변경</h4>
+        <h4>토핑 추가</h4>
         <ToppingList
           productData={productMenuData}
           quantityMap={productQuantity}
@@ -277,8 +296,10 @@ function SetMenuModal({
             true
           )} // 음료 메뉴
         />
-        <button onClick={handleAddToCart}>추가</button>
-        <button onClick={() => setOpen(false)}>취소</button>
+        <div className="actions">
+          <button onClick={handleAddToCart}>추가</button>
+          <button onClick={() => setOpen(false)}>취소</button>
+        </div>
       </div>
 
       <OptionSelectionModal
