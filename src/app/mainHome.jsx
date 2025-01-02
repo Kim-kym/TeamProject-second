@@ -17,7 +17,6 @@ import SetMenuModal from "../components/topping/SetMenuModal";
 import productMenuData from "../components/menu/ProductMenuData";
 import OptionSelectionModal from "../components/topping/OptionSelectionModal";
 import "../styled/Modal.css";
-import "../components/cart/Cart";
 
 // import menuListData from "../components/menu/MenuList";
 
