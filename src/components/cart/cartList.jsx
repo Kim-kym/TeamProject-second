@@ -36,26 +36,18 @@ function CartList({ cart, removeFromCart, updateQuantity }) {
 
   return (
     <div id="cart">
-      <h2>장바구니</h2>
-
       {/* 카테고리별 합산금액 표시 */}
       {categoryTotals.map((categoryTotal, index) => (
         <div key={`${categoryTotal.category}-${index}`}>
-          <h3>
+          {/* <h3>
             {categoryTotal.category} 합계: {categoryTotal.total}원
-          </h3>
+          </h3> */}
         </div>
       ))}
-
       {/* 장바구니 항목을 가로로 나열 */}
       <div className="cart-items">
         {cart.map((item) => (
           <div key={item.id} className="cart-item">
-            {/* <img
-              src={item.imgurl}
-              alt={item.name}
-              style={{ width: "100px", marginRight: "10px" }}
-            /> */}
             <div className="item-details">
               <span>{item.name}</span> <p>{item.price}원</p>
               {/* 선택된 토핑 표시 */}
@@ -121,7 +113,6 @@ function CartList({ cart, removeFromCart, updateQuantity }) {
           </div>
         ))}
       </div>
-
       {/* 총액 표시 */}
       <div className="total">
         <h3>총액: {totalAmount}원</h3>

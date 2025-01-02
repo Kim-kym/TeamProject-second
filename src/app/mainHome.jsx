@@ -73,6 +73,7 @@ function MainHome() {
 
   const handleMenuClick = (menu) => {
     console.log("Selected menu:", menu);
+    addToCart(menu);
     // 메뉴 클릭 시 필요한 추가 로직
     setCurrentMenu(menu.category); // 예: 클릭된 메뉴에 따라 카테고리 설정
   };
@@ -102,13 +103,14 @@ function MainHome() {
             menuListData={menuDatas}
           />
         </div>
-
-        {/* 장바구니 관리 */}
-        <CartManager
-          cart={cart}
-          removeFromCart={removeFromCart}
-          updateQuantity={updateQuantity}
-        />
+        <div className="cartCss">
+          {/* 장바구니 관리 */}
+          <CartManager
+            cart={cart}
+            removeFromCart={removeFromCart}
+            updateQuantity={updateQuantity}
+          />
+        </div>
       </main>
     </div>
   );

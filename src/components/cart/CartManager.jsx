@@ -7,7 +7,7 @@ function CartManager({ cart, removeFromCart, updateQuantity }) {
 
   return (
     <div>
-      {/* 장바구니 열기/닫기 */}
+      {/* 장바구니 열기/닫기 버튼 */}
       <div
         className={`cart-container ${isCartOpen ? "open" : ""}`}
         onClick={() => setIsCartOpen(!isCartOpen)}
@@ -17,11 +17,13 @@ function CartManager({ cart, removeFromCart, updateQuantity }) {
 
       {/* 장바구니 리스트 */}
       {isCartOpen && (
-        <CartList
-          cart={cart}
-          removeFromCart={removeFromCart}
-          updateQuantity={updateQuantity}
-        />
+        <div className="cartCss">
+          <CartList
+            cart={cart}
+            removeFromCart={removeFromCart}
+            updateQuantity={updateQuantity}
+          />
+        </div>
       )}
     </div>
   );
