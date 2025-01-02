@@ -35,7 +35,7 @@ function MenuList({
     slidesToScroll: 3, // 한 번에 이동하는 슬라이드 개수
     rows: 2, // 행 개수 (기본값: 2)
     swipeToSlide: true, // 슬라이드로 스와이프 가능
-    arrows: true, // 좌우 화살표 표시
+    arrows: false, // 좌우 화살표 표시
     draggable: false, // 슬라이드를 드레그로 변경 못하게 함
   };
 
@@ -48,7 +48,7 @@ function MenuList({
       {menuData.length === 0 ? (
         <p>메뉴가 없습니다.</p>
       ) : (
-        <Slider {...settings} ref={slickRef}>
+        <Slider {...settings} ref={slickRef} className="menu-slider">
           {menuData.map((menu) => (
             <div key={menu.id}>
               <div
