@@ -98,7 +98,10 @@ function MainHome() {
             currentMenu={currentMenu}
             setCurrentMenu={setCurrentMenu}
             addToCart={addToCart}
-            handleMenuClick={handleMenuClick}
+            handleMenuClick={(menu) => {
+              console.log("Menu item clicked in MenuDisplay:", menu);
+              handleMenuClick;
+            }}
             menuListData={menuDatas}
           />
         </div>

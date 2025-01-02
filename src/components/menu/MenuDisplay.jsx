@@ -16,7 +16,6 @@ function MenuDisplay({
   handleMenuClick,
   menuListData,
 }) {
-  console.log("Menu Display:", menuListData);
   return (
     <div className="menu-display">
       {/* 카테고리 버튼 */}
