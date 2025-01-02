@@ -1,7 +1,7 @@
 // import "../../styled/Modal.css";
 // import ReactDOM from "react-dom";
 
-const Modal = ({ isOpen, onClose, children }) => {
+const BasedModal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   return (
@@ -14,4 +14,4 @@ const Modal = ({ isOpen, onClose, children }) => {
   );
 };
 
-export default Modal;
+export default BasedModal;
