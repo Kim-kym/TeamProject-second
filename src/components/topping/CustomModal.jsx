@@ -3,6 +3,7 @@ import { useState } from "react";
 import ToppingList from "./ToppingList";
 
 function CustomModal({
+  menuData = [],
   formatPrice,
   isOpen, // 변경: open → isOpen
   onClose, // 변경: setOpen → onClose
@@ -10,6 +11,7 @@ function CustomModal({
   addToCart,
   productMenuData,
   onModalTypeChange,
+  quantityMap,
 }) {
   const [selectedMenu, setSelectedMenu] = useState(selectedItem || {});
 
@@ -17,7 +19,7 @@ function CustomModal({
     const cartItem = {
       ...selectedMenu,
       toppings: Object.entries(quantityMap)
-        .filter(([_, quantity]) => quantity > 0)
+        .filter(([, quantity]) => quantity > 0)
         .map(([id, quantity]) => ({
           ...productMenuData.find((item) => item.id === parseInt(id)),
           quantity,

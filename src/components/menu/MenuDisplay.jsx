@@ -2,13 +2,6 @@ import React from "react";
 import Category from "./Category";
 import MenuList from "./MenuList";
 
-const formatPrice = (price) => {
-  if (typeof price !== "number") {
-    price = parseFloat(price); // 숫자가 아닌 경우 변환
-  }
-  return price.toLocaleString("ko-KR");
-};
-
 function MenuDisplay({
   currentMenu,
   setCurrentMenu,

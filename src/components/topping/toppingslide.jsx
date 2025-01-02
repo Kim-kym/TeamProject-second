@@ -1,4 +1,5 @@
 import "../../styled/slideTopping.css";
+
 export default function SlideTopping({
   item,
   quantityMap = {},
