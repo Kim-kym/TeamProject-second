@@ -26,6 +26,25 @@ function SetMenuModal({
     defaultDrink ? { [defaultDrink.id]: 1 } : {}
   );
 
+  const [selectedSide, setSelectedSide] = useState(null); // 선택된 사이드 메뉴 상태
+
+  const handleSideSelect = (side) => {
+    setSelectedSide(side); // 사이드 메뉴 선택 처리
+  };
+
+  const handleAddSideToCart = () => {
+    if (selectedSide) {
+      addToCart({
+        id: selectedSide.id,
+        name: selectedSide.name,
+        quantity: 1,
+        price: selectedSide.price,
+        category: "side", // 사이드 메뉴로 구분
+      });
+      setOpen(false); // 모달 닫기
+    }
+  };
+
   const hasDefaultSideChanged = useRef(false);
   const hasDefaultDrinkChanged = useRef(false);
 
@@ -202,8 +221,27 @@ function SetMenuModal({
     return (selectedItem?.price || 0) + productPrice + sidePrice + drinkPrice;
   };
 
+  // const handleAddToCart = () => {
+  //   addToCart({
+  //     ...selectedItem,
+  //     product: Object.entries(productQuantity).map(([id, qty]) => ({
+  //       ...productMenuData.find((item) => item.id === parseInt(id)),
+  //       quantity: qty,
+  //     })),
+  //     sides: Object.entries(sideQuantity).map(([id, qty]) => ({
+  //       ...sideMenuData.find((item) => item.id === parseInt(id)),
+  //       quantity: qty,
+  //     })),
+  //     drinks: Object.entries(drinkQuantity).map(([id, qty]) => ({
+  //       ...drinkMenuData.find((item) => item.id === parseInt(id)),
+  //       quantity: qty,
+  //     })),
+  //   });
+  //   setOpen(false);
+  // };
   const handleAddToCart = () => {
-    addToCart({
+    // 장바구니에 추가할 데이터 생성
+    const cartItem = {
       ...selectedItem,
       product: Object.entries(productQuantity).map(([id, qty]) => ({
         ...productMenuData.find((item) => item.id === parseInt(id)),
@@ -217,8 +255,11 @@ function SetMenuModal({
         ...drinkMenuData.find((item) => item.id === parseInt(id)),
         quantity: qty,
       })),
-    });
-    setOpen(false);
+    };
+
+    // 장바구니에 아이템 추가
+    addToCart(cartItem); // 부모 컴포넌트에서 전달된 addToCart 함수 호출
+    setOpen(false); // 모달을 닫기
   };
 
   const handleCheckboxChange = (e) => {
@@ -266,7 +307,7 @@ function SetMenuModal({
         />
         <div style={{ marginBottom: "30px" }}></div>
 
-        <h4>사이드 메뉴</h4>
+        <h4>&nbsp;&nbsp;&nbsp;&nbsp;사이드 메뉴</h4>
         <ToppingList
           productData={sideMenuData.map((item) => ({
             ...item,
@@ -282,7 +323,7 @@ function SetMenuModal({
         />
         <div style={{ marginBottom: "30px" }}></div>
 
-        <h4>음료 선택</h4>
+        <h4>&nbsp;&nbsp;&nbsp;&nbsp;음료 선택</h4>
         <ToppingList
           productData={drinkMenuData.map((item) => ({
             ...item,

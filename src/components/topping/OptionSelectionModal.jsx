@@ -14,9 +14,13 @@ function OptionSelectionModal({
     setSelectedOptions((prev) => {
       if (!Array.isArray(prev)) return [option];
 
-      return prev.includes(option)
-        ? prev.filter((item) => item !== option) // 이미 선택된 경우 제거
-        : [...prev, option]; // 새 옵션 추가
+      // 새 옵션 선택 시 기존 옵션 제거 후 새 옵션 추가 (단일 선택)
+      if (!prev.includes(option)) {
+        return [option]; // 기존 선택 제거하고 새 옵션으로 대체
+      }
+
+      // 동일한 옵션 클릭 시 선택 해제
+      return [];
     });
   };
   return (

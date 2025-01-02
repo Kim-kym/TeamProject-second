@@ -143,7 +143,7 @@ function CustomModal({
         <h3 className="Total-Price">
           Total Price: {formatPrice(calculateTotalPrice())}원
         </h3>
-        <h4 className="Topping-Plus">토핑 추가</h4>
+        <h4 className="Topping-Plus">&nbsp;&nbsp;&nbsp;&nbsp;토핑 추가</h4>
         <ToppingList
           productData={productMenuData}
           quantityMap={quantityMap}
