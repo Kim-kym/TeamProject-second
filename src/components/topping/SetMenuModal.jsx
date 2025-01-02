@@ -307,7 +307,7 @@ function SetMenuModal({
         />
         <div style={{ marginBottom: "30px" }}></div>
 
-        <h4>사이드 메뉴</h4>
+        <h4>&nbsp;&nbsp;&nbsp;&nbsp;사이드 메뉴</h4>
         <ToppingList
           productData={sideMenuData.map((item) => ({
             ...item,
@@ -323,7 +323,7 @@ function SetMenuModal({
         />
         <div style={{ marginBottom: "30px" }}></div>
 
-        <h4>음료 선택</h4>
+        <h4>&nbsp;&nbsp;&nbsp;&nbsp;음료 선택</h4>
         <ToppingList
           productData={drinkMenuData.map((item) => ({
             ...item,
