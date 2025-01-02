@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CartList from "../components/cart/cartList";
 import MenuDisplay from "../components/menu/MenuDisplay";
-// import Modal from "./Modal";
 import BurgerSetMenuData from "../components/menu/BurgerSetMenuData";
 import BurgerMenuData from "../components/menu/BurgerMenuData";
 import CoffeeMenuData from "../components/menu/CoffeeMenuData";

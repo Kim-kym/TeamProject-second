@@ -49,10 +49,6 @@ function MenuList({
     draggable: false, // 슬라이드를 드레그로 변경 못하게 함
   };
 
-  console.log("DATA:", menuData);
-  console.log("Slider Data:", menuData);
-  console.log("Current Menu:", currentMenu);
-
   return (
     <div className="menu-list">
       {menuData.length === 0 ? (
