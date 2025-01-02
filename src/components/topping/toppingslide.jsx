@@ -1,10 +1,18 @@
 import "../../styled/slideTopping.css";
-export default function SlideToping({
+export default function SlideTopping({
   item,
-  quantityMap,
+  quantityMap = {},
   handleQuantityChange,
 }) {
-  console.log("아이템 정보" + item.price);
+  if (!item) {
+    console.error("Invalid item:", item);
+    return <div className="error">유효하지 않은 아이템입니다.</div>;
+  }
+
+  if (!quantityMap) {
+    console.error("Invalid quantityMap:", quantityMap);
+    return <div className="error">수량 데이터가 유효하지 않습니다.</div>;
+  }
   return (
     // {/* <h3>토핑 추가</h3> */}
     // {/* <Carousel responsive={responsive}> */}
