@@ -44,17 +44,25 @@ function Home() {
       <div
         style={{
           //상단 여유공간 확보 ( 나중에 로고 추가 )
-          height: "40vw",
+          height: "5vw",
         }}
       ></div>
+  <p 
+    style={{
+      //상단 여유공간 확보 ( 나중에 로고 추가 )
+      height: "20vw",
+      fontSize: "10vw",
+      textAlign: "center",
+      color: "rgb(235, 232, 61)",
+    }}>Krusty Krab</p>
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   {/* 포장 버튼 */}
   <div
     style={{
       position: "relative",
-      width: "47vw",
-      height: "45vw",
+      width: "30vw",
+      height: "30vw",
       marginRight: "0.8vw",
     }}
   >
@@ -100,8 +108,8 @@ function Home() {
   <div
     style={{
       position: "relative",
-      width: "47vw",
-      height: "45vw",
+      width: "30vw",
+      height: "30vw",
     }}
   >
     {/* 흐릿한 배경 */}
