@@ -37,16 +37,17 @@ function MainHome() {
     } else if (menu.name === "양념감자") {
       // 양념감자 클릭 시 맛 선택 모달 열기
       setModalConfig({
-        title: "양념감자 맛 선택",
-        options: ["치즈", "양파", "매운맛", "갈릭"], // 선택 가능한 맛 옵션
+        title: "양념감자 맛 선택", // 올바른 제목
+        options: ["치즈", "양파", "매운맛", "갈릭"], // 양념감자의 옵션
         selectedOptions: [],
         targetId: menu.id,
+        name: menu.name, // 메뉴 이름 전달
       });
       setOptionModalOpen(true); // 맛 선택 모달 열기
     } else if (menu.category === "side" || menu.category === "drink") {
       addToCart({
         id: menu.id,
-        name: menu.name,
+        name: modalConfig.name,
         price: menu.price,
         category: menu.category,
         quantity: 1,
@@ -57,6 +58,7 @@ function MainHome() {
         options: ["아이스", "핫"], // 선택 가능한 옵션
         selectedOptions: [],
         targetId: menu.id,
+        name: menu.name,
       });
       setOptionModalOpen(true);
     } else {
@@ -155,17 +157,21 @@ function MainHome() {
     const isCoffee = modalConfig.title.includes("커피");
     const basePrice = isCoffee ? 3000 : 2000; // 커피는 3000원, 양념감자는 2000원
 
-    addToCart({
-      id: modalConfig.targetId,
-      name: modalConfig.title.includes("커피") ? "커피" : "양념감자",
-      options: selectedOptions.join(", "), // 선택한 옵션 정보
-      price: basePrice, // 기본 가격
-      quantity: 1, // 기본 수량
+    // 선택된 옵션 각각을 개별 항목으로 추가
+    selectedOptions.forEach((option) => {
+      addToCart({
+        id: `${modalConfig.targetId}-${option}`, // 옵션별 고유 ID 생성
+        name: isCoffee
+          ? `${modalConfig.name} (${option})`
+          : `양념감자 (${option})`, // 이름에 옵션 명시
+        options: option, // 선택된 옵션 정보
+        price: basePrice, // 기본 가격
+        quantity: 1, // 기본 수량
+      });
     });
 
     setOptionModalOpen(false); // 모달 닫기
   };
-
   const handleReturnClick = () => {
     navigate("/home"); // "/home" 경로로 이동
   };
@@ -257,7 +263,7 @@ function MainHome() {
           setOpen={setOptionModalOpen}
           title={modalConfig.title}
           options={modalConfig.options}
-          selectedOptions={modalConfig.selectedOptions}
+          selectedOptions={modalConfig.selectedOptions || ""} //  단일 선택 상태 전달
           setSelectedOptions={(updateFn) =>
             setModalConfig((prev) => ({
               ...prev,
