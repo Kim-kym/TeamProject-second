@@ -24,6 +24,12 @@ function MainHome() {
   const [currentMenu, setCurrentMenu] = useState("burger"); // 초기 메뉴는 'burger'
   const navigate = useNavigate();
   const [cart, setCart] = useState([]); //  장바구니 상태
+  const [paymentCompleted, setPaymentCompleted] = useState(false); // 결제 상태
+  // 결제 처리
+  const handlePayment = () => {
+    setPaymentCompleted(true); // 결제 완료 상태로 설정
+    setCart([]); // 결제 후 장바구니 초기화
+  };
 
   const handleMenuClick = (menu) => {
     if (menu.category === "burger") {
@@ -209,6 +215,8 @@ function MainHome() {
           cart={cart}
           removeFromCart={removeFromCart}
           updateQuantity={updateQuantity}
+          paymentCompleted={paymentCompleted} // 결제 완료 상태를 CartManager로 전달
+          handlePayment={handlePayment} // 결제 처리 함수 전달
         />
 
         {modalType === "custom" && selectedItem?.category === "burger" && (
@@ -244,15 +252,6 @@ function MainHome() {
             sideMenuData={menuDatas.side}
             drinkMenuData={menuDatas.drink}
             productMenuData={menuDatas.product}
-            // handleOptionModalOpen={(id) => {
-            //   setModalConfig({
-            //     title: "양념감자 맛 선택",
-            //     options: ["치즈", "양파", "매운맛", "갈릭"],
-            //     selectedOptions: [],
-            //     targetId: id,
-            //   });
-            //   setOptionModalOpen(true);
-            // }}
             handleOptionModalOpen={handleOptionModalOpen}
           />
         )}
