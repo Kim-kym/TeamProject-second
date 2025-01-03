@@ -253,10 +253,13 @@ function SetMenuModal({
     setOpen(false); // 모달 닫기
   };
 
-  const handleMenuToggle = () => {
-    console.log("Switching to custom menu modal");
+  const handleCheckboxChange = (e) => {
     if (typeof onModalTypeChange === "function") {
-      onModalTypeChange("custom"); // 단품 메뉴로 전환
+      const isChecked = !e.target.checked; // 체크 해제 시 단품 메뉴로 전환
+
+      if (!isChecked && selectedItem?.id) {
+        onModalTypeChange("custom");
+      }
     } else {
       console.error("onModalTypeChange is not a function");
     }
@@ -277,7 +280,7 @@ function SetMenuModal({
                 type="checkbox"
                 className="image-checkbox"
                 // checked={isSetMenuSelected}
-                onClick={handleMenuToggle}
+                onChange={handleCheckboxChange}
               />
               <span>단품 메뉴로 변경</span> {/* 체크박스 옆에 표시될 텍스트 */}
             </label>

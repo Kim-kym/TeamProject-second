@@ -74,11 +74,15 @@ function CustomModal({
   };
 
   const handleMenuToggle = () => {
-    console.log("Switching to set menu modal");
-    if (typeof onModalTypeChange === "function") {
-      onModalTypeChange("setMenu"); // 세트 메뉴로 전환
+    if (!setMenu) return; // 세트 메뉴가 없는 경우 아무 작업도 하지 않음
+    if (selectedMenu === setMenu) {
+      // 세트 메뉴 → 단품 메뉴 전환
+      setSelectedMenu(selectedItem);
+      setIsSetMenuSelected(false);
     } else {
-      console.error("onModalTypeChange is not a function");
+      // 단품 메뉴 → 세트 메뉴 전환
+      setSelectedMenu(setMenu);
+      setIsSetMenuSelected(true);
     }
   };
 
@@ -121,7 +125,11 @@ function CustomModal({
         {/* 선택한 메뉴 정보: 이미지, 이름, 알레르기, 가격 */}
         {selectedMenu && (
           <div className="selected-menu">
-            <img src={selectedMenu.imgurl} alt={selectedMenu.name} />
+            <img
+              src={selectedMenu.imgurl}
+              alt={selectedMenu.name}
+              onClick={handleMenuToggle}
+            />
             <div>
               <h3>{selectedMenu.name}</h3>
               <p>알레르기: {selectedMenu.allergy || "없음"}</p>
@@ -132,7 +140,7 @@ function CustomModal({
                   type="checkbox"
                   className="image-checkbox"
                   checked={isSetMenuSelected}
-                  onChange={handleMenuToggle}
+                  onChange={handleCheckboxChange}
                 />
                 <span>세트 메뉴 선택</span> {/* 체크박스 옆에 표시될 텍스트 */}
               </label>
