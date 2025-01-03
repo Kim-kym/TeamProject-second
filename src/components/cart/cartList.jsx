@@ -9,7 +9,6 @@ function CartList({
   handlePayment,
   closePaymentMessage,
 }) {
-
   const location = useLocation();
   const orderOption = location.state.orderOption;
 
@@ -138,7 +137,7 @@ function CartList({
             ))}
           </div>
           {/* 매장, 포장 주문 옵션 표기 */}
-          <h3 style={{marginLeft: '2vw'}}>{orderOption} 주문입니다</h3>
+          <h3 style={{ marginLeft: "2vw" }}>{orderOption} 주문입니다</h3>
           {/* 총액과 결제하기 버튼 */}
           <div className="total">
             <h3>총액: {totalAmount}원</h3>

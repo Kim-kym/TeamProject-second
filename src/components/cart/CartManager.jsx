@@ -16,7 +16,7 @@ function CartManager({ cart, removeFromCart, updateQuantity }) {
   // 결제 완료 메시지 닫기
   const closePaymentMessage = () => {
     setIsCartOpen(false); // 장바구니를 닫기
-     navigate("/")
+    navigate("/");
   };
   // 장바구니 열 때 결제 상태 초기화
   const openCart = () => {
