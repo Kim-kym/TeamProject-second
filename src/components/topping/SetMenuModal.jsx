@@ -101,6 +101,15 @@ function SetMenuModal({
     selectedOption: "",
     targetId: null,
   });
+  useEffect(() => {
+    if (!open) {
+      // 세트 메뉴 모달이 닫힐 때 상태 초기화
+      setSideQuantity(defaultSide ? { [defaultSide.id]: 1 } : {});
+      setDrinkQuantity(defaultDrink ? { [defaultDrink.id]: 1 } : {});
+      setproductQuantity({});
+    }
+  }, [open]);
+
   // 기본값 설정
   const handleQuantityChange = (setter, isSide, isDrink) => (id, change) => {
     const sideItem = sideMenuData.find((item) => item.id === id);
@@ -108,52 +117,43 @@ function SetMenuModal({
     setter((prev) => {
       const currentQuantity = prev[id] || 0;
 
-      // **양념감자 처리**
+      // 양념감자 처리
       if (sideItem?.name === "양념감자") {
-        // 양념감자의 수량이 1이고 증가하려는 경우: 모달 열지 않고 수량 유지
         if (currentQuantity === 1 && change > 0) {
           console.log("양념감자의 수량이 이미 1입니다. 추가할 수 없습니다.");
           return prev;
         }
 
-        // 다른 사이드 메뉴 초기화
         const updatedState = { [id]: Math.max(currentQuantity + change, 0) };
         Object.keys(prev).forEach((key) => {
-          if (key !== id.toString()) updatedState[key] = 0; // 다른 메뉴는 수량 0
+          updatedState[key] = key === id.toString() ? updatedState[key] : 0;
         });
 
-        // 모달 열기 조건: 수량이 증가하고 새로운 수량이 1일 때
         if (change > 0 && updatedState[id] === 1) {
-          handleOptionModalOpen(id); // 맛 선택 모달 열기
+          setOpen(false); // 세트메뉴 모달 닫기
+          handleOptionModalOpen(id); // 옵션 모달 열기
         }
 
         return updatedState;
       }
 
-      // **사이드 메뉴 및 음료 메뉴 처리**
+      // 사이드 및 음료 메뉴 처리
       if (isSide || isDrink) {
-        if (change > 0) {
-          const updatedState = { [id]: 1 }; // 새로운 메뉴 수량 1로 설정
-          Object.keys(prev).forEach((key) => {
-            if (key !== id.toString()) updatedState[key] = 0; // 다른 메뉴 수량 0
-          });
-          return updatedState;
-        }
-
-        // 수량 감소 처리 (0 이하로 내려가지 않음)
-        return {
-          ...prev,
-          [id]: Math.max(currentQuantity + change, 0),
-        };
+        const updatedState = { [id]: change > 0 ? 1 : 0 };
+        Object.keys(prev).forEach((key) => {
+          updatedState[key] = key === id.toString() ? updatedState[key] : 0;
+        });
+        return updatedState;
       }
 
-      // **기타 메뉴(토핑 등) 처리**
+      // 기타 메뉴 처리
       return {
         ...prev,
-        [id]: Math.max((prev[id] || 0) + change, 0),
+        [id]: Math.max(currentQuantity + change, 0),
       };
     });
   };
+
   const handleOptionConfirm = (selectedOptions) => {
     console.log("선택된 양념감자 맛:", selectedOptions);
     console.log("modalConfig.targetId:", modalConfig.targetId);
@@ -253,20 +253,20 @@ function SetMenuModal({
     setOpen(false); // 모달 닫기
   };
 
-  const handleCheckboxChange = (e) => {
+  const handleMenuToggle = () => {
     if (typeof onModalTypeChange === "function") {
-      const isChecked = !e.target.checked; // 체크 해제 시 단품 메뉴로 전환
-
-      if (!isChecked && selectedItem?.id) {
-        onModalTypeChange("custom");
-      }
+      console.log("Switching to custom menu modal");
+      onModalTypeChange("custom");
     } else {
-      console.error("onModalTypeChange is not a function");
+      console.error("onModalTypeChange is not a function or undefined");
     }
   };
 
   return (
-    <BasedModal isOpen={open} onClose={() => setOpen(false)}>
+    <BasedModal
+      isOpen={open && !optionModalOpen}
+      onClose={() => setOpen(false)}
+    >
       <div className="set-menu-modal">
         <div className="selected-menu">
           <img src={selectedItem.imgurl} alt={selectedItem.name} />
@@ -280,7 +280,7 @@ function SetMenuModal({
                 type="checkbox"
                 className="image-checkbox"
                 // checked={isSetMenuSelected}
-                onChange={handleCheckboxChange}
+                onChange={handleMenuToggle}
               />
               <span>단품 메뉴로 변경</span> {/* 체크박스 옆에 표시될 텍스트 */}
             </label>
@@ -333,9 +333,8 @@ function SetMenuModal({
           <button onClick={() => setOpen(false)}>취소</button>
         </div>
       </div>
-
       <OptionSelectionModal
-        open={optionModalOpen}
+        open={optionModalOpen} // 독립적인 상태로 관리
         setOpen={setOptionModalOpen}
         title={modalConfig.title}
         options={modalConfig.options}
@@ -346,7 +345,10 @@ function SetMenuModal({
             selectedOptions: updateFn(prev.selectedOptions),
           }))
         }
-        onConfirm={handleOptionConfirm} // 직접 handleOptionConfirm 연결
+        onConfirm={(selectedOptions) => {
+          handleOptionConfirm(selectedOptions);
+          setOptionModalOpen(false); // 옵션 모달만 닫기
+        }}
       />
     </BasedModal>
   );

@@ -425,4 +425,7 @@ h4 {
   justify-content: center;
   align-items: center;
 }
+.option-modal {
+  z-index: 10001;
+}
 
