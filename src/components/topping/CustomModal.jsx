@@ -15,7 +15,6 @@ function CustomModal({
   const [selectedMenu, setSelectedMenu] = useState(selectedItem || {});
   const [quantityMap, setQuantityMap] = useState({});
   const [isSetMenuSelected, setIsSetMenuSelected] = useState(false);
-
   const carouselRef = useRef(null);
 
   const handleModalOpen = () => {
