@@ -394,3 +394,29 @@ button:focus {
   font-size: 24px; /* 총액 크기 키우기 */
   color: #333;
 }
+
+/* 결제하기 버튼 스타일 */
+.payment-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.payment-btn:hover {
+  background-color: #45a049;
+}
+
+/* 결제 완료 메시지 */
+.payment-message {
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #e7ffe7;
+  border: 2px solid #4CAF50;
+  border-radius: 10px;
+}
