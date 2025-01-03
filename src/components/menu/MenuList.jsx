@@ -33,7 +33,7 @@ function MenuList({
     speed: 500, // 슬라이더 전환 속도
     slidesToShow: 3, // 한 번에 보여지는 슬라이드 개수
     slidesToScroll: 3, // 한 번에 이동하는 슬라이드 개수
-    rows: 2, // 행 개수 (기본값: 3)
+    rows: 2, // 행 개수 (기본값: 2)
     swipeToSlide: true, // 슬라이드로 스와이프 가능
     arrows: true, // 좌우 화살표 표시
     draggable: false, // 슬라이드를 드레그로 변경 못하게 함
