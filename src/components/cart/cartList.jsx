@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 function CartList({
   cart,
@@ -8,6 +9,9 @@ function CartList({
   handlePayment,
   closePaymentMessage,
 }) {
+  const location = useLocation();
+  const orderOption = location.state.orderOption;
+
   // 항목별 총액 계산 함수
   const calculateItemTotal = (item) => {
     const toppingsTotal = item.toppings
@@ -132,7 +136,8 @@ function CartList({
               </div>
             ))}
           </div>
-
+          {/* 매장, 포장 주문 옵션 표기 */}
+          <h3 style={{ marginLeft: "2vw" }}>{orderOption} 주문입니다</h3>
           {/* 총액과 결제하기 버튼 */}
           <div className="total">
             <h3>총액: {totalAmount}원</h3>
