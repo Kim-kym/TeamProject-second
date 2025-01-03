@@ -1,3 +1,4 @@
+import Category from "../components/menu/Category";
 import logo from "/image/logo1.jpg";
 import home from "/image/home_24.png";
 import "../styled/MainHome.css";
@@ -5,25 +6,62 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CartManager from "../components/cart/CartManager";
 import MenuDisplay from "../components/menu/MenuDisplay";
+// import Modal from "./Modal";
 import BurgerSetMenuData from "../components/menu/BurgerSetMenuData";
 import BurgerMenuData from "../components/menu/BurgerMenuData";
 import CoffeeMenuData from "../components/menu/CoffeeMenuData";
 import DrinkMenuData from "../components/menu/DrinkMenuData";
 import SideMenuData from "../components/menu/SideMenuData";
+import CustomModal from "../components/topping/CustomModal";
+import SetMenuModal from "../components/topping/SetMenuModal";
 import productMenuData from "../components/menu/ProductMenuData";
+import OptionSelectionModal from "../components/topping/OptionSelectionModal";
 import "../styled/Modal.css";
-import ModalManager from "../app/ModalManager";
+
+// import menuListData from "../components/menu/MenuList";
 
 function MainHome() {
   const [currentMenu, setCurrentMenu] = useState("burger"); // 초기 메뉴는 'burger'
   const navigate = useNavigate();
-  const [cart, setCart] = useState([]); // 장바구니 상태
+  const [cart, setCart] = useState([]); //  장바구니 상태
 
-  const formatPrice = (price) => {
-    if (typeof price !== "number") {
-      price = parseFloat(price); // 숫자가 아닌 경우 변환
+  const handleMenuClick = (menu) => {
+    if (menu.category === "burger") {
+      setModalType("custom");
+      setSelectedItem(menu);
+      setOpen(true);
+    } else if (menu.category === "Set") {
+      setModalType("setMenu");
+      setSelectedItem(menu);
+      setOpen(true);
+    } else if (menu.name === "양념감자") {
+      // 양념감자 클릭 시 맛 선택 모달 열기
+      setModalConfig({
+        title: "양념감자 맛 선택",
+        options: ["치즈", "양파", "매운맛", "갈릭"], // 선택 가능한 맛 옵션
+        selectedOptions: [],
+        targetId: menu.id,
+      });
+      setOptionModalOpen(true); // 맛 선택 모달 열기
+    } else if (menu.category === "side" || menu.category === "drink") {
+      addToCart({
+        id: menu.id,
+        name: menu.name,
+        price: menu.price,
+        category: menu.category,
+        quantity: 1,
+      });
+    } else if (menu.category === "coffee") {
+      setModalConfig({
+        title: "커피 옵션 선택",
+        options: ["아이스", "핫"], // 선택 가능한 옵션
+        selectedOptions: [],
+        targetId: menu.id,
+      });
+      setOptionModalOpen(true);
+    } else {
+      console.error("Unknown menu category:", menu.category);
     }
-    return price.toLocaleString("ko-KR");
   };
 
   const menuDatas = {
@@ -35,86 +73,31 @@ function MainHome() {
     product: productMenuData || [],
   };
 
-  const handleReturnClick = () => {
-    navigate("/home"); // "/home" 경로로 이동
-  };
-
-  const handleMenuClick = (menu) => {
-    console.log("Selected menu:", menu);
-    // 메뉴 클릭 시 필요한 추가 로직
-    setCurrentMenu(menu.category); // 예: 클릭된 메뉴에 따라 카테고리 설정
-    // handleModalClick 호출로 메뉴 정보 전달
-    handleModalClick(menu);
-    console.log("ModalClick:", menu);
-  };
-
-  // 모달 관련 상태 및 핸들러
-  const [isOpen, setIsOpen] = useState(false);
-  const [modalType, setModalType] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [modalConfig, setModalConfig] = useState({
-    title: "",
-    options: [],
-    selectedOptions: [],
-  });
-  const [quantityMap, setQuantityMap] = useState({});
-
-  const handleModalClick = (menu) => {
-    if (menu.category === "burger" || menu.category === "Set") {
-      setSelectedItem(menu);
-      setModalType(menu.category === "burger" ? "custom" : "setMenu");
-      setIsOpen(true);
-    } else if (menu.name === "양념감자" || menu.category === "coffee") {
-      setModalConfig({
-        title:
-          menu.category === "coffee" ? "커피 옵션 선택" : "양념감자 맛 선택",
-        options:
-          menu.category === "coffee"
-            ? ["아이스", "핫"]
-            : ["치즈", "양파", "매운맛", "갈릭"],
-        selectedOptions: [],
-        targetId: menu.id,
-      });
-      setModalType("optionSelection");
-      setIsOpen(true);
-    }
-  };
-
-  const handleCloseModal = () => {
-    setIsOpen(false);
-    setSelectedItem(null);
-    setModalType(null);
-    setModalConfig({ title: "", options: [], selectedOptions: [] });
-  };
-
-  const handleModalQuantityChange = (id, change) => {
-    setQuantityMap((prev) => ({
-      ...prev,
-      [id]: Math.max((prev[id] || 0) + change, 0),
-    }));
-  };
-
   // 메뉴 항목 클릭 시 장바구니에 추가
   const addToCart = (item) => {
     const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+
     if (existingItem) {
+      // 기존 항목 병합
       setCart(
         cart.map((cartItem) =>
           cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            ? {
+                ...cartItem,
+                quantity: cartItem.quantity + (item.quantity || 1),
+                toppings: [
+                  ...(cartItem.toppings || []),
+                  ...(item.toppings || []),
+                ],
+                sides: [...(cartItem.sides || []), ...(item.sides || [])],
+                drinks: [...(cartItem.drinks || []), ...(item.drinks || [])],
+              }
             : cartItem
         )
       );
     } else {
-      setCart([
-        ...cart,
-        {
-          ...item,
-          quantity: 1,
-          price: item.price || 0,
-          category: item.category || "기타",
-        },
-      ]);
+      // 새 항목 추가
+      setCart([...cart, { ...item, quantity: item.quantity || 1 }]);
     }
   };
 
@@ -133,6 +116,62 @@ function MainHome() {
       );
     }
   };
+  // 메뉴 가격
+  const formatPrice = (price) => price.toLocaleString("ko-KR");
+
+  //  모달 상태 관리
+  const [open, setOpen] = useState(false);
+
+  // 선택된 메뉴 아이템 저장
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  // 선택된 토핑 저장
+  const [selectedTopping, setSelectedTopping] = useState(null);
+
+  // 옵션 선택 모달 상태
+  const [optionModalOpen, setOptionModalOpen] = useState(false);
+  const [modalConfig, setModalConfig] = useState({
+    title: "",
+    options: [],
+    selectedOptions: [],
+  });
+
+  const handleOptionModalOpen = (menuId) => {
+    setModalConfig({
+      title: "양념감자 맛 선택",
+      options: ["치즈", "양파", "매운맛", "갈릭"],
+      selectedOptions: [],
+      targetId: menuId, // 양념감자 ID 추적
+    });
+    setOptionModalOpen(true);
+  };
+
+  const handleOptionConfirm = (selectedOptions) => {
+    if (selectedOptions.length === 0) {
+      alert("옵션을 선택해주세요."); // 선택이 없을 경우 경고
+      return;
+    }
+
+    const isCoffee = modalConfig.title.includes("커피");
+    const basePrice = isCoffee ? 3000 : 2000; // 커피는 3000원, 양념감자는 2000원
+
+    addToCart({
+      id: modalConfig.targetId,
+      name: modalConfig.title.includes("커피") ? "커피" : "양념감자",
+      options: selectedOptions.join(", "), // 선택한 옵션 정보
+      price: basePrice, // 기본 가격
+      quantity: 1, // 기본 수량
+    });
+
+    setOptionModalOpen(false); // 모달 닫기
+  };
+
+  const handleReturnClick = () => {
+    navigate("/home"); // "/home" 경로로 이동
+  };
+
+  // 'custom' 또는 'setMenu'
+  const [modalType, setModalType] = useState("custom");
 
   return (
     <div className="root">
@@ -159,14 +198,88 @@ function MainHome() {
             menuListData={menuDatas}
           />
         </div>
-        <div className="cartCss">
-          {/* 장바구니 관리 */}
-          <CartManager
-            cart={cart}
-            removeFromCart={removeFromCart}
-            updateQuantity={updateQuantity}
+        {/* 장바구니 관리 */}
+        <CartManager
+          cart={cart}
+          removeFromCart={removeFromCart}
+          updateQuantity={updateQuantity}
+        />
+
+        {modalType === "custom" && selectedItem?.category === "burger" && (
+          <CustomModal
+            open={open}
+            setOpen={setOpen}
+            selectedItem={selectedItem}
+            addToCart={addToCart}
+            selectedTopping={selectedTopping}
+            setSelectedTopping={setSelectedTopping}
+            formatPrice={formatPrice}
+            onModalTypeChange={(newType) => {
+              if (newType === "setMenu") {
+                const setMenu = BurgerSetMenuData.find(
+                  (menu) => menu.id === selectedItem?.setMenuId
+                );
+                if (setMenu) {
+                  setSelectedItem(setMenu);
+                  setModalType(newType); // 상태 변경
+                }
+              }
+            }}
           />
-        </div>
+        )}
+
+        {modalType === "setMenu" && selectedItem?.category === "Set" && (
+          <SetMenuModal
+            open={open}
+            setOpen={setOpen}
+            selectedItem={selectedItem}
+            addToCart={addToCart}
+            formatPrice={formatPrice}
+            sideMenuData={menuDatas.side}
+            drinkMenuData={menuDatas.drink}
+            productMenuData={menuDatas.product}
+            // handleOptionModalOpen={(id) => {
+            //   setModalConfig({
+            //     title: "양념감자 맛 선택",
+            //     options: ["치즈", "양파", "매운맛", "갈릭"],
+            //     selectedOptions: [],
+            //     targetId: id,
+            //   });
+            //   setOptionModalOpen(true);
+            // }}
+            handleOptionModalOpen={handleOptionModalOpen}
+          />
+        )}
+
+        {/* 옵션 선택 모달 */}
+        <OptionSelectionModal
+          open={optionModalOpen}
+          setOpen={setOptionModalOpen}
+          title={modalConfig.title}
+          options={modalConfig.options}
+          selectedOptions={modalConfig.selectedOptions}
+          setSelectedOptions={(updateFn) =>
+            setModalConfig((prev) => ({
+              ...prev,
+              selectedOptions: updateFn(prev.selectedOptions),
+            }))
+          }
+          onConfirm={handleOptionConfirm}
+        />
+        {/* SetMenuModal 열기 */}
+        {modalType === "setMenu" && selectedItem?.category === "Set" && (
+          <SetMenuModal
+            open={open}
+            setOpen={setOpen}
+            selectedItem={selectedItem}
+            addToCart={addToCart}
+            formatPrice={formatPrice}
+            sideMenuData={menuDatas.side}
+            drinkMenuData={menuDatas.drink}
+            productMenuData={menuDatas.product}
+            handleOptionModalOpen={handleOptionModalOpen}
+          />
+        )}
       </main>
     </div>
   );

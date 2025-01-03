@@ -1,8 +1,13 @@
-// import "../../styled/Modal.css";
+import "../../styled/Modal.css";
 // import ReactDOM from "react-dom";
 
 const BasedModal = ({ isOpen, onClose, children }) => {
-  if (!isOpen) return null;
+  console.log("BasedModal: isOpen:", isOpen);
+
+  if (!isOpen) {
+    console.log("BasedModal is not open.");
+    return null;
+  }
 
   return (
     <div onClick={onClose} className="modal-overlay">
