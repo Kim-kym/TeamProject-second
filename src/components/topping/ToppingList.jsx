@@ -3,7 +3,12 @@ import { useEffect, useRef } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-const ToppingList = ({ productData, quantityMap, handleQuantityChange }) => {
+const ToppingList = ({
+  menuData = [],
+  productData,
+  quantityMap,
+  handleQuantityChange,
+}) => {
   const carouselRef = useRef(null);
 
   const responsive = {
