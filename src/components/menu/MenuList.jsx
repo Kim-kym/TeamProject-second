@@ -51,7 +51,7 @@ function MenuList({
 
   // console.log("DATA:", menuData);
   // console.log("Slider Data:", menuData);
-  console.log("Current Menu:", currentMenu);
+  // console.log("Current Menu:", currentMenu);
 
   return (
     <div className="menu-list">

@@ -196,6 +196,7 @@ button:focus {
 
 /* 전체 장바구니 컨테이너 */
 .cart-container {
+/* .cart { */
   position: fixed;
   bottom: 0;
   right: 50px;
@@ -211,13 +212,31 @@ button:focus {
 
 /* 장바구니 열림/닫힘 애니메이션 */
 .cart-container.open {
+/* .cart.open{ */
   transform: translateY(0); /* 열린 상태 */
 }
 
 .cart-container.closed {
+/* .cart.{ */
   transform: translateY(100%); /* 닫힌 상태 */
 }
 
+#cart {
+  position: fixed;
+  /* bottom: 0; */
+  /* right: 50px; */
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 500px; /* 장바구니 너비 */
+  height: 50vh; /* 장바구니의 높이를 50%로 설정 */
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  border-radius: 10px 10px 0 0; /* 상단 모서리 둥글게 처리 */
+  overflow-y: auto; /* 세로 스크롤 가능하도록 */
+  z-index: 1000; /* 다른 요소들보다 우선하여 보이게 */
+  transition: transform 0.3s ease; /* 슬라이드 효과 */
+} 
 /* 장바구니 아이템 */
 .cart-items {
   display: flex;
@@ -241,6 +260,50 @@ button:focus {
 
 .cart-item:hover {
   background-color: #f1f1f1; /* hover 시 배경색 변경 */
+}
+
+/* 장바구니 닫기 버튼 */
+.cart-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #FF5C5C;
+  color: white;
+  font-size: 18px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.cart-close-btn:hover {
+  background-color: #e04e4e;
+}
+
+/* 장바구니 열기 버튼 */
+.cart-container .open-btn {
+  position: fixed;
+  bottom: 20px;
+  /* right: 20px; */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cart-container .open-btn:hover {
+  background-color: #45a049;
 }
 
 /* 아이템 디테일 */
@@ -330,46 +393,4 @@ button:focus {
 .cart-summary .total {
   font-size: 24px; /* 총액 크기 키우기 */
   color: #333;
-}
-
-/* 장바구니 닫기 버튼 */
-.cart-close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #FF5C5C;
-  color: white;
-  font-size: 18px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: background-color 0.3s;
-}
-
-.cart-close-btn:hover {
-  background-color: #e04e4e;
-}
-
-/* 장바구니 열기 버튼 */
-.cart-container .open-btn {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 30px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.cart-container .open-btn:hover {
-  background-color: #45a049;
 }

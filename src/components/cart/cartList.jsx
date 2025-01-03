@@ -32,10 +32,19 @@ function CartList({ cart, removeFromCart, updateQuantity }) {
     0
   );
 
+  // 결제 처리 함수
+  const handlePayment = () => {
+    setPaymentCompleted(true); // 결제 완료 상태 변경
+    setIsOpen(false); // 장바구니 닫기
+  };
+
+  const toggleCart = () => {
+    setIsOpen(!isOpen); // 장바구니 열기/닫기 상태 변경
+  };
+
   return (
     <div id="cart">
       <h2>장바구니</h2>
-
       <div className="cart-items">
         {cart.map((item) => (
           <div key={item.id} className="cart-item">
@@ -125,5 +134,4 @@ function CartList({ cart, removeFromCart, updateQuantity }) {
     </div>
   );
 }
-
 export default CartList;
