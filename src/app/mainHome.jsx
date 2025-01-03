@@ -134,26 +134,6 @@ function MainHome() {
     }
   };
 
-  const menuDatas = {
-    Set: BurgerSetMenuData || [],
-    burger: BurgerMenuData || [],
-    drink: DrinkMenuData || [],
-    coffee: CoffeeMenuData || [],
-    side: SideMenuData || [],
-    product: productMenuData || [],
-  };
-
-  const handleReturnClick = () => {
-    navigate("/home"); // "/home" 경로로 이동
-  };
-
-  const handleMenuClick = (menu) => {
-    console.log("Selected menu:", menu);
-    addToCart(menu);
-    // 메뉴 클릭 시 필요한 추가 로직
-    setCurrentMenu(menu.category); // 예: 클릭된 메뉴에 따라 카테고리 설정
-  };
-
   return (
     <div className="root">
       <div className="back"></div>
