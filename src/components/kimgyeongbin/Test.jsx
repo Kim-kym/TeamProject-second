@@ -3,8 +3,6 @@ import { useLocation } from "react-router-dom";
 function Test() {
 
     const location = useLocation();
-
-    console.log(location)
     const orderOption = location.state.orderOption;
 
     console.log(orderOption)
