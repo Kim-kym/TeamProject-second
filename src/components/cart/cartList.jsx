@@ -51,12 +51,6 @@ function CartList({ cart, removeFromCart, updateQuantity }) {
             <div className="item-details">
               {/* 이름 및 기본 가격 */}
               <span>{item.name}</span> <p>{item.price}원</p>
-              {/* 양념감자 옵션(맛) 표시 */}
-              {item.options && (
-                <p>
-                  맛: <strong>{item.options}</strong>
-                </p>
-              )}
               {/* 토핑 표시 */}
               {item.toppings && item.toppings.length > 0 && (
                 <ul>
