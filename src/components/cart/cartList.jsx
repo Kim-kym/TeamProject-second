@@ -1,61 +1,83 @@
 import React from "react";
 
 function CartList({ cart, removeFromCart, updateQuantity }) {
-  // 카테고리별 금액 합산
-  const categories = [...new Set(cart.map((item) => item.category))];
-  const categoryTotals = categories.map((category) => {
-    const categoryTotal = cart
-      .filter((item) => item.category === category)
-      .reduce((total, item) => {
-        const toppingsTotal = item.toppings
-          ? item.toppings.reduce(
-              (toppingTotal, topping) =>
-                toppingTotal + topping.price * topping.quantity,
-              0
-            )
-          : 0;
-        return total + item.price * item.quantity + toppingsTotal;
-      }, 0);
-    return { category, total: categoryTotal };
-  });
-
-  const totalAmount = cart.reduce((total, item) => {
+  // 항목별 총액 계산 함수
+  const calculateItemTotal = (item) => {
     const toppingsTotal = item.toppings
-      ? item.toppings.reduce((toppingTotal, topping) => {
-          const toppingPrice = isNaN(topping.price) ? 0 : topping.price;
-          return toppingTotal + toppingPrice * topping.quantity;
-        }, 0)
+      ? item.toppings.reduce(
+          (sum, topping) => sum + topping.price * topping.quantity,
+          0
+        )
       : 0;
 
-    return total + item.price * item.quantity + toppingsTotal;
-  }, 0);
+    const sidesTotal = item.sides
+      ? item.sides.reduce((sum, side) => sum + side.price * side.quantity, 0)
+      : 0;
+
+    const drinksTotal = item.drinks
+      ? item.drinks.reduce(
+          (sum, drink) => sum + drink.price * drink.quantity,
+          0
+        )
+      : 0;
+
+    return (
+      item.price * item.quantity + toppingsTotal + sidesTotal + drinksTotal
+    );
+  };
+
+  // 총액 계산
+  const totalAmount = cart.reduce(
+    (total, item) => total + calculateItemTotal(item),
+    0
+  );
 
   return (
     <div id="cart">
-      {/* 카테고리별 합산금액 표시 */}
-      {categoryTotals.map((categoryTotal, index) => (
-        <div key={`${categoryTotal.category}-${index}`}>
-          {/* <h3>
-            {categoryTotal.category} 합계: {categoryTotal.total}원
-          </h3> */}
-        </div>
-      ))}
-      {/* 장바구니 항목을 가로로 나열 */}
+      <h2>장바구니</h2>
       <div className="cart-items">
         {cart.map((item) => (
           <div key={item.id} className="cart-item">
             <div className="item-details">
+              {/* 이름 및 기본 가격 */}
               <span>{item.name}</span> <p>{item.price}원</p>
-              {/* 선택된 토핑 표시 */}
+              {/* 양념감자 옵션(맛) 표시 */}
+              {item.options && (
+                <p>
+                  맛: <strong>{item.options}</strong>
+                </p>
+              )}
+              {/* 토핑 표시 */}
               {item.toppings && item.toppings.length > 0 && (
                 <ul>
                   {item.toppings.map((topping, index) => (
-                    <li key={`${item.id}-topping-${topping.id}-${index}`}>
+                    <li key={`${item.id}-topping-${index}`}>
                       {topping.name} x {topping.quantity}개 ({topping.price}원)
                     </li>
                   ))}
                 </ul>
               )}
+              {/* 사이드 표시 */}
+              {item.sides && item.sides.length > 0 && (
+                <ul>
+                  {item.sides.map((side, index) => (
+                    <li key={`${item.id}-side-${index}`}>
+                      {side.name} x {side.quantity}개 ({side.price}원)
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {/* 음료 표시 */}
+              {item.drinks && item.drinks.length > 0 && (
+                <ul>
+                  {item.drinks.map((drink, index) => (
+                    <li key={`${item.id}-drink-${index}`}>
+                      {drink.name} x {drink.quantity}개 ({drink.price}원)
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {/* 수량 조정 */}
               <div className="quantity-container">
                 <button
                   className="quantity-btn"
@@ -81,17 +103,8 @@ function CartList({ cart, removeFromCart, updateQuantity }) {
               </div>
             </div>
 
-            {/* 합계 금액 */}
-            <div className="item-total">
-              {item.price * item.quantity +
-                (item.toppings
-                  ? item.toppings.reduce(
-                      (sum, topping) => sum + topping.price * topping.quantity,
-                      0
-                    )
-                  : 0)}
-              원
-            </div>
+            {/* 항목 총액 */}
+            <div className="item-total">{calculateItemTotal(item)}원</div>
 
             {/* 삭제 버튼 */}
             <button
@@ -103,6 +116,7 @@ function CartList({ cart, removeFromCart, updateQuantity }) {
           </div>
         ))}
       </div>
+
       {/* 총액 표시 */}
       <div className="total">
         <h3>총액: {totalAmount}원</h3>
