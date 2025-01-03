@@ -2,7 +2,7 @@ import Category from "../components/menu/Category";
 import logo from "/image/logo1.jpg";
 import home from "/image/home_24.png";
 import "../styled/MainHome.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CartManager from "../components/cart/CartManager";
 import MenuDisplay from "../components/menu/MenuDisplay";
@@ -41,19 +41,18 @@ function MainHome() {
       setSelectedItem(menu);
       setOpen(true);
     } else if (menu.name === "양념감자") {
-      // 양념감자 클릭 시 맛 선택 모달 열기
       setModalConfig({
-        title: "양념감자 맛 선택", // 올바른 제목
-        options: ["치즈", "양파", "매운맛", "갈릭"], // 양념감자의 옵션
+        title: "양념감자 맛 선택",
+        options: ["치즈", "양파", "매운맛", "갈릭"], // 선택 가능한 맛 옵션
         selectedOptions: [],
         targetId: menu.id,
         name: menu.name, // 메뉴 이름 전달
       });
-      setOptionModalOpen(true); // 맛 선택 모달 열기
+      setOptionModalOpen(true);
     } else if (menu.category === "side" || menu.category === "drink") {
       addToCart({
         id: menu.id,
-        name: modalConfig.name,
+        name: menu.name, // 메뉴 이름 전달
         price: menu.price,
         category: menu.category,
         quantity: 1,
@@ -64,13 +63,17 @@ function MainHome() {
         options: ["아이스", "핫"], // 선택 가능한 옵션
         selectedOptions: [],
         targetId: menu.id,
-        name: menu.name,
+        name: menu.name, // 메뉴 이름 전달
       });
       setOptionModalOpen(true);
     } else {
       console.error("Unknown menu category:", menu.category);
     }
   };
+
+  useEffect(() => {
+    console.log(`Modal type changed to: ${modalType}`);
+  }, [modalType]);
 
   const menuDatas = {
     Set: BurgerSetMenuData || [],
@@ -161,17 +164,24 @@ function MainHome() {
     }
 
     const isCoffee = modalConfig.title.includes("커피");
-    const basePrice = isCoffee ? 3000 : 2000; // 커피는 3000원, 양념감자는 2000원
+    const selectedMenu = isCoffee
+      ? CoffeeMenuData.find((menu) => menu.id === modalConfig.targetId)
+      : SideMenuData.find((menu) => menu.id === modalConfig.targetId);
+
+    if (!selectedMenu) {
+      console.error("선택된 메뉴를 찾을 수 없습니다.");
+      return;
+    }
+
+    const basePrice = selectedMenu.price;
 
     // 선택된 옵션 각각을 개별 항목으로 추가
     selectedOptions.forEach((option) => {
       addToCart({
         id: `${modalConfig.targetId}-${option}`, // 옵션별 고유 ID 생성
-        name: isCoffee
-          ? `${modalConfig.name} (${option})`
-          : `양념감자 (${option})`, // 이름에 옵션 명시
+        name: `${selectedMenu.name} (${option})`, // 메뉴 이름 + 옵션
         options: option, // 선택된 옵션 정보
-        price: basePrice, // 기본 가격
+        price: basePrice, // 메뉴 가격 사용
         quantity: 1, // 기본 수량
       });
     });
@@ -183,7 +193,12 @@ function MainHome() {
   };
 
   // 'custom' 또는 'setMenu'
-  const [modalType, setModalType] = useState("custom");
+
+  const handleModalTypeChange = (type) => {
+    console.log(`Switching modal type to: ${type}`);
+    setModalType(type);
+    setOpen(true); // 모달을 다시 열어줌
+  };
 
   return (
     <div className="root">
@@ -228,17 +243,7 @@ function MainHome() {
             selectedTopping={selectedTopping}
             setSelectedTopping={setSelectedTopping}
             formatPrice={formatPrice}
-            onModalTypeChange={(newType) => {
-              if (newType === "setMenu") {
-                const setMenu = BurgerSetMenuData.find(
-                  (menu) => menu.id === selectedItem?.setMenuId
-                );
-                if (setMenu) {
-                  setSelectedItem(setMenu);
-                  setModalType(newType); // 상태 변경
-                }
-              }
-            }}
+            onModalTypeChange={handleModalTypeChange}
           />
         )}
 
@@ -283,6 +288,7 @@ function MainHome() {
             drinkMenuData={menuDatas.drink}
             productMenuData={menuDatas.product}
             handleOptionModalOpen={handleOptionModalOpen}
+            onModalTypeChange={handleModalTypeChange}
           />
         )}
       </main>
